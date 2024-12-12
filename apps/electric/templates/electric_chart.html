@@ -1,0 +1,38 @@
+{% extends 'electric_base.html' %}
+{% load static %}
+{% block main %}
+    <div id="electric-chart"></div>
+    <script src="{% static '/highcharts/highcharts.js' %}"></script>
+{% endblock main %}
+{% block scripts %}
+    const electricUsageByDay = []
+    const xhr = new XMLHttpRequest()
+    xhr.open("GET", "/api/usage/?format=json")
+    xhr.onreadystatechange = async () => {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            let electricUsageData = JSON.parse(xhr.responseText)
+            for (const day of Object.values(electricUsageData)) {
+                electricUsageByDay.push([DateTime.fromISO(day.hour).toMillis(), day.kwh])
+            }
+            const electricHighChart = new Highcharts.Chart({
+                title: {  style: { color: '#f8f9fa' }, text: 'Electric Usage' },
+                subtitle: {  style: { color: '#f8f9fa' }, text: document.ontouchstart === undefined ? 'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in' },
+                chart: {
+                    backgroundColor: '#212529',
+                    renderTo: 'electric-chart',
+                    zoomType: 'x'
+                },
+                xAxis: { title: { text: 'Hour' }, type: 'datetime' },
+                yAxis: { title: { text: 'Kilowatt-hours (kWh)' } },
+                series: [{
+                    data: electricUsageByDay,
+                    name: 'Kilowatt-Hours (kWh)',
+                    states: { hover: { lineWidthPlus: 0 } },
+                    type: 'line'
+                }],
+                time: { timezone: 'America/New_York' }
+            })
+        }
+    }
+    xhr.send()
+{% endblock scripts %}

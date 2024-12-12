@@ -1,0 +1,133 @@
+{% extends 'water_base.html' %}
+{% load static %}
+{% block main %}
+    <div class="container-lg">
+        <table class="display table table-borderless table-dark table-responsive table-sm table-striped" id="waterTable">
+            <thead class="h6">
+                <tr>
+                    <th title="Date">Date</th>
+                    <th title="Gallons">Gallons</th>
+                </tr>
+            </thead>
+            <tbody>
+            <!--
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            -->
+            </tbody>
+            <tfoot class="h6">
+                <tr class="table-group-divider" id="page-total-row">
+                    <td><b>Total</b>:</td>
+                    <td id="page-gallons"></td>
+                </tr>
+                <tr id="all-total-row">
+                    <td><b>All</b>:</td>
+                    <td id="total-gallons"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <link href="{% static 'datatables/datatables.min.css' %}" rel="stylesheet">
+    <script src="{% static 'datatables/datatables.min.js' %}"></script>
+    <script src="{% static 'datatables/sum.js' %}"></script>
+{% endblock main %}
+{% block scripts %}
+    const pageGallonsNode = document.getElementById('page-gallons')
+    const totalGallonsNode = document.getElementById('total-gallons')
+    async function footerTotal (api, col=1, digits=4) {
+        let pageGallons = DataTable.render.number(',', '.', digits).display(api.column(col, {page: 'current'}).data().sum())
+        pageGallonsNode.innerHTML = `<code class="fw-bolder" title="Total: ${pageGallons} Gallons">${pageGallons}</code>`
+        pageGallonsNode.title = `Total: ${pageGallons} Gallons (on this page)`
+        let totalGallons = DataTable.render.number(',', '.', digits).display(api.column(col).data().sum())
+        totalGallonsNode.innerHTML = `<code class="fw-bolder">${totalGallons}</code>`
+        totalGallonsNode.title = `All: ${totalGallons} Total Gallons`
+    }
+    const exportFileName = 'WaterTable'
+    const resultName = 'days'
+    new DataTable('#waterTable', {
+        ajax: {
+            url: '/api/usage/?format=json',
+            dataSrc: ''
+        },
+        columns: [
+            {
+                data: 'date',
+                render: DataTable.render.date('yyyy-MM-dd', 'DDDD', 'en')
+            },
+            {
+                data: 'gallons',
+                render: (data, type) => {
+                    if (type === 'display') {
+                        let gallonText = 'primary'
+                        if (data > 100) {
+                            gallonText = 'danger'
+                        } else if (data > 75) {
+                            gallonText = 'warning'
+                        } else if (data > 50) {
+                            gallonText = 'info'
+                        }
+                        return `<code class="fw-bold text-${gallonText}-emphasis" title="${data} gallons">${data}</code>`
+                    }
+                    return data
+                }
+            }
+        ],
+        footerCallback: async function () {
+            await footerTotal(this.api())
+        },
+        language: {
+            'emptyTable': `No ${resultName} available in table`,
+            'info': `Showing _START_ to _END_ of _TOTAL_ ${resultName}`,
+            'infoEmpty': `Showing 0 to 0 of 0 ${resultName}`,
+            'infoFiltered': `(filtered from _MAX_ total ${resultName})`,
+            'lengthMenu': `_MENU_ ${resultName}`,
+            'zeroRecords': `No matching ${resultName} found`,
+            searchBuilder: {'title': null}
+        },
+        layout: {
+            topStart: {buttons: [{
+                extend: 'searchBuilder',
+                config: {depthLimit: 1},
+            }]},
+            topEnd: {buttons: [
+                {
+                    extend: 'copyHtml5',
+                    text: '<span class="bi bi-clipboard" title="Copy rows to clipboard"> Copy</span>',
+                    title: exportFileName
+                },
+                {
+                    extend: 'csvHtml5',
+                    text: '<span class="bi bi-filetype-csv" title="Comma-Separated Values (.csv)"> CSV</span>',
+                    title: exportFileName
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: '<span class="bi bi-filetype-xlsx" title="Excel (.xlsx)"> Excel</span>',
+                    title: exportFileName
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: '<span class="bi bi-filetype-pdf" title="Portable Data Format (.pdf)"> PDF</span>',
+                    title: exportFileName
+                },
+                {
+                    extend: 'print',
+                    text: '<span class="bi bi-printer" title="Print"> Print</span>'
+                },
+            ]},
+            bottomStart: 'pageLength',
+            bottom1: 'paging',
+            bottomEnd: 'info'
+        },
+        lengthMenu: [
+            1, 2, 3, 4, 5, 6, {label: `7 *`, value: 7}, 8, 9,
+            10, 14, 21, 30, 45, 60, 90, 120, 150, 180, 210, 240, 270,
+            300, 330, 365, {label: 'All', value: -1}
+        ],
+        order: [[0, 'desc']],
+        pageLength: 7,
+        stateSave: true
+    })
+{% endblock scripts %}

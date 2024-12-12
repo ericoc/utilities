@@ -1,0 +1,15 @@
+.*
+!.gitignore
+settings.py
+*.bak
+*.csv
+*.doc
+*.docx
+*.json
+*.pyc
+*.xls
+*.xlsx
+*.zip
+__pycache__
+/static/
+/venv/
