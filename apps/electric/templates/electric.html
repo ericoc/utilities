@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+    <div id="electric-chart"></div>
+    <hr>
+    <table class="display table table-borderless table-dark table-hover table-responsive table-sm table-striped" id="electricTable">
+        <thead class="h6">
+        <tr>
+            <th title="Hour">Hour</th>
+            <th title="Kilowatt-Hours (kWh)">Kilowatt-Hours (kWh)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        -->
+        </tbody>
+        <tfoot class="h6">
+        <tr class="table-group-divider">
+            <td><b>Total</b>:</td>
+            <td id="page-total"></td>
+        </tr>
+        <tr id="all-total-row">
+            <td><b>All</b>:</td>
+            <td id="all-total"></td>
+        </tr>
+        </tfoot>
+    </table>
+{% endblock main %}
+{% block scripts %}
+    const electricUsageByDay = []
+    const xhr = new XMLHttpRequest()
+    xhr.open("GET", "/api/electric/?format=json")
+    xhr.onreadystatechange = async () => {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            let electricUsageData = JSON.parse(xhr.responseText)
+            for (const day of Object.values(electricUsageData)) {
+                electricUsageByDay.push([DateTime.fromISO(day.hour).toMillis(), day.kwh])
+            }
+            const electricHighChart = new Highcharts.Chart({
+                title: {  style: { color: '#f8f9fa' }, text: 'Electric Usage' },
+                subtitle: {  style: { color: '#f8f9fa' }, text: document.ontouchstart === undefined ? 'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in' },
+                chart: {
+                    backgroundColor: '#212529',
+                    renderTo: 'electric-chart',
+                    zoomType: 'x'
+                },
+                xAxis: { title: { text: 'Hour' }, type: 'datetime' },
+                yAxis: { title: { text: 'Kilowatt-Hours (kWh)' }, type: 'num' },
+                series: [{
+                    color: '#E4A11B',
+                    data: electricUsageByDay,
+                    name: 'Kilowatt-Hours (kWh)',
+                    states: { hover: { lineWidthPlus: 0 } },
+                    type: 'line'
+                }],
+                styledMode: true,
+                time: { timezone: 'America/New_York' }
+            })
+        }
+    }
+    xhr.send()
+
+    const pageTotalNode = document.getElementById('page-total')
+    const allTotalNode = document.getElementById('all-total')
+    async function footerTotal (api, col=1, digits=2) {
+        let pageElectric = DataTable.render.number(',', '.', digits).display(api.column(col, {page: 'current'}).data().sum())
+        pageTotalNode.innerHTML = `<code class="fw-bolder">${pageElectric}</code>`
+        pageTotalNode.title = `Page Total: ${pageElectric} Kilowatt-Hours (kWh) (on this page)`
+        let totalElectric = DataTable.render.number(',', '.', digits).display(api.column(col).data().sum())
+        allTotalNode.innerHTML = `<code class="fw-bolder">${totalElectric}</code>`
+        allTotalNode.title = `Total: ${totalElectric} Kilowatt-Hours (kWh) (all)`
+    }
+    const exportFileName = 'ElectricTable'
+    const resultName = 'hours'
+    new DataTable('#electricTable', {
+        ajax: {
+            url: '/api/electric/?format=json',
+            dataSrc: ''
+        },
+        columns: [
+            {
+                data: 'hour',
+                render: DataTable.render.datetime('DDDD, tt'),
+            },
+            {
+                data: 'kwh',
+                render: (data, type) => {
+                    if (type === 'display') {
+                        let electricText = 'primary'
+                        if (data > 1) {
+                            electricText = 'danger'
+                        } else if (data > 0.75) {
+                            electricText = 'warning'
+                        } else if (data > 0.5) {
+                            electricText = 'info'
+                        }
+                        return `<code class="fw-bold text-${electricText}-emphasis" title="${data} Kilowatt-Hours (kWh)">${data}</code>`
+                    }
+                    return data
+                },
+                type: 'num'
+            }
+        ],
+        footerCallback: async function () {
+            await footerTotal(this.api())
+        },
+        language: {
+            'emptyTable': `No ${resultName} available in table`,
+            'info': `Showing _START_ to _END_ of _TOTAL_ ${resultName}`,
+            'infoEmpty': `Showing 0 to 0 of 0 ${resultName}`,
+            'infoFiltered': `(filtered from _MAX_ total ${resultName})`,
+            'lengthMenu': `_MENU_ ${resultName}`,
+            'zeroRecords': `No matching ${resultName} found`
+        },
+        layout: {
+            topStart: {buttons: [{
+                    extend: 'searchBuilder',
+                    config: {depthLimit: 1},
+                }]},
+            topEnd: {buttons: [
+                    {
+                        extend: 'copyHtml5',
+                        text: '<span class="bi bi-clipboard" title="Copy rows to clipboard"> Copy</span>',
+                    },
+                    {
+                        extend: 'csvHtml5',
+                        text: '<span class="bi bi-filetype-csv" title="Comma-Separated Values (.csv)"> CSV</span>',
+                        title: exportFileName
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: '<span class="bi bi-filetype-xlsx" title="Excel (.xlsx)"> Excel</span>',
+                        title: exportFileName
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<span class="bi bi-filetype-pdf" title="Portable Data Format (.pdf)"> PDF</span>',
+                        title: exportFileName
+                    },
+                    {
+                        extend: 'print',
+                        text: '<span class="bi bi-printer" title="Print"> Print</span>'
+                    },
+                ]},
+            bottomStart: 'pageLength',
+            bottom1: 'paging',
+            bottomEnd: 'info'
+        },
+        lengthMenu: [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, {label: `12 *`, value: 12},
+            13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 36, 48, 72, 96,
+            {label: 'All', value: -1}
+        ],
+        order: [[0, 'desc']],
+        pageLength: 12,
+        stateSave: true
+    })
+</script>
+{% endblock scripts %}

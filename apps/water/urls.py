@@ -1,10 +1,8 @@
 from django.urls import path
 
-from .views import WaterChartView, WaterTableView
+from .views import WaterView
 
 
 urlpatterns = [
-    path("", WaterTableView.as_view(), name="water_index"),
-    path("chart/", WaterChartView.as_view(), name="water_chart"),
-    path("table/", WaterTableView.as_view(), name="water_table"),
+    path("", WaterView.as_view(), name="water"),
 ]

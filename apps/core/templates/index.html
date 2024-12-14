@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+    <div class="container-fluid">
+        <ol>
+            <li>
+                <a href="{% url 'electric' %}" title="Electric">Electric</a>
+            </li>
+            <li>
+                <a href="{% url 'water' %}" title="Water">Water</a>
+            </li>
+        </ol>
+    </div>
+{% endblock main %}
+{% block scripts %}
+{% endblock scripts %}

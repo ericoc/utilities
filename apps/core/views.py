@@ -1,6 +1,8 @@
 from django.views.generic.base import TemplateView
 
 
-class CoreIndexView(TemplateView):
+class IndexView(TemplateView):
     """Index page."""
-    template_name = "core_index.html"
+    extra_context = {"TITLE": "Utility"}
+    http_method_names = ("get",)
+    template_name = "index.html"
