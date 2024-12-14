@@ -54,7 +54,7 @@
         columns: [
             {
                 data: 'date',
-                render: DataTable.render.date('yyyy-MM-dd', 'DDDD', 'en')
+                render: DataTable.render.date('DDDD'),
             },
             {
                 data: 'gallons',
@@ -71,7 +71,8 @@
                         return `<code class="fw-bold text-${gallonText}-emphasis" title="${data} gallons">${data}</code>`
                     }
                     return data
-                }
+                },
+                type: 'num'
             }
         ],
         footerCallback: async function () {
@@ -83,8 +84,7 @@
             'infoEmpty': `Showing 0 to 0 of 0 ${resultName}`,
             'infoFiltered': `(filtered from _MAX_ total ${resultName})`,
             'lengthMenu': `_MENU_ ${resultName}`,
-            'zeroRecords': `No matching ${resultName} found`,
-            searchBuilder: {'title': null}
+            'zeroRecords': `No matching ${resultName} found`
         },
         layout: {
             topStart: {buttons: [{

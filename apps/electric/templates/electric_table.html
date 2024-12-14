@@ -6,7 +6,7 @@
             <thead class="h6">
                 <tr>
                     <th title="Hour">Hour</th>
-                    <th title="kWh">kWh</th>
+                    <th title="Kilowatt-Hours (kWh)">Kilowatt-Hours (kWh)</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,11 +38,11 @@
     const allTotalNode = document.getElementById('all-total')
     async function footerTotal (api, col=1, digits=2) {
         let pageElectric = DataTable.render.number(',', '.', digits).display(api.column(col, {page: 'current'}).data().sum())
-        pageTotalNode.innerHTML = `<code class="fw-bolder" title="Total: ${pageElectric} kWh">${pageElectric}</code>`
-        pageTotalNode.title = `Total: ${pageElectric} kWh (on this page)`
+        pageTotalNode.innerHTML = `<code class="fw-bolder">${pageElectric}</code>`
+        pageTotalNode.title = `Page Total: ${pageElectric} Kilowatt-Hours (kWh) (on this page)`
         let totalElectric = DataTable.render.number(',', '.', digits).display(api.column(col).data().sum())
         allTotalNode.innerHTML = `<code class="fw-bolder">${totalElectric}</code>`
-        allTotalNode.title = `All: ${totalElectric} Total kWh`
+        allTotalNode.title = `Total: ${totalElectric} Kilowatt-Hours (kWh) (all)`
     }
     const exportFileName = 'ElectricTable'
     const resultName = 'hours'
@@ -54,10 +54,7 @@
         columns: [
             {
                 data: 'hour',
-                render: DataTable.render.datetime('ff'),
-                searchBuilderType: 'luxon',
-                type: 'luxon'
-                // 2024-12-07T23:00:00-05:00
+                render: DataTable.render.datetime('DDDD, tt'),
             },
             {
                 data: 'kwh',
@@ -71,11 +68,10 @@
                         } else if (data > 0.5) {
                             electricText = 'info'
                         }
-                        return `<code class="fw-bold text-${electricText}-emphasis" title="${data} kWh">${data}</code>`
+                        return `<code class="fw-bold text-${electricText}-emphasis" title="${data} Kilowatt-Hours (kWh)">${data}</code>`
                     }
                     return data
                 },
-                searchBuilderType: 'num',
                 type: 'num'
             }
         ],
@@ -88,8 +84,7 @@
             'infoEmpty': `Showing 0 to 0 of 0 ${resultName}`,
             'infoFiltered': `(filtered from _MAX_ total ${resultName})`,
             'lengthMenu': `_MENU_ ${resultName}`,
-            'zeroRecords': `No matching ${resultName} found`,
-            searchBuilder: {'title': null}
+            'zeroRecords': `No matching ${resultName} found`
         },
         layout: {
             topStart: {buttons: [{
@@ -100,7 +95,6 @@
                 {
                     extend: 'copyHtml5',
                     text: '<span class="bi bi-clipboard" title="Copy rows to clipboard"> Copy</span>',
-                    title: exportFileName
                 },
                 {
                     extend: 'csvHtml5',

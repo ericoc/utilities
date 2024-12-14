@@ -6,6 +6,7 @@ settings.py
 *.doc
 *.docx
 *.json
+*.pdf
 *.pyc
 *.xls
 *.xlsx

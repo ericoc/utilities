@@ -23,13 +23,14 @@
                     zoomType: 'x'
                 },
                 xAxis: { title: { text: 'Hour' }, type: 'datetime' },
-                yAxis: { title: { text: 'Kilowatt-hours (kWh)' } },
+                yAxis: { title: { text: 'Kilowatt-Hours (kWh)' }, type: 'num' },
                 series: [{
                     data: electricUsageByDay,
                     name: 'Kilowatt-Hours (kWh)',
                     states: { hover: { lineWidthPlus: 0 } },
                     type: 'line'
                 }],
+                styledMode: true,
                 time: { timezone: 'America/New_York' }
             })
         }

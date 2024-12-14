@@ -1,2 +1,2 @@
-from .fill import Command as FillCommand
-from .weekend import Command as WeekendCommand
+from .water_fill import Command as WaterFillCommand
+from .water_weekend import Command as WaterWeekendCommand
