@@ -41,8 +41,14 @@
                 gasUsageByMonth.push([DateTime.fromISO(item.month).toMillis(), item.ccf])
             }
             const gasHighChart = new Highcharts.Chart({
-                title: {  style: { color: '#f8f9fa' }, text: '(Natural) Gas Usage' },
-                subtitle: {  style: { color: '#f8f9fa' }, text: document.ontouchstart === undefined ? 'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in' },
+                title: {
+                    style: { color: '#f8f9fa' },
+                    text: '{{ TITLE }} Usage'
+                },
+                subtitle: {
+                    style: { color: '#f8f9fa' },
+                    text: document.ontouchstart === undefined ? 'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+                },
                 chart: {
                     backgroundColor: '#212529',
                     renderTo: 'gas-chart',
