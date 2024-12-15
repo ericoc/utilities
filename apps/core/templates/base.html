@@ -28,16 +28,24 @@
         <script src="{% static 'highcharts/export-data.js' %}"></script>
         <script src="{% static 'highcharts/accessibility.js' %}"></script>
         <style>
-            nav a:hover { opacity: 50%; }
+            nav a { text-decoration: none; }
+            nav a:hover { text-decoration: underline }
             .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
         </style>
     </head>
     <body class="container-fluid">
-        <header class="header">
-            <nav class="navbar">
-                <a class="nav-link navbar-brand" href="#" title="{{ TITLE }} Usage">
-                    {{ TITLE }} Usage
-                </a>
+        <header class="header navbar">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="h2 breadcrumb-item{% if TITLE and TITLE == "Utilities" %} active" aria-current="page{% endif %}" title="Utilities">
+                        <a href="{% url 'index' %}">Utilities</a>
+                    </li>
+                {% if TITLE and TITLE != "Utilities" %}
+                    <li class="h2 active breadcrumb-item" aria-current="page" title="{{ TITLE }}">
+                        <a href="#">{{ TITLE }}</a>
+                    </li>
+                {% endif %}
+                </ol>
             </nav>
         </header>
         <main class="container-fluid">

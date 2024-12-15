@@ -2,14 +2,17 @@
 {% load static %}
 {% block main %}
     <div class="container-fluid">
-        <ol>
-            <li>
+        <ul class="list-group list-group-horizontal">
+            <li class="list-group-item list-group-item-dark">
                 <a href="{% url 'electric' %}" title="Electric">Electric</a>
             </li>
-            <li>
+            <li class="list-group-item list-group-item-dark">
+                <a href="{% url 'gas' %}" title="Natural Gas">(Natural) Gas</a>
+            </li>
+            <li class="list-group-item list-group-item-dark">
                 <a href="{% url 'water' %}" title="Water">Water</a>
             </li>
-        </ol>
+        </ul>
     </div>
 {% endblock main %}
 {% block scripts %}

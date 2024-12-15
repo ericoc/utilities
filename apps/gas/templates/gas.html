@@ -41,7 +41,7 @@
                 gasUsageByMonth.push([DateTime.fromISO(item.month).toMillis(), item.ccf])
             }
             const gasHighChart = new Highcharts.Chart({
-                title: {  style: { color: '#f8f9fa' }, text: 'Natural Gas Usage' },
+                title: {  style: { color: '#f8f9fa' }, text: '(Natural) Gas Usage' },
                 subtitle: {  style: { color: '#f8f9fa' }, text: document.ontouchstart === undefined ? 'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in' },
                 chart: {
                     backgroundColor: '#212529',
@@ -51,7 +51,7 @@
                 xAxis: { title: { text: 'Month' }, type: 'datetime' },
                 yAxis: { title: { text: 'Hundreds of Cubic Feet (CCF)' }, type: 'num' },
                 series: [{
-                    color: '#9d00ff',
+                    color: '#6610f2',
                     data: gasUsageByMonth,
                     name: 'Hundreds of Cubic Feet (CCF)',
                     states: { hover: { lineWidthPlus: 0 } },
@@ -79,7 +79,7 @@
                 columns: [
                     {
                         data: 'month',
-                        render: DataTable.render.datetime('MMMM ygi'),
+                        render: DataTable.render.datetime('MMMM y'),
                     },
                     {
                         data: 'ccf',
