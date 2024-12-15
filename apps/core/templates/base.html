@@ -44,34 +44,34 @@
         </style>
     </head>
     <body class="container-fluid">
-        <header class="mb-3">
+        <header class="mb-3 border-bottom">
             <nav class="navbar navbar-dark navbar-expand-lg" style="font-size: 1.25rem;">
-                <a class="btn btn-lg" href="{% url 'index' %}" title="Utilities" data-bs-toggle="tooltip" data-bs-title="Utilities" data-bs-placement="bottom">
-                    <img class="border border-secondary rounded navbar-brand" id="logo" alt="Utilities" src="{% static 'logo.png' %}" style="height: 5rem;">
+                <a class="btn btn-lg m-1" href="{% url 'index' %}" title="Utilities" data-bs-toggle="tooltip" data-bs-title="Utilities" data-bs-placement="bottom">
+                    <img class="border border-secondary rounded navbar-brand p-1" id="logo" alt="Utilities" src="{% static 'logo.png' %}" style="height: 5rem;">
                 </a>
-                    <ul class="navbar-nav gap-3">
-                        <li class="m-1 btn btn-lg border nav-item rounded border-{% if TITLE and TITLE == 'Electric' %}light{% else %}secondary{% endif %}" title="Electric">
-                            <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == 'Electric' %} active" aria-current="page{% endif %}" href="{% url 'electric' %}" data-bs-toggle="tooltip" data-bs-title="Electric" data-bs-placement="bottom">
-                                <svg class="bi" aria-hidden="true" style="color: var(--color-electric);">
-                                    <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li class="m-1 btn btn-lg border nav-item rounded border-{% if TITLE and TITLE == '(Natural) Gas' %}light{% else %}secondary{% endif %}" title="(Natural) Gas">
-                            <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == '(Natural) Gas' %} active" aria-current="page{% endif %}" href="{% url 'gas' %}" data-bs-toggle="tooltip" data-bs-title="(Natural) Gas" data-bs-placement="bottom">
-                                <svg class="bi" aria-hidden="true" style="color: var(--color-gas);">
-                                    <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#fan"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li class="m-1 btn btn-lg border nav-item rounded border-{% if TITLE and TITLE == 'Water' %}light{% else %}secondary{% endif %}" title="Water">
-                            <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == 'Water' %} active" aria-current="page{% endif %}" href="{% url 'water' %}" data-bs-toggle="tooltip" data-bs-title="Water" data-bs-placement="bottom">
-                                <svg class="bi" aria-hidden="true" style="color: var(--color-water);">
-                                    <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#droplet"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
+                <ul class="navbar-nav gap-3">
+                    <li class="m-1 btn btn-lg border nav-item rounded border-{% if TITLE and TITLE == 'Electric' %}light{% else %}secondary{% endif %}" title="Electric">
+                        <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == 'Electric' %} active" aria-current="page{% endif %}" href="{% url 'electric' %}" data-bs-toggle="tooltip" data-bs-title="Electric" data-bs-placement="bottom">
+                            <svg class="bi" aria-hidden="true" style="color: var(--color-electric);">
+                                <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="m-1 btn btn-lg border nav-item rounded border-{% if TITLE and TITLE == '(Natural) Gas' %}light{% else %}secondary{% endif %}" title="(Natural) Gas">
+                        <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == '(Natural) Gas' %} active" aria-current="page{% endif %}" href="{% url 'gas' %}" data-bs-toggle="tooltip" data-bs-title="(Natural) Gas" data-bs-placement="bottom">
+                            <svg class="bi" aria-hidden="true" style="color: var(--color-gas);">
+                                <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#fan"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="m-1 btn btn-lg border nav-item rounded border-{% if TITLE and TITLE == 'Water' %}light{% else %}secondary{% endif %}" title="Water">
+                        <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == 'Water' %} active" aria-current="page{% endif %}" href="{% url 'water' %}" data-bs-toggle="tooltip" data-bs-title="Water" data-bs-placement="bottom">
+                            <svg class="bi" aria-hidden="true" style="color: var(--color-water);">
+                                <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#droplet"></use>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
             </nav>
         </header>
         <main class="container-fluid">
