@@ -16,17 +16,15 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        # peco_electric_usage_interval_data_Service 1_1_2023-01-21_to_2023-12-07.csv
-        csv_prefix = settings.ELECTRIC_PREFIX
-        csv_files = sorted(
-            list(Path(".").glob(f"{csv_prefix}*.csv")),
-            reverse=True
-        )
         try:
+            # peco_electric_usage_interval_data_Service 1_1_2023-01-21_to_2023-12-07.csv
+            csv_prefix = settings.ELECTRIC_PREFIX
+            csv_files = sorted(
+                list(Path(".").glob(f"{csv_prefix}*.csv")),
+                reverse=True
+            )
             self.stdout.write(
-                self.style.SUCCESS(
-                    f"{len(csv_files)} CSV file(s) found."
-                )
+                self.style.SUCCESS(f"{len(csv_files)} CSV file(s) found.")
             )
             num_created = 0
 

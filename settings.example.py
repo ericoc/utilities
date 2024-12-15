@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'rest_framework',
     "apps.CoreConfig",
     "apps.ElectricConfig",
+    "apps.GasConfig",
     "apps.WaterConfig"
 ]
 
@@ -118,4 +119,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # peco_electric_usage_interval_data_Service 1_1_2023-01-21_to_2023-12-07.csv
 ELECTRIC_PREFIX = 'peco_electric_usage_interval_data_Service 1_1_'
+
+# UsageData12142024.xlsx (UsageDataMMDDYYYY.xlsx)
+GAS_PREFIX = 'UsageData'
+
 WATER_FILENAME = 'ChartData.csv'

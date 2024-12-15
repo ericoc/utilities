@@ -23,7 +23,7 @@ class Command(BaseCommand):
                 for csv_row in DictReader(csv_fh):
 
                     # Ensure the row is measuring gallons (not CCFs, etc.)
-                    assert csv_row[" Units"] == " Gallons", "Invalid unit."
+                    assert csv_row[" Units"] == " Gallons", "Invalid unit!"
 
                     # Parse the date column within each CSV row.
                     date_parts = csv_row[" Time Interval"].strip().split('/')
@@ -46,7 +46,7 @@ class Command(BaseCommand):
                     if created:
                         num_created += 1
                         self.stdout.write(self.style.SUCCESS(
-                            f"Created:\t{obj.date.strftime("%A, %B %d, %Y")}"
+                            f"Created:\t{obj.date.strftime('%A, %B %d, %Y')}"
                             f" ({obj.date}) [{obj.gallons} gallons]"
                         ))
 

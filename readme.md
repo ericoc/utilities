@@ -1,14 +1,14 @@
 # Utilities
 
-Both the Philadelphia energy utility (PECO) and Philadelphia Water Department
-(PWD) websites each allow for a residential account holder access to their own
-account usage data.
+The Philadelphia energy utility (PECO), Philadelphia Gas Works (PGW), and the
+Philadelphia Water Department (PWD) websites each allow for a residential
+account holder to access (and export!) their own account usage data.
 
-- PECO provides the amount of electricity used each hour in kilowatt-hours (kWh).
-- PWD provides the amount of water used each day in gallons.
-
-Each website provides uniquely-formatted data in "comma-separated values" (CSV)
-file format, as detailed below.
+- PECO provides a comma-separated values ("CSV") file detailing the amount of
+electricity used each hour in kilowatt-hours (kWh).
+- PGW provides an Excel (`.xlsx`) spreadsheet file detailing the amount of
+natural gas used each month by hundreds of cubic feet (CCF).
+- PWD provides a CSV file detailing the amount of water used daily, in gallons.
 
 ---
 
@@ -35,6 +35,32 @@ Each row of the file includes kilowatt-hours (kWh) of electricity used per hour:
 > Electric usage,2023-07-04,03:00,03:59,0.32
 > ```
 
+---
+
+## (Natural) Gas
+The export spreadsheet from PGW is named based upon when it was exported,
+similarly to:
+`UsageData12142024.xlsx` (`UsageDataMMDDYYYY.xlsx`)
+
+### Example
+The natural gas usage Excel spreadsheet (`.xlsx`) file from PGW begins with a
+header that includes account information:
+```
+> Service Point Number: 1776xxxxxx            
+> Period: Jan 2021 To Jun 2021            
+> Property: 1 S BROAD ST (xxxxx1776)
+```
+Each row of the file includes hundreds of cubic feet (CCF) of natural gas used
+each billing month:
+```
+> Bill Month    Units Consumed (CCF)    Period Start    Period End
+> Jan, 2021     50.00                   12/18/20        01/21/21
+> Feb, 2021     73.00                   01/21/21        02/22/21
+> Mar, 2021     45.00                   02/22/21        03/22/21
+> Apr, 2021     17.00                   03/22/21        04/21/21
+> May, 2021     10.00                   04/21/21        05/20/21
+> Jun, 2021     5.0                     05/20/21        06/18/21
+```
 ---
 
 ## Water
