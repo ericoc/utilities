@@ -29,24 +29,61 @@
         <script src="{% static 'highcharts/export-data.js' %}"></script>
         <script src="{% static 'highcharts/accessibility.js' %}"></script>
         <style>
-            nav a { text-decoration: none; }
-            nav a:hover { text-decoration: underline }
             .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
+            #logo { filter: invert(50%); }
+            .icon-link-hover svg { color: var(--bs-primary); --bs-icon-link-transform: translate3d(0, -.3rem, 0); }
         </style>
     </head>
     <body class="container-fluid">
-        <header class="header navbar">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="h2 breadcrumb-item{% if TITLE and TITLE == "Utilities" %} active" aria-current="page{% endif %}" title="Utilities">
-                        <a href="{% url 'index' %}">Utilities</a>
-                    </li>
-                {% if TITLE and TITLE != "Utilities" %}
-                    <li class="h2 active breadcrumb-item" aria-current="page" title="{{ TITLE }}">
-                        <a href="#">{{ TITLE }}</a>
-                    </li>
-                {% endif %}
-                </ol>
+        <header class="border-bottom mb-3">
+            <nav class="navbar navbar-dark navbar-expand-lg">
+                <a href="{% url 'index' %}" title="Utilities">
+                    <img class="navbar-brand" id="logo" alt="Utilities" src="{% static 'logo.png' %}" style="height: 3rem;">
+                </a>
+                <button class="border-secondary m-3 navbar-dark navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle Navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse p-2" id="navbarNavDropdown">
+                    <ul class="navbar-nav nav-underline">
+
+                        <li class="nav-item" title="Utilities">
+                            <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == 'Utilities' %} active" aria-current="page{% endif %}" href="{% url 'index' %}">
+                                <svg class="bi" aria-hidden="true">
+                                    <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#house"></use>
+                                </svg>
+                                Utilities
+                            </a>
+                        </li>
+
+                        <li class="nav-item" title="Electric">
+                            <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == 'Electric' %} active" aria-current="page{% endif %}" href="{% url 'electric' %}">
+                                <svg class="bi" aria-hidden="true">
+                                    <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use>
+                                </svg>
+                                Electric
+                            </a>
+                        </li>
+
+                        <li class="nav-item" title="(Natural) Gas">
+                            <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == '(Natural) Gas' %} active" aria-current="page{% endif %}" href="{% url 'gas' %}">
+                                <svg class="bi" aria-hidden="true">
+                                    <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#fan"></use>
+                                </svg>
+                                (Natural Gas)
+                            </a>
+                        </li>
+
+                        <li class="nav-item" title="Water">
+                            <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == 'Water' %} active" aria-current="page{% endif %}" href="{% url 'water' %}">
+                                <svg class="bi" aria-hidden="true">
+                                    <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#droplet"></use>
+                                </svg>
+                                Water
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
             </nav>
         </header>
         <main class="container-fluid">
