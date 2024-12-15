@@ -45,16 +45,16 @@
     </head>
     <body class="container-fluid">
         <header class="mb-3">
-            <nav class="navbar navbar-dark display-6 navbar-expand-lg">
+            <nav class="navbar navbar-dark navbar-expand-lg" style="font-size: 1.25rem;">
                 <a href="{% url 'index' %}" title="Utilities">
                     <img class="border border-secondary rounded navbar-brand" id="logo" alt="Utilities" src="{% static 'logo.png' %}" style="height: 5rem;">
                 </a>
-                <button class="border border-secondary m-3 navbar-dark navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle Navigation">
+                <button class="border border-secondary m-1 navbar-dark navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle Navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse p-2" id="navbarNavDropdown">
-                    <ul class="navbar-nav nav-underline">
-                        <li class="border nav-item rounded border-{% if TITLE and TITLE == 'Electric' %}light{% else %}secondary{% endif %}" title="Electric">
+                <div class="collapse navbar-collapse p-1 m-1" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="border m-1 nav-item p-1 rounded border-{% if TITLE and TITLE == 'Electric' %}light{% else %}secondary{% endif %}" title="Electric">
                             <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == 'Electric' %} active" aria-current="page{% endif %}" href="{% url 'electric' %}">
                                 <svg class="bi text-electric" aria-hidden="true" style="color: var(--color-electric);">
                                     <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use>
@@ -62,7 +62,7 @@
                                 Electric
                             </a>
                         </li>
-                        <li class="border nav-item rounded border-{% if TITLE and TITLE == '(Natural) Gas' %}light{% else %}secondary{% endif %}" title="(Natural) Gas">
+                        <li class="border m-1 nav-item p-1 rounded border-{% if TITLE and TITLE == '(Natural) Gas' %}light{% else %}secondary{% endif %}" title="(Natural) Gas">
                             <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == '(Natural) Gas' %} active" aria-current="page{% endif %}" href="{% url 'gas' %}">
                                 <svg class="bi text-gas" aria-hidden="true" style="color: var(--color-gas);">
                                     <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#fan"></use>
@@ -70,7 +70,7 @@
                                 (Natural) Gas
                             </a>
                         </li>
-                        <li class="border nav-item rounded border-{% if TITLE and TITLE == 'Water' %}light{% else %}secondary{% endif %}" title="Water">
+                        <li class="border m-1 nav-item p-1 rounded border-{% if TITLE and TITLE == 'Water' %}light{% else %}secondary{% endif %}" title="Water">
                             <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == 'Water' %} active" aria-current="page{% endif %}" href="{% url 'water' %}">
                                 <svg class="bi text-water" aria-hidden="true" style="color: var(--color-water);">
                                     <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#droplet"></use>
