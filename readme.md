@@ -1,24 +1,22 @@
 # Utilities
 
-The Philadelphia energy utility (PECO), Philadelphia Gas Works (PGW), and the
-Philadelphia Water Department (PWD) websites each allow for a residential
-account holder to access (and export!) their own account usage data.
-
-- PECO provides a comma-separated values ("CSV") file detailing the amount of
-electricity used each hour in kilowatt-hours (kWh).
-- PGW provides an Excel (`.xlsx`) spreadsheet file detailing the amount of
-natural gas used each month by hundreds of cubic feet (CCF).
-- PWD provides a CSV file detailing the amount of water used daily, in gallons.
+The Philadelphia electrical, natural gas, and water utilities websites each
+allow for a residential account holder to access (and export!) their own usage
+data.
 
 ---
 
 ## Electric
-The export file from PECO is named based upon the dates exported, similarly to:
-`peco_electric_usage_interval_data_Service 1_1_2023-07-04_to_2023-07-04.csv`
+### Pennsylvania Electric Company ("PECO")
+Comma-separated values ("CSV" / `.csv`) file of electricity used, in
+kilowatt-hours (kWh), each hour.
 
-### Example
-The electricity usage CSV file from PECO begins with a header that includes
-account information:
+#### Name
+The export CSV file from PECO is named based upon the dates exported, like so:
+> `peco_electric_usage_interval_data_Service 1_1_2023-07-04_to_2023-07-04.csv`
+
+#### Header
+The PECO file begins with a header that includes account information:
 > ```
 > Name,WILLIAM PENN
 > Address,"1 S BROAD ST, PHILADELPHIA PA 19112"
@@ -26,7 +24,8 @@ account information:
 > Service,Service 1
 > ```
 
-Each row of the file includes kilowatt-hours (kWh) of electricity used per hour:
+#### Data
+Each row of the PECO file has kilowatt-hours (kWh) of electricity used hourly:
 > ```
 > TYPE,DATE,START TIME,END TIME,USAGE (kWh),NOTES
 > Electric usage,2023-07-04,00:00,00:59,0.29
@@ -38,21 +37,27 @@ Each row of the file includes kilowatt-hours (kWh) of electricity used per hour:
 ---
 
 ## (Natural) Gas
-The export spreadsheet from PGW is named based upon when it was exported,
-similarly to:
-`UsageData12142024.xlsx` (`UsageDataMMDDYYYY.xlsx`)
+### Philadelphia Gas Works ("PGW")
+Excel (`.xlsx`) spreadsheet file of natural gas, used in hundreds of cubic
+feet (CCF), each (billing) month.
 
-### Example
-The natural gas usage Excel spreadsheet (`.xlsx`) file from PGW begins with a
-header that includes account information:
-```
+#### Name
+The Excel spreadsheet from PGW is named by the date it was exported
+(such as `UsageDataMMDDYYYY.xlsx`):
+> `UsageData12142024.xlsx`
+
+#### Header
+The PGW file also begins with a header that includes account information:
+> ```
 > Service Point Number: 1776xxxxxx            
 > Period: Jan 2021 To Jun 2021            
 > Property: 1 S BROAD ST (xxxxx1776)
-```
-Each row of the file includes hundreds of cubic feet (CCF) of natural gas used
-each billing month:
-```
+> ```
+
+#### Data
+Each row of the PGW file includes hundreds of cubic feet (CCF) of natural gas
+used each billing month:
+> ```
 > Bill Month    Units Consumed (CCF)    Period Start    Period End
 > Jan, 2021     50.00                   12/18/20        01/21/21
 > Feb, 2021     73.00                   01/21/21        02/22/21
@@ -60,27 +65,31 @@ each billing month:
 > Apr, 2021     17.00                   03/22/21        04/21/21
 > May, 2021     10.00                   04/21/21        05/20/21
 > Jun, 2021     5.0                     05/20/21        06/18/21
-```
+> ```
+
 ---
 
 ## Water
-A CSV can be downloaded by "Gallons" of water used "Daily" from the
-"[Detailed Usage](https://secure8.i-doxs.net/CityOfPhiladelphiaWRB/Secure/Usage.aspx)"
-section of the Philadelphia Water Department (PWD) website.
+#### Philadelphia Water Department ("PWD")
+Comma-separated values ("CSV" / `.csv`) file of water used, in gallons, daily.
 
-### Example
+A CSV file can be downloaded by "Gallons" of water used "Daily" from the
+"[Detailed Usage](https://secure8.i-doxs.net/CityOfPhiladelphiaWRB/Secure/Usage.aspx)"
+section of the Philadelphia Water Department (PWD) website:
 ![Export Philadelphia Water Department Detailed Usage Screenshot](export.png)
 
-The water usage export file is named `ChartData.csv` and each row of the file
-includes gallons of water used per hour:
-```
-Access Code, Time Interval, Consumption, Units
-00145xxxx, 11/27/2024, 18.7013, Gallons
-00145xxxx, 11/28/2024, 35.9065, Gallons
-00145xxxx, 11/29/2024, 35.1584, Gallons
-00145xxxx, 11/30/2024, 44.8831, Gallons
-00145xxxx, 12/01/2024, 71.8130, Gallons
-00145xxxx, 12/02/2024, 25.4338, Gallons
-00145xxxx, 12/03/2024, 23.9377, Gallons
-etc..
-```
+### Name
+The water usage export `.csv` file is always named `ChartData.csv`.
+
+#### Data
+Each row of the PWD file includes the number of gallons of water used each day:
+> ```
+> Access Code, Time Interval, Consumption, Units
+> 00145xxxx, 11/27/2024, 18.7013, Gallons
+> 00145xxxx, 11/28/2024, 35.9065, Gallons
+> 00145xxxx, 11/29/2024, 35.1584, Gallons
+> 00145xxxx, 11/30/2024, 44.8831, Gallons
+> 00145xxxx, 12/01/2024, 71.8130, Gallons
+> 00145xxxx, 12/02/2024, 25.4338, Gallons
+> 00145xxxx, 12/03/2024, 23.9377, Gallons
+> ```
