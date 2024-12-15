@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main %}
-    <div id="electric-chart"></div>
-    <table class="display table table-borderless table-dark table-hover table-responsive table-sm table-striped" id="electricTable">
+    <table class="display table table-borderless table-dark table-hover table-responsive table-sm table-striped" id="utility-table">
         <thead class="h6">
         <tr>
             <th title="Hour">Hour</th>
@@ -45,7 +44,7 @@
                 subtitle: {  style: { color: '#f8f9fa' }, text: document.ontouchstart === undefined ? 'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in' },
                 chart: {
                     backgroundColor: '#212529',
-                    renderTo: 'electric-chart',
+                    renderTo: 'utility-chart',
                     zoomType: 'x'
                 },
                 xAxis: { title: { text: 'Hour' }, type: 'datetime' },
@@ -74,7 +73,7 @@
             const exportFileName = 'ElectricTable'
             const resultName = 'hours'
 
-            new DataTable('#electricTable', {
+            new DataTable('#utility-table', {
                 data: electricUsageData,
                 columns: [
                     {

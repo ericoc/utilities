@@ -49,16 +49,16 @@
                 <a class="btn btn-lg m-1" href="{% url 'index' %}" title="Utilities" data-bs-toggle="tooltip" data-bs-title="Utilities" data-bs-placement="bottom">
                     <img class="border border-secondary rounded navbar-brand p-1" id="logo" alt="Utilities" src="{% static 'logo.png' %}" style="height: 5rem;">
                 </a>
-                <ul class="navbar-nav gap-3">
+                <ul class="d-inline-block navbar-nav gap-3">
                     <li class="m-1 btn btn-lg border nav-item rounded border-{% if TITLE and TITLE == 'Electric' %}light{% else %}secondary{% endif %}" title="Electric">
-                        <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == 'Electric' %} active" aria-current="page{% endif %}" href="{% url 'electric' %}" data-bs-toggle="tooltip" data-bs-title="Electric" data-bs-placement="bottom">
+                        <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == 'Electric' %} active" aria-current="page{% endif %}" href="{% url 'electric' %}#chart" data-bs-toggle="tooltip" data-bs-title="Electric" data-bs-placement="bottom">
                             <svg class="bi" aria-hidden="true" style="color: var(--color-electric);">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use>
                             </svg>
                         </a>
                     </li>
                     <li class="m-1 btn btn-lg border nav-item rounded border-{% if TITLE and TITLE == '(Natural) Gas' %}light{% else %}secondary{% endif %}" title="(Natural) Gas">
-                        <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == '(Natural) Gas' %} active" aria-current="page{% endif %}" href="{% url 'gas' %}" data-bs-toggle="tooltip" data-bs-title="(Natural) Gas" data-bs-placement="bottom">
+                        <a class="nav-link icon-link icon-link-hover{% if TITLE and TITLE == '(Natural) Gas' %} active" aria-current="page{% endif %}" href="{% url 'gas' %}#chart" data-bs-toggle="tooltip" data-bs-title="(Natural) Gas" data-bs-placement="bottom">
                             <svg class="bi" aria-hidden="true" style="color: var(--color-gas);">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#fan"></use>
                             </svg>
@@ -75,6 +75,7 @@
             </nav>
         </header>
         <main class="container-fluid">
+            <div id="utility-chart"></div>
             {% block main %}
                 <!-- -->
             {% endblock main %}

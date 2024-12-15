@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main %}
-    <div id="water-chart"></div>
-    <table class="display table table-borderless table-dark table-responsive table-sm table-striped" id="waterTable">
+    <table class="display table table-borderless table-dark table-responsive table-sm table-striped" id="utility-table">
         <thead>
             <tr>
                 <th title="Date">Date</th>
@@ -51,7 +50,7 @@
                 },
                 chart: {
                     backgroundColor: '#212529',
-                    renderTo: 'water-chart',
+                    renderTo: 'utility-chart',
                     zoomType: 'x'
                 },
                 xAxis: { title: { text: 'Date' }, type: 'datetime' },
@@ -79,7 +78,7 @@
             const exportFileName = 'WaterTable'
             const resultName = 'days'
 
-            new DataTable('#waterTable', {
+            new DataTable('#utility-table', {
                     data: waterUsageData,
                     columns: [
                         {

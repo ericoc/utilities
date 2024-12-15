@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main %}
-    <div id="gas-chart"></div>
-    <table class="display table table-borderless table-dark table-hover table-responsive table-sm table-striped" id="gasTable">
+    <table class="display table table-borderless table-dark table-hover table-responsive table-sm table-striped" id="utility-table">
         <thead class="h6">
         <tr>
             <th title="Month">Month</th>
@@ -51,7 +50,7 @@
                 },
                 chart: {
                     backgroundColor: '#212529',
-                    renderTo: 'gas-chart',
+                    renderTo: 'utility-chart',
                     zoomType: 'x'
                 },
                 xAxis: { title: { text: 'Month' }, type: 'datetime' },
@@ -80,7 +79,7 @@
             const exportFileName = 'NaturalGasTable'
             const resultName = 'months'
 
-            new DataTable('#gasTable', {
+            new DataTable('#utility-table', {
                 data: gasUsageData,
                 columns: [
                     {
