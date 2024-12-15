@@ -1,7 +1,4 @@
 # TODO
 
-- Highcharts exporting?
-  - https://github.com/highcharts/node-export-server/issues/602
-
-- Make the index page actually useful and pretty:
+- Make the index page actually useful and more pretty:
   - https://utilities.ericoc.com/
