@@ -31,6 +31,7 @@
         <style>
             .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
             #logo { filter: invert(50%); }
+            #logo:hover { filter: invert(75%); }
             .icon-link-hover svg { color: var(--bs-primary); --bs-icon-link-transform: translate3d(0, -.3rem, 0); }
         </style>
     </head>
@@ -69,7 +70,7 @@
                                 <svg class="bi" aria-hidden="true">
                                     <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#fan"></use>
                                 </svg>
-                                (Natural Gas)
+                                (Natural) Gas
                             </a>
                         </li>
 
@@ -90,8 +91,17 @@
             {% block main %}
             {% endblock main %}
         </main>
+        <footer class="container-fluid footer my-3">
+            <a class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/ericoc/utilities" target="_blank">
+                <code>https://github.com/ericoc/utilities</code>
+                <svg class="bi" aria-hidden="true">
+                    <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#box-arrow-up-right"></use>
+                </svg>
+            </a>
+        </footer>
         <script>
             {% block scripts %}
+                <!-- -->
             {% endblock scripts %}
         </script>
     </body>
