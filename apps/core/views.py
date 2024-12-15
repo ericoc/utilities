@@ -1,8 +1,19 @@
+from django.conf import settings
 from django.views.generic.base import TemplateView
 
 
-class IndexView(TemplateView):
-    """Index page."""
-    extra_context = {"TITLE": "Utilities"}
+class BaseView(TemplateView):
+    """Base view."""
     http_method_names = ("get",)
     template_name = "index.html"
+    title = "Utilities"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["DEBUG"] = settings.DEBUG
+        context["TITLE"] = self.title
+        return context
+
+
+class IndexView(BaseView):
+    """Index page."""

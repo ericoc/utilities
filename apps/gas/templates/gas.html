@@ -31,7 +31,8 @@
 {% endblock main %}
 {% block scripts %}
     const xhr = new XMLHttpRequest()
-    xhr.open("GET", "/api/gas/?format=json")
+    const gasAPI = '/api/gas/?format=json'
+    xhr.open("GET", gasAPI)
     xhr.onreadystatechange = async () => {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             const gasUsageData = JSON.parse(xhr.responseText)

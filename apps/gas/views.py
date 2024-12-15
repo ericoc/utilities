@@ -1,11 +1,7 @@
-from django.views.generic import TemplateView
-
-from .models import GasUsage
+from apps.core.views import BaseView
 
 
-class GasView(TemplateView):
+class GasView(BaseView):
     """Natural gas usage view."""
-    extra_context = {"TITLE": "(Natural) Gas"}
-    http_method_names = ("get",)
-    model = GasUsage
     template_name = "gas.html"
+    title = "(Natural) Gas"

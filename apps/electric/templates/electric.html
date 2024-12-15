@@ -31,7 +31,8 @@
 {% endblock main %}
 {% block scripts %}
     const xhr = new XMLHttpRequest()
-    xhr.open("GET", "/api/electric/?format=json")
+    const electricAPI = '/api/electric/?format=json{% if DEBUG %}&days=90{% endif %}'
+    xhr.open("GET", electricAPI)
     xhr.onreadystatechange = async () => {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             const electricUsageData = JSON.parse(xhr.responseText)

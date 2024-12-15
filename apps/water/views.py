@@ -1,11 +1,7 @@
-from django.views.generic import TemplateView
-
-from .models import WaterUsage
+from apps.core.views import BaseView
 
 
-class WaterView(TemplateView):
+class WaterView(BaseView):
     """Water usage view."""
-    extra_context = {"TITLE": "Water"}
-    http_method_names = ("get",)
-    model = WaterUsage
     template_name = "water.html"
+    title = "Water"

@@ -31,7 +31,8 @@
 {% endblock main %}
 {% block scripts %}
     const xhr = new XMLHttpRequest()
-    xhr.open("GET", "/api/water/?format=json")
+    const waterAPI = '/api/water/?format=json'
+    xhr.open("GET", waterAPI)
     xhr.onreadystatechange = async () => {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             const waterUsageData = JSON.parse(xhr.responseText)

@@ -1,11 +1,7 @@
-from django.views.generic import TemplateView
-
-from .models import ElectricUsage
+from apps.core.views import BaseView
 
 
-class ElectricView(TemplateView):
+class ElectricView(BaseView):
     """Electric usage view."""
-    extra_context = {"TITLE": "Electric"}
-    http_method_names = ("get",)
-    model = ElectricUsage
     template_name = "electric.html"
+    title = "Electric"

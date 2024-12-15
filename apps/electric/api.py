@@ -1,3 +1,7 @@
+from datetime import timedelta
+
+from django.utils.timezone import localtime
+from rest_framework.exceptions import ParseError
 from rest_framework.serializers import ModelSerializer
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
@@ -17,3 +21,16 @@ class APIElectricUsageViewSet(ReadOnlyModelViewSet):
     model = ElectricUsage
     queryset = model.objects
     serializer_class = ElectricUsageSerializer
+
+    def get_queryset(self):
+        # Allow optional filtering by past number of days (via ?days=#).
+        qs = super().get_queryset()
+        days = self.request.query_params.get("days")
+        if days:
+            try:
+                days = int(days)
+            except (TypeError, ValueError):
+                raise ParseError("Invalid number of days supplied!")
+            dt_ago = localtime() - timedelta(days=days)
+            qs = qs.filter(hour__gte=dt_ago)
+        return qs
