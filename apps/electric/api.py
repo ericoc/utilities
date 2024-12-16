@@ -29,8 +29,8 @@ class APIElectricUsageViewSet(ReadOnlyModelViewSet):
         if days:
             try:
                 days = int(days)
+                dt_ago = localtime() - timedelta(days=days)
             except (TypeError, ValueError):
                 raise ParseError("Invalid number of days supplied!")
-            dt_ago = localtime() - timedelta(days=days)
             qs = qs.filter(hour__gte=dt_ago)
         return qs

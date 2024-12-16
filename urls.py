@@ -5,6 +5,7 @@ from django.urls import include, path
 
 from api import api_router
 
+
 urlpatterns = [
     path("", include("apps.core.urls"), name="core"),
     path("api/", include(api_router.urls), name="api"),
