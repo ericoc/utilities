@@ -43,5 +43,5 @@ class APIElectricUsageViewSet(ReadOnlyModelViewSet):
 
                 if ago:
                     dt_ago = localtime() - ago
-                    qs = qs.filter(hour__gte=dt_ago)
+                    return qs.filter(hour__gte=dt_ago)
         return qs
