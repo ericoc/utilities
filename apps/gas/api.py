@@ -1,6 +1,6 @@
 from dateutil.relativedelta import relativedelta
 
-from django.utils.timezone import localtime
+from django.utils.timezone import localdate
 from rest_framework.exceptions import ParseError
 from rest_framework.serializers import ModelSerializer
 from rest_framework.viewsets import ReadOnlyModelViewSet
@@ -29,7 +29,7 @@ class APIGasUsageViewSet(ReadOnlyModelViewSet):
         if months:
             try:
                 months = int(months)
-                dt_ago = localtime().date() - relativedelta(months=months)
+                dt_ago = localdate() - relativedelta(months=months)
             except (TypeError, ValueError):
                 raise ParseError("Invalid number of months supplied!")
             qs = qs.filter(month__gte=dt_ago)

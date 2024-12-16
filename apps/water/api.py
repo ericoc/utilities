@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from django.utils.timezone import localtime
+from django.utils.timezone import localdate
 from rest_framework.exceptions import ParseError
 from rest_framework.serializers import ModelSerializer
 from rest_framework.viewsets import ReadOnlyModelViewSet
@@ -29,7 +29,7 @@ class APIWaterUsageViewSet(ReadOnlyModelViewSet):
         if days:
             try:
                 days = int(days)
-                dt_ago = localtime().date() - timedelta(days=days)
+                dt_ago = localdate() - timedelta(days=days)
             except (TypeError, ValueError):
                 raise ParseError("Invalid number of days supplied!")
             qs = qs.filter(date__gte=dt_ago)

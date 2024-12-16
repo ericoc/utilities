@@ -23,14 +23,25 @@ class APIElectricUsageViewSet(ReadOnlyModelViewSet):
     serializer_class = ElectricUsageSerializer
 
     def get_queryset(self):
-        # Allow optional filtering by past number of days (via ?days=#).
+        # Allow optional filtering by past number of hours or days.
         qs = super().get_queryset()
-        days = self.request.query_params.get("days")
-        if days:
-            try:
-                days = int(days)
-                dt_ago = localtime() - timedelta(days=days)
-            except (TypeError, ValueError):
-                raise ParseError("Invalid number of days supplied!")
-            qs = qs.filter(hour__gte=dt_ago)
+        ago = None
+
+        filterables = ("days", "hours")
+        for filterable in filterables:
+            value = self.request.query_params.get(filterable)
+
+            if value:
+                try:
+                    num_value = int(value)
+                    if filterable == 'days':
+                        ago = timedelta(days=num_value)
+                    elif filterable == 'hours':
+                        ago = timedelta(hours=num_value)
+                except (TypeError, ValueError):
+                    raise ParseError(f"Invalid ${filterable} value supplied!")
+
+                if ago:
+                    dt_ago = localtime() - ago
+                    qs = qs.filter(hour__gte=dt_ago)
         return qs
