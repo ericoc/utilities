@@ -1,4 +1,4 @@
-from datetime import timedelta
+from dateutil.relativedelta import relativedelta
 
 from django.utils.timezone import localtime
 from rest_framework.exceptions import ParseError
@@ -23,25 +23,21 @@ class APIElectricUsageViewSet(ReadOnlyModelViewSet):
     serializer_class = ElectricUsageSerializer
 
     def get_queryset(self):
-        # Allow optional filtering by past number of hours or days.
+        # Allow optional filtering by past number of days, hours, or months.
         qs = super().get_queryset()
-        ago = None
 
-        filterables = ("days", "hours")
-        for filterable in filterables:
+        for filterable in ("hours", "days", "months"):
             value = self.request.query_params.get(filterable)
-
             if value:
                 try:
-                    num_value = int(value)
-                    if filterable == 'days':
-                        ago = timedelta(days=num_value)
-                    elif filterable == 'hours':
-                        ago = timedelta(hours=num_value)
-                except (TypeError, ValueError):
-                    raise ParseError(f"Invalid ${filterable} value supplied!")
+                    # Dictionary of one of the three (3):
+                    #   {"hours": value}, {"days": value}, or {"months": value}
+                    #   to pass keyword argument to relativedelta() method.
+                    ago = {filterable: int(value)}
+                    return qs.filter(
+                        pk__gte=localtime() - relativedelta(**ago)
+                    )
+                except ValueError:
+                    raise ParseError(f"Invalid number of {filterable}!")
 
-                if ago:
-                    dt_ago = localtime() - ago
-                    return qs.filter(hour__gte=dt_ago)
         return qs
