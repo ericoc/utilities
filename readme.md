@@ -8,8 +8,11 @@ data.
 
 ## Electric
 ### Pennsylvania Electric Company ("PECO")
-Comma-separated values ("CSV" / `.csv`) file of electricity used, in
-kilowatt-hours (kWh), each hour.
+A ZIP (`.zip`) archive containing a comma-separated values (`.csv`) file, of
+electricity used in kilowatt-hours (kWh), can be downloaded from the
+"[My Green Button Data](https://secure.peco.com/MyAccount/MyBillUsage/Pages/Secure/GreenButtonConnectDownloadMyData.aspx)"
+page of the "My Usage" section of the PECO website:
+![Export Pennsylvania Electric Company Electric Usage Screenshot](apps/electric/export.png)
 
 #### Name
 The export CSV file from PECO is named based upon the dates exported, like so:
@@ -25,7 +28,8 @@ The PECO file begins with a header that includes account information:
 > ```
 
 #### Data
-Each row of the PECO file has kilowatt-hours (kWh) of electricity used hourly:
+Each row of the PECO CSV export file has kilowatt-hours (kWh) of electricity
+used, as well as the start and end of the hour measured:
 > ```
 > TYPE,DATE,START TIME,END TIME,USAGE (kWh),NOTES
 > Electric usage,2023-07-04,00:00,00:59,0.29
@@ -38,8 +42,14 @@ Each row of the PECO file has kilowatt-hours (kWh) of electricity used hourly:
 
 ## (Natural) Gas
 ### Philadelphia Gas Works ("PGW")
-Excel (`.xlsx`) spreadsheet file of natural gas, used in hundreds of cubic
-feet (CCF), each (billing) month.
+An Excel (`.xlsx`) spreadsheet file of natural gas, used in hundreds of cubic
+feet (CCF), each (billing) month can be downloaded from the
+"[usage section](https://myaccount.pgworks.com/portal/usages.aspx?type=GU)"
+of the Philadelphia Gas Works (PGW) website;
+![Export Philadelphia Gas Works (Natural) Gas Usage Screenshot](apps/gas/export.png)
+
+
+https://myaccount.pgworks.com/portal/usages.aspx?type=GU
 
 #### Name
 The Excel spreadsheet from PGW is named by the date it was exported
@@ -76,7 +86,7 @@ Comma-separated values ("CSV" / `.csv`) file of water used, in gallons, daily.
 A CSV file can be downloaded by "Gallons" of water used "Daily" from the
 "[Detailed Usage](https://secure8.i-doxs.net/CityOfPhiladelphiaWRB/Secure/Usage.aspx)"
 section of the Philadelphia Water Department (PWD) website:
-![Export Philadelphia Water Department Detailed Usage Screenshot](export.png)
+![Export Philadelphia Water Department Detailed Usage Screenshot](apps/water/export.png)
 
 ### Name
 The water usage export `.csv` file is always named `ChartData.csv`.
