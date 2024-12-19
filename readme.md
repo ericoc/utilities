@@ -4,8 +4,6 @@ The Philadelphia electrical, natural gas, and water utilities websites each
 allow for a residential account holder to access (and export!) their own usage
 data.
 
----
-
 ## Electric
 ### Pennsylvania Electric Company ("PECO")
 A ZIP (`.zip`) archive containing a comma-separated values (`.csv`) file, of
@@ -14,11 +12,9 @@ electricity used in kilowatt-hours (kWh), can be downloaded from the
 page of the "My Usage" section of the PECO website:
 ![Export Pennsylvania Electric Company Electric Usage Screenshot](apps/electric/export.png)
 
-#### Name
 The export CSV file from PECO is named based upon the dates exported, like so:
 > `peco_electric_usage_interval_data_Service 1_1_2023-07-04_to_2023-07-04.csv`
 
-#### Header
 The PECO file begins with a header that includes account information:
 > ```
 > Name,WILLIAM PENN
@@ -27,7 +23,6 @@ The PECO file begins with a header that includes account information:
 > Service,Service 1
 > ```
 
-#### Data
 Each row of the PECO CSV export file has kilowatt-hours (kWh) of electricity
 used, as well as the start and end of the hour measured:
 > ```
@@ -38,7 +33,23 @@ used, as well as the start and end of the hour measured:
 > Electric usage,2023-07-04,03:00,03:59,0.32
 > ```
 
----
+The `electric_fill` Django management command imports this file into the database:
+> ```
+> $ python3 manage.py electric_fill
+> TODO: Output Example
+> Done.
+> ```
+
+The `electric_weekend` Django management command does some calculations based
+upon the data to compare electric usage on weekdays vs. weekends:
+> ```
+> $ python3 manage.py electric_weekend             
+> From:           Sun Jan 22 04:00:00 2023 (2023-01-22 04:00:00+00:00)
+> To:             Mon Dec 16 04:00:00 2024 (2024-12-16 04:00:00+00:00)
+> Weekdays:       7,694.1700 total kWh / 11,885 total hours = average 0.6474 kWh.
+> Weekends:       3,549.1300 total kWh / 4,770 total hours = average 0.7441 kWh.
+> Total:          11,243.3000 kWh / 16,655 hours = average 0.6751 kWh.
+> ```
 
 ## (Natural) Gas
 ### Philadelphia Gas Works ("PGW")
@@ -48,15 +59,10 @@ feet (CCF), each (billing) month can be downloaded from the
 of the Philadelphia Gas Works (PGW) website;
 ![Export Philadelphia Gas Works (Natural) Gas Usage Screenshot](apps/gas/export.png)
 
-
-https://myaccount.pgworks.com/portal/usages.aspx?type=GU
-
-#### Name
 The Excel spreadsheet from PGW is named by the date it was exported
 (such as `UsageDataMMDDYYYY.xlsx`):
 > `UsageData12142024.xlsx`
 
-#### Header
 The PGW file also begins with a header that includes account information:
 > ```
 > Service Point Number: 1776xxxxxx            
@@ -64,7 +70,6 @@ The PGW file also begins with a header that includes account information:
 > Property: 1 S BROAD ST (xxxxx1776)
 > ```
 
-#### Data
 Each row of the PGW file includes hundreds of cubic feet (CCF) of natural gas
 used each billing month:
 > ```
@@ -77,7 +82,12 @@ used each billing month:
 > Jun, 2021     5.0                     05/20/21        06/18/21
 > ```
 
----
+The `gas_fill` Django management command imports this file into the database:
+> ```
+> $ python3 manage.py gas_fill
+> TODO: Output Example
+> Done.
+> ```
 
 ## Water
 #### Philadelphia Water Department ("PWD")
@@ -88,10 +98,8 @@ A CSV file can be downloaded by "Gallons" of water used "Daily" from the
 section of the Philadelphia Water Department (PWD) website:
 ![Export Philadelphia Water Department Detailed Usage Screenshot](apps/water/export.png)
 
-### Name
 The water usage export `.csv` file is always named `ChartData.csv`.
 
-#### Data
 Each row of the PWD file includes the number of gallons of water used each day:
 > ```
 > Access Code, Time Interval, Consumption, Units
@@ -103,3 +111,29 @@ Each row of the PWD file includes the number of gallons of water used each day:
 > 00145xxxx, 12/02/2024, 25.4338, Gallons
 > 00145xxxx, 12/03/2024, 23.9377, Gallons
 > ```
+
+The `water_fill` Django management command imports this file into the database:
+> ```
+> $ python3 manage.py water_fill
+> Created:        Monday, December 16, 2024 (2024-12-16) [80.7896 gallons]
+> Total:          1
+> Done.
+> ```
+
+The `water_weekend` Django management command does some calculations based
+upon the data to compare water usage on weekdays vs. weekends:
+> ```
+> $ python3 manage.py water_weekend   
+> From:           Thursday, September 15, 2022 (2022-09-15)
+> To:             Monday, December 16, 2024 (2024-12-16)
+> Weekdays:       19,604.9468 gallons / 586 week days = average 33.4555 gallons.
+> Weekends:       13,288.3955 gallons / 233 weekend days = average 57.0317 gallons.
+> Total:          32,893.3423 gallons / 819 days = average 40.1628 gallons.
+> ```
+
+## API
+Highcharts and DataTables are display using the utility data from Django REST
+Framework endpoints for each data set:
+- Electric: [`https://utilities.ericoc.com/api/electric/`](https://utilities.ericoc.com/api/electric/)
+- (Natural) Gas: [`https://utilities.ericoc.com/api/gas/`](https://utilities.ericoc.com/api/gas/)
+- Water: [`https://utilities.ericoc.com/api/water/`](https://utilities.ericoc.com/api/water/)
