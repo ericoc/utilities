@@ -24,4 +24,5 @@ class GasUsage(models.Model):
         managed = True
         db_table = "gas"
         ordering = ("month",)
-        verbose_name = verbose_name_plural = _("Natural Gas Usage")
+        verbose_name = _("month")
+        verbose_name_plural = _("months")

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class WaterUsage(models.Model):
@@ -20,4 +21,5 @@ class WaterUsage(models.Model):
         managed = True
         db_table = "water"
         ordering = ("date",)
-        verbose_name = verbose_name_plural = "Water Usage"
+        verbose_name = _("day")
+        verbose_name_plural = _("days")

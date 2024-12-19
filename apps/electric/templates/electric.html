@@ -30,7 +30,7 @@
 {% endblock main %}
 {% block scripts %}
     const xhr = new XMLHttpRequest()
-    const electricAPI = '/api/electric/?format=json{% if DEBUG %}&days=90{% endif %}'
+    const electricAPI = '/api/electric/?format=json&days={% if DEBUG %}90{% else %}365{% endif %}'
     xhr.open("GET", electricAPI)
     xhr.onreadystatechange = async () => {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
@@ -40,7 +40,7 @@
                 electricUsageByHour.push([DateTime.fromISO(day.hour).toMillis(), day.kwh])
             }
             const electricHighChart = new Highcharts.Chart({
-                title: {  style: { color: '#f8f9fa' }, text: '{{ TITLE }} Usage' },
+                title: {  style: { color: '#f8f9fa' }, text: '{{ title }} Usage' },
                 subtitle: {  style: { color: '#f8f9fa' }, text: document.ontouchstart === undefined ? 'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in' },
                 chart: {
                     backgroundColor: '#212529',

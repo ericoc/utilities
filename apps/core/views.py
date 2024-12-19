@@ -10,8 +10,8 @@ class BaseView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["DEBUG"] = settings.DEBUG
-        context["TITLE"] = self.title
+        context["debug"] = settings.DEBUG
+        context["title"] = self.title
         return context
 
 

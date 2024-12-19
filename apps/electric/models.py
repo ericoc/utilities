@@ -23,4 +23,5 @@ class ElectricUsage(models.Model):
         managed = True
         db_table = "electric"
         ordering = ("hour",)
-        verbose_name = verbose_name_plural = "Electric Usage"
+        verbose_name = _("hour")
+        verbose_name_plural = _("hours")
