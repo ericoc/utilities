@@ -27,28 +27,39 @@ Each row of the PECO CSV export file has kilowatt-hours (kWh) of electricity
 used, as well as the start and end of the hour measured:
 > ```
 > TYPE,DATE,START TIME,END TIME,USAGE (kWh),NOTES
-> Electric usage,2023-07-04,00:00,00:59,0.29
-> Electric usage,2023-07-04,01:00,01:59,0.34
-> Electric usage,2023-07-04,02:00,02:59,0.34
-> Electric usage,2023-07-04,03:00,03:59,0.32
+> ...
+> Electric usage,2024-12-17,18:00,18:59,0.46
+> Electric usage,2024-12-17,19:00,19:59,0.44
+> Electric usage,2024-12-17,20:00,20:59,0.41
+> Electric usage,2024-12-17,21:00,21:59,0.51
+> Electric usage,2024-12-17,22:00,22:59,1.08
+> Electric usage,2024-12-17,23:00,23:59,2.92
 > ```
 
 The `electric_fill` Django management command imports this file into the database:
 > ```
 > $ python3 manage.py electric_fill
-> TODO: Output Example
+> 1 CSV file(s) found.
+> ...
+> Created:        Tuesday, December 17, 2024 @ 06 PM (2024-12-17 18:00:00-05:00) [0.46 kWh]
+> Created:        Tuesday, December 17, 2024 @ 07 PM (2024-12-17 19:00:00-05:00) [0.44 kWh]
+> Created:        Tuesday, December 17, 2024 @ 08 PM (2024-12-17 20:00:00-05:00) [0.41 kWh]
+> Created:        Tuesday, December 17, 2024 @ 09 PM (2024-12-17 21:00:00-05:00) [0.51 kWh]
+> Created:        Tuesday, December 17, 2024 @ 10 PM (2024-12-17 22:00:00-05:00) [1.08 kWh]
+> Created:        Tuesday, December 17, 2024 @ 11 PM (2024-12-17 23:00:00-05:00) [2.92 kWh]
+> Total:          24
 > Done.
 > ```
 
 The `electric_weekend` Django management command does some calculations based
 upon the data to compare electric usage on weekdays vs. weekends:
 > ```
-> $ python3 manage.py electric_weekend             
+> $ python3 manage.py electric_weekend                                             
 > From:           Sun Jan 22 04:00:00 2023 (2023-01-22 04:00:00+00:00)
-> To:             Mon Dec 16 04:00:00 2024 (2024-12-16 04:00:00+00:00)
-> Weekdays:       7,694.1700 total kWh / 11,885 total hours = average 0.6474 kWh.
+> To:             Wed Dec 18 04:00:00 2024 (2024-12-18 04:00:00+00:00)
+> Weekdays:       7,726.0700 total kWh / 11,933 total hours = average 0.6475 kWh.
 > Weekends:       3,549.1300 total kWh / 4,770 total hours = average 0.7441 kWh.
-> Total:          11,243.3000 kWh / 16,655 hours = average 0.6751 kWh.
+> Total:          11,275.2000 kWh / 16,703 hours = average 0.6750 kWh.
 > ```
 
 ## (Natural) Gas
