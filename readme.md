@@ -132,7 +132,7 @@ upon the data to compare water usage on weekdays vs. weekends:
 > ```
 
 ## API
-Highcharts and DataTables are display using the utility data from Django REST
+Highcharts and DataTables are displayed using the JSON data from Django REST
 Framework endpoints for each data set:
 - Electric: [`https://utilities.ericoc.com/api/electric/`](https://utilities.ericoc.com/api/electric/)
 - (Natural) Gas: [`https://utilities.ericoc.com/api/gas/`](https://utilities.ericoc.com/api/gas/)
