@@ -69,12 +69,10 @@
             const pageTotalNode = document.getElementById('page-total')
             const allTotalNode = document.getElementById('all-total')
             async function footerTotal (api, col=1, digits=0) {
-                let pageGas = DataTable.render.number(',', '.', digits).display(api.column(col, {page: 'current'}).data().sum())
-                pageTotalNode.innerHTML = `<code class="fw-bolder">${pageGas}</code>`
-                pageTotalNode.title = `Page Total: ${pageGas} Hundreds of Cubic Feet (CCF) (on this page)`
-                let totalGas = DataTable.render.number(',', '.', digits).display(api.column(col).data().sum())
-                allTotalNode.innerHTML = `<code class="fw-bolder">${totalGas}</code>`
-                allTotalNode.title = `Total: ${totalGas} Hundreds of Cubic Feet (CCF) (all)`
+                const pageGas = DataTable.render.number(',', '.', digits).display(api.column(col, {page: 'current'}).data().sum())
+                pageTotalNode.innerHTML = `<code class="fw-bolder" title="Page Total: ${pageGas} Hundreds of Cubic Feet (CCF) (on this page)">${pageGas}</code>`
+                const totalGas = DataTable.render.number(',', '.', digits).display(api.column(col).data().sum())
+                allTotalNode.innerHTML = `<code class="fw-bolder" title="Total: ${totalGas} Hundreds of Cubic Feet (CCF) (all)">${totalGas}</code>`
             }
             const exportFileName = 'NaturalGasTable'
             const resultName = 'months'

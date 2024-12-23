@@ -44,28 +44,28 @@
             <nav class="navbar navbar-dark navbar-expand">
                 <ul class="navbar-nav gap-3">
                     <li class="nav-item" title="Utilities (Home)">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover rounded{% if title and title == 'Utilities' %} active" aria-current="page" style="border-color: var(--bs-primary); border-width: 0.15rem;{% endif %}" href="{% url 'index' %}" data-bs-toggle="tooltip" data-bs-title="Utilities (Home)">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover rounded{% if title and title == 'Utilities' %} active" aria-current="page" style="border-color: var(--bs-primary); border-width: 0.15rem;{% endif %}" href="{% url 'index' %}" data-bs-toggle="tooltip" data-bs-title="Utilities (Home)" data-bs-placement="bottom">
                             <svg class="bi text-primary" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#house"></use>
                             </svg>
                         </a>
                     </li>
                     <li class="nav-item" title="Electric">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover rounded{% if title and title == 'Electric' %} active" aria-current="page" style="border-color: var(--color-electric); border-width: 0.15rem;{% endif %}" href="{% url 'electric' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="Electric">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover rounded{% if title and title == 'Electric' %} active" aria-current="page" style="border-color: var(--color-electric); border-width: 0.15rem;{% endif %}" href="{% url 'electric' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="Electric" data-bs-placement="bottom">
                             <svg class="bi" aria-hidden="true" style="color: var(--color-electric);">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use>
                             </svg>
                         </a>
                     </li>
                     <li class="nav-item" title="(Natural) Gas">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover rounded{% if title and title == '(Natural) Gas' %} active" aria-current="page" style="border-color: var(--color-gas); border-width: 0.15rem;{% endif %}" href="{% url 'gas' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="(Natural) Gas">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover rounded{% if title and title == '(Natural) Gas' %} active" aria-current="page" style="border-color: var(--color-gas); border-width: 0.15rem;{% endif %}" href="{% url 'gas' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="(Natural) Gas" data-bs-placement="bottom">
                             <svg class="bi" aria-hidden="true" style="color: var(--color-gas);">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#fan"></use>
                             </svg>
                         </a>
                     </li>
                     <li class="nav-item" title="Water">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover rounded{% if title and title == 'Water' %} active" aria-current="page" style="border-color: var(--color-water); border-width: 0.15rem;{% endif %}" href="{% url 'water' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="Water">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover rounded{% if title and title == 'Water' %} active" aria-current="page" style="border-color: var(--color-water); border-width: 0.15rem;{% endif %}" href="{% url 'water' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="Water" data-bs-placement="bottom">
                             <svg class="bi" aria-hidden="true" style="color: var(--color-water);">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#droplet"></use>
                             </svg>
