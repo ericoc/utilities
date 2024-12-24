@@ -9,12 +9,13 @@
             </tr>
         </thead>
         <tbody>
-        <!--
-            <tr>
-                <td></td>
-                <td></td>
+            <tr id="chart-loading">
+                <td colspan="2">
+                    <div class="spinner-border color-water" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </td>
             </tr>
-        -->
         </tbody>
         <tfoot class="h6">
             <tr>
@@ -40,19 +41,9 @@
                 waterUsageByDay.push([DateTime.fromISO(day.date).toMillis(), day.gallons])
             }
             const waterHighChart = new Highcharts.Chart({
-                title: {
-                    style: { color: '#f8f9fa' },
-                    text: '{{ title }} Usage'
-                },
-                subtitle: {
-                    style: { color: '#f8f9fa' },
-                    text: document.ontouchstart === undefined ? 'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
-                },
-                chart: {
-                    backgroundColor: '#212529',
-                    renderTo: 'utility-chart',
-                    zoomType: 'x'
-                },
+                title: chartTitle,
+                subtitle: chartSubtitle,
+                chart: chartChart,
                 xAxis: { title: { text: 'Date' }, type: 'datetime' },
                 yAxis: { title: { text: 'Gallons' }, type: 'num' },
                 series: [{
@@ -61,10 +52,9 @@
                     states: { hover: { lineWidthPlus: 0 } },
                     type: 'line'
                 }],
-                styledMode: true,
-                time: { timezone: 'America/New_York' }
+                styledMode: chartStyled,
+                time: chartTime
             })
-
             const pageGallonsNode = document.getElementById('page-gallons')
             const totalGallonsNode = document.getElementById('total-gallons')
             async function footerTotal (api, col=1, digits=4) {
@@ -73,7 +63,6 @@
                 const totalGallons = DataTable.render.number(',', '.', digits).display(api.column(col).data().sum())
                 totalGallonsNode.innerHTML = `<code class="fw-bolder" title="All: ${totalGallons} total gallons">${totalGallons}</code>`
             }
-            const exportFileName = 'WaterTable'
             const resultName = 'days'
 
             new DataTable('#utility-table', {
@@ -113,55 +102,15 @@
                         'lengthMenu': `_MENU_ ${resultName}`,
                         'zeroRecords': `No matching ${resultName} found`
                     },
-                    layout: {
-                        topStart: {
-                            buttons: [
-                                {
-                                    extend: 'searchBuilder',
-                                    config: {depthLimit: 1},
-                                }
-                            ]
-                        },
-                        topEnd: {
-                            buttons: [
-                                {
-                                    extend: 'copyHtml5',
-                                    text: '<span class="bi bi-clipboard" title="Copy rows to clipboard"> Copy</span>',
-                                    title: exportFileName
-                                },
-                                {
-                                    extend: 'csvHtml5',
-                                    text: '<span class="bi bi-filetype-csv" title="Comma-Separated Values (.csv)"> CSV</span>',
-                                    title: exportFileName
-                                },
-                                {
-                                    extend: 'excelHtml5',
-                                    text: '<span class="bi bi-filetype-xlsx" title="Excel (.xlsx)"> Excel</span>',
-                                    title: exportFileName
-                                },
-                                {
-                                    extend: 'pdfHtml5',
-                                    text: '<span class="bi bi-filetype-pdf" title="Portable Data Format (.pdf)"> PDF</span>',
-                                    title: exportFileName
-                                },
-                                {
-                                    extend: 'print',
-                                    text: '<span class="bi bi-printer" title="Print"> Print</span>'
-                                },
-                            ]
-                        },
-                        bottomStart: 'pageLength',
-                        bottom1: 'paging',
-                        bottomEnd: 'info'
-                    },
+                    layout: chartLayout,
                     lengthMenu: [
                         1, 2, 3, 4, 5, 6, {label: `7 *`, value: 7}, 8, 9, 10,
                         14, 21, 30, 45, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 365,
                         {label: 'All', value: -1}
                     ],
-                    order: [[0, 'desc']],
+                    order: chartOrder,
                     pageLength: 7,
-                    stateSave: true
+                    stateSave: chartSave
                 }
             )
         }

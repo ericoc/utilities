@@ -34,39 +34,45 @@
                 --color-gas: #853cfd;
                 --color-water: #2caffe;
             }
+            .border-electric { border-color: var(--color-electric); border-style: solid; }
+            .color-electric { color: var(--color-electric); }
+            .border-gas { border-color: var(--color-gas); border-style: solid; }
+            .color-gas { color: var(--color-gas); }
+            .border-water { border-color: var(--color-water); border-style: solid; }
+            .color-water { color: var(--color-water); }
             .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
             .icon-link-hover svg { --bs-icon-link-transform: translate3d(0, -.5rem, 0); }
-            .navbar-expand .navbar-nav .nav-link { border-style: solid; font-size: 2.5rem; }
+            .navbar-expand .navbar-nav .nav-link { font-size: 2.5rem; }
         </style>
     </head>
     <body class="container-fluid">
         <header class="mb-3">
             <nav class="navbar navbar-dark navbar-expand">
                 <ul class="navbar-nav gap-3">
-                    <li class="nav-item" title="Utilities (Home)">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover rounded{% if title and title == 'Utilities' %} active" aria-current="page" style="border-color: var(--bs-primary); border-width: 0.15rem;{% endif %}" href="{% url 'index' %}" data-bs-toggle="tooltip" data-bs-title="Utilities (Home)" data-bs-placement="bottom">
+                    <li class="nav-item{% if title and title == 'Utilities' %} border border-primary rounded{% endif %}" title="Utilities (Home)">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Utilities' %} active" aria-current="page{% endif %}" href="{% url 'index' %}" data-bs-toggle="tooltip" data-bs-title="Utilities (Home)" data-bs-placement="bottom">
                             <svg class="bi text-primary" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#house"></use>
                             </svg>
                         </a>
                     </li>
-                    <li class="nav-item" title="Electric">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover rounded{% if title and title == 'Electric' %} active" aria-current="page" style="border-color: var(--color-electric); border-width: 0.15rem;{% endif %}" href="{% url 'electric' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="Electric" data-bs-placement="bottom">
-                            <svg class="bi" aria-hidden="true" style="color: var(--color-electric);">
+                    <li class="nav-item{% if title and title == 'Electric' %} border-electric rounded{% endif %}" title="Electric">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Electric' %} active" aria-current="page{% endif %}" href="{% url 'electric' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="Electric" data-bs-placement="bottom">
+                            <svg class="bi color-electric" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use>
                             </svg>
                         </a>
                     </li>
-                    <li class="nav-item" title="(Natural) Gas">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover rounded{% if title and title == '(Natural) Gas' %} active" aria-current="page" style="border-color: var(--color-gas); border-width: 0.15rem;{% endif %}" href="{% url 'gas' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="(Natural) Gas" data-bs-placement="bottom">
-                            <svg class="bi" aria-hidden="true" style="color: var(--color-gas);">
+                    <li class="nav-item{% if title and title == '(Natural) Gas' %} border-gas rounded{% endif %}" title="(Natural) Gas">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == '(Natural) Gas' %} active" aria-current="page{% endif %}" href="{% url 'gas' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="(Natural) Gas" data-bs-placement="bottom">
+                            <svg class="bi color-gas" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#fan"></use>
                             </svg>
                         </a>
                     </li>
-                    <li class="nav-item" title="Water">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover rounded{% if title and title == 'Water' %} active" aria-current="page" style="border-color: var(--color-water); border-width: 0.15rem;{% endif %}" href="{% url 'water' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="Water" data-bs-placement="bottom">
-                            <svg class="bi" aria-hidden="true" style="color: var(--color-water);">
+                    <li class="nav-item{% if title and title == 'Water' %} border-water rounded{% endif %}" title="Water">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Water' %} active" aria-current="page{% endif %}" href="{% url 'water' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="Water" data-bs-placement="bottom">
+                            <svg class="bi color-water" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#droplet"></use>
                             </svg>
                         </a>
@@ -92,6 +98,67 @@
             </a>
         </footer>
         <script>
+        {% if title and title != "Utilities" %}
+            const chartColors = {
+                textColor: '#f8f9fa',
+                backgroundColor: '#212529'
+            }
+            const chartColorTitle = { color: chartColors.textColor }
+            const chartTitle = {
+                style: chartColorTitle,
+                text: '{{ title }} Usage'
+            }
+            const chartSubtitle = {
+                style: chartColorTitle,
+                text: document.ontouchstart === undefined ? 'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+            }
+            const chartChart = {
+                backgroundColor: chartColors.backgroundColor,
+                renderTo: 'utility-chart',
+                zoomType: 'x'
+            }
+            const chartLayout = {
+                topStart: {
+                    buttons: [
+                        {
+                            extend: 'searchBuilder',
+                            config: {depthLimit: 1},
+                        }
+                    ]
+                },
+                topEnd: {
+                    buttons: [
+                        {
+                            extend: 'copyHtml5',
+                            text: '<span class="bi bi-clipboard" title="Copy rows to clipboard"> Copy</span>'
+                        },
+                        {
+                            extend: 'csvHtml5',
+                            text: '<span class="bi bi-filetype-csv" title="Comma-Separated Values (.csv)"> CSV</span>'
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            text: '<span class="bi bi-filetype-xlsx" title="Excel (.xlsx)"> Excel</span>'
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            text: '<span class="bi bi-filetype-pdf" title="Portable Data Format (.pdf)"> PDF</span>'
+                        },
+                        {
+                            extend: 'print',
+                            text: '<span class="bi bi-printer" title="Print"> Print</span>'
+                        },
+                    ]
+                },
+                bottomStart: 'pageLength',
+                bottom1: 'paging',
+                bottomEnd: 'info'
+            }
+            const chartOrder = [[0, 'desc']]
+            const chartSave = true
+            const chartStyled = true
+            const chartTime = { timezone: 'America/New_York' }
+        {% endif %}
             {% block scripts %}
                 <!-- -->
             {% endblock scripts %}

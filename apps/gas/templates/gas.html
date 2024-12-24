@@ -3,18 +3,19 @@
 {% block main %}
     <table class="display table table-borderless table-dark table-hover table-responsive table-sm table-striped" id="utility-table">
         <thead class="h6">
-        <tr>
-            <th title="Month">Month</th>
-            <th title="Hundreds of Cubic Feet (CCF)">Hundreds of Cubic Feet (CCF)</th>
-        </tr>
+            <tr>
+                <th title="Month">Month</th>
+                <th title="Hundreds of Cubic Feet (CCF)">Hundreds of Cubic Feet (CCF)</th>
+            </tr>
         </thead>
         <tbody>
-        <!--
-            <tr>
-                <td></td>
-                <td></td>
+            <tr id="chart-loading">
+                <td colspan="2">
+                    <div class="spinner-border color-gas" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </td>
             </tr>
-        -->
         </tbody>
         <tfoot class="h6">
             <tr>
@@ -40,19 +41,9 @@
                 gasUsageByMonth.push([DateTime.fromISO(item.month).toMillis(), item.ccf])
             }
             const gasHighChart = new Highcharts.Chart({
-                title: {
-                    style: { color: '#f8f9fa' },
-                    text: '{{ title }} Usage'
-                },
-                subtitle: {
-                    style: { color: '#f8f9fa' },
-                    text: document.ontouchstart === undefined ? 'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
-                },
-                chart: {
-                    backgroundColor: '#212529',
-                    renderTo: 'utility-chart',
-                    zoomType: 'x'
-                },
+                title: chartTitle,
+                subtitle: chartSubtitle,
+                chart: chartChart,
                 xAxis: { title: { text: 'Month' }, type: 'datetime' },
                 yAxis: { title: { text: 'Hundreds of Cubic Feet (CCF)' }, type: 'num' },
                 series: [{
@@ -62,8 +53,8 @@
                     states: { hover: { lineWidthPlus: 0 } },
                     type: 'line'
                 }],
-                styledMode: true,
-                time: { timezone: 'America/New_York' }
+                styledMode: chartStyled,
+                time: chartTime
             })
 
             const pageTotalNode = document.getElementById('page-total')
@@ -74,7 +65,6 @@
                 const totalGas = DataTable.render.number(',', '.', digits).display(api.column(col).data().sum())
                 allTotalNode.innerHTML = `<code class="fw-bolder" title="Total: ${totalGas} Hundreds of Cubic Feet (CCF) (all)">${totalGas}</code>`
             }
-            const exportFileName = 'NaturalGasTable'
             const resultName = 'months'
 
             new DataTable('#utility-table', {
@@ -114,55 +104,16 @@
                     'lengthMenu': `_MENU_ ${resultName}`,
                     'zeroRecords': `No matching ${resultName} found`
                 },
-                layout: {
-                    topStart: {
-                        buttons: [
-                            {
-                                extend: 'searchBuilder',
-                                config: {depthLimit: 1},
-                            }
-                        ]
-                    },
-                    topEnd: {
-                        buttons: [
-                            {
-                                extend: 'copyHtml5',
-                                text: '<span class="bi bi-clipboard" title="Copy rows to clipboard"> Copy</span>',
-                            },
-                            {
-                                extend: 'csvHtml5',
-                                text: '<span class="bi bi-filetype-csv" title="Comma-Separated Values (.csv)"> CSV</span>',
-                                title: exportFileName
-                            },
-                            {
-                                extend: 'excelHtml5',
-                                text: '<span class="bi bi-filetype-xlsx" title="Excel (.xlsx)"> Excel</span>',
-                                title: exportFileName
-                            },
-                            {
-                                extend: 'pdfHtml5',
-                                text: '<span class="bi bi-filetype-pdf" title="Portable Data Format (.pdf)"> PDF</span>',
-                                title: exportFileName
-                            },
-                            {
-                                extend: 'print',
-                                text: '<span class="bi bi-printer" title="Print"> Print</span>'
-                            },
-                        ]
-                    },
-                    bottomStart: 'pageLength',
-                    bottom1: 'paging',
-                    bottomEnd: 'info'
-                },
+                layout: chartLayout,
                 lengthMenu: [
                     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
                     {label: `12 *`, value: 12},
                     24, 36, 48, 60, 72, 84, 96, 108, 120, 132, 144,
                     {label: 'All', value: -1}
                 ],
-                order: [[0, 'desc']],
+                order: chartOrder,
                 pageLength: 12,
-                stateSave: true
+                stateSave: chartSave
             })
         }
     }
