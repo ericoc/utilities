@@ -5,23 +5,23 @@ from rest_framework.exceptions import ParseError
 from rest_framework.serializers import ModelSerializer
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
-from .models import GasUsage
+from .models import NaturalGasUsage
 
 
-class GasUsageSerializer(ModelSerializer):
+class NaturalGasUsageSerializer(ModelSerializer):
     """Django-Rest-Framework (DRF) serializer for natural gas usage."""
     class Meta:
-        model = GasUsage
+        model = NaturalGasUsage
         fields = "__all__"
 
 
-class APIGasUsageViewSet(ReadOnlyModelViewSet):
+class APINaturalGasUsageViewSet(ReadOnlyModelViewSet):
     """Natural gas usage API view."""
     fields = filterset_fields = "__all__"
-    model = GasUsage
+    model = NaturalGasUsage
     no_filter = ("days", "hours")
     queryset = model.objects
-    serializer_class = GasUsageSerializer
+    serializer_class = NaturalGasUsageSerializer
 
     def get_queryset(self):
         # Allow optional filtering by past number of months (via ?months=#).

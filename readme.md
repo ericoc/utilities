@@ -62,13 +62,13 @@ upon the data to compare electric usage on weekdays vs. weekends:
 > Total:          11,275.2000 kWh / 16,703 hours = average 0.6750 kWh.
 > ```
 
-## (Natural) Gas
+## Natural Gas
 ### Philadelphia Gas Works ("PGW")
 An Excel (`.xlsx`) spreadsheet file of natural gas, used in hundreds of cubic
 feet (CCF), each (billing) month can be downloaded from the
 "[usage section](https://myaccount.pgworks.com/portal/usages.aspx?type=GU)"
 of the Philadelphia Gas Works (PGW) website;
-![Export Philadelphia Gas Works (Natural) Gas Usage Screenshot](apps/gas/export.png)
+![Export Philadelphia Gas Works Natural Gas Usage Screenshot](apps/natural_gas/export.png)
 
 The Excel spreadsheet from PGW is named by the date it was exported
 (such as `UsageDataMMDDYYYY.xlsx`):
@@ -95,7 +95,7 @@ used each billing month:
 
 The `gas_fill` Django management command imports this file into the database:
 > ```
-> $ python3 manage.py gas_fill
+> $ python3 manage.py natural_gas_fill
 > TODO: Output Example
 > Done.
 > ```
@@ -146,5 +146,5 @@ upon the data to compare water usage on weekdays vs. weekends:
 Highcharts and DataTables are displayed using the JSON data from Django REST
 Framework endpoints for each data set:
 - Electric: [`https://utilities.ericoc.com/api/electric/`](https://utilities.ericoc.com/api/electric/)
-- (Natural) Gas: [`https://utilities.ericoc.com/api/gas/`](https://utilities.ericoc.com/api/gas/)
+- Natural Gas: [`https://utilities.ericoc.com/api/natural_gas/`](https://utilities.ericoc.com/api/natural_gas/)
 - Water: [`https://utilities.ericoc.com/api/water/`](https://utilities.ericoc.com/api/water/)

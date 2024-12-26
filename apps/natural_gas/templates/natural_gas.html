@@ -10,8 +10,8 @@
         </thead>
         <tbody>
             <tr id="chart-loading">
-                <td colspan="2">
-                    <div class="spinner-border color-gas" role="status">
+                <td colspan="2" class="text-center">
+                    <div class="color-gas m-3 spinner-border" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>
                 </td>
@@ -31,16 +31,16 @@
 {% endblock main %}
 {% block scripts %}
     const xhr = new XMLHttpRequest()
-    const gasAPI = '/api/gas/?format=json'
-    xhr.open("GET", gasAPI)
+    const naturalGasAPI = '/api/natural_gas/?format=json'
+    xhr.open("GET", naturalGasAPI)
     xhr.onreadystatechange = async () => {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            const gasUsageData = JSON.parse(xhr.responseText)
-            const gasUsageByMonth = []
-            for (const item of Object.values(gasUsageData)) {
-                gasUsageByMonth.push([DateTime.fromISO(item.month).toMillis(), item.ccf])
+            const naturalGasUsageData = JSON.parse(xhr.responseText)
+            const naturalGasUsageByMonth = []
+            for (const item of Object.values(naturalGasUsageData)) {
+                naturalGasUsageByMonth.push([DateTime.fromISO(item.month).toMillis(), item.ccf])
             }
-            const gasHighChart = new Highcharts.Chart({
+            const naturalGasHighChart = new Highcharts.Chart({
                 title: chartTitle,
                 subtitle: chartSubtitle,
                 chart: chartChart,
@@ -48,7 +48,7 @@
                 yAxis: { title: { text: 'Hundreds of Cubic Feet (CCF)' }, type: 'num' },
                 series: [{
                     color: '#853cfd',
-                    data: gasUsageByMonth,
+                    data: naturalGasUsageByMonth,
                     name: 'Hundreds of Cubic Feet (CCF)',
                     states: { hover: { lineWidthPlus: 0 } },
                     type: 'line'
@@ -60,15 +60,15 @@
             const pageTotalNode = document.getElementById('page-total')
             const allTotalNode = document.getElementById('all-total')
             async function footerTotal (api, col=1, digits=0) {
-                const pageGas = DataTable.render.number(',', '.', digits).display(api.column(col, {page: 'current'}).data().sum())
+                const pageNaturalGas = DataTable.render.number(',', '.', digits).display(api.column(col, {page: 'current'}).data().sum())
                 pageTotalNode.innerHTML = `<code class="fw-bolder" title="Page Total: ${pageGas} Hundreds of Cubic Feet (CCF) (on this page)">${pageGas}</code>`
-                const totalGas = DataTable.render.number(',', '.', digits).display(api.column(col).data().sum())
+                const totalNaturalGas = DataTable.render.number(',', '.', digits).display(api.column(col).data().sum())
                 allTotalNode.innerHTML = `<code class="fw-bolder" title="Total: ${totalGas} Hundreds of Cubic Feet (CCF) (all)">${totalGas}</code>`
             }
             const resultName = 'months'
 
             new DataTable('#utility-table', {
-                data: gasUsageData,
+                data: naturalGasUsageData,
                 columns: [
                     {
                         data: 'month',
@@ -78,15 +78,15 @@
                         data: 'ccf',
                         render: (data, type) => {
                             if (type === 'display') {
-                                let gasText = 'primary'
+                                let naturalGasText = 'primary'
                                 if (data > 50) {
-                                    gasText = 'danger'
+                                    naturalGasText = 'danger'
                                 } else if (data > 25) {
-                                    gasText = 'warning'
+                                    naturalGasText = 'warning'
                                 } else if (data > 10) {
-                                    gasText = 'info'
+                                    naturalGasText = 'info'
                                 }
-                                return `<code class="fw-bold text-${gasText}-emphasis" title="${data} Hundreds of Cubic Feet (CCF)">${data}</code>`
+                                return `<code class="fw-bold text-${naturalGasText}-emphasis" title="${data} Hundreds of Cubic Feet (CCF)">${data}</code>`
                             }
                             return data
                         },

@@ -63,8 +63,8 @@
                             </svg>
                         </a>
                     </li>
-                    <li class="nav-item{% if title and title == '(Natural) Gas' %} border-gas rounded{% endif %}" title="(Natural) Gas">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == '(Natural) Gas' %} active" aria-current="page{% endif %}" href="{% url 'gas' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="(Natural) Gas" data-bs-placement="bottom">
+                    <li class="nav-item{% if title and title == 'Natural Gas' %} border-gas rounded{% endif %}" title="Natural Gas">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Natural Gas' %} active" aria-current="page{% endif %}" href="{% url 'natural_gas' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="Natural Gas" data-bs-placement="bottom">
                             <svg class="bi color-gas" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#fan"></use>
                             </svg>

@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class GasUsage(models.Model):
+class NaturalGasUsage(models.Model):
     """Natural gas usage table."""
 
     month = models.DateField(
@@ -22,7 +22,7 @@ class GasUsage(models.Model):
 
     class Meta:
         managed = True
-        db_table = "gas"
+        db_table = "natural_gas"
         ordering = ("month",)
         verbose_name = _("month")
         verbose_name_plural = _("months")

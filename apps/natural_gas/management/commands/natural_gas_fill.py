@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from openpyxl import load_workbook
 from pathlib import Path
-from ...models import GasUsage
+from ...models import NaturalGasUsage
 
 
 class Command(BaseCommand):
@@ -45,16 +45,16 @@ class Command(BaseCommand):
                         row_month.value, "%b, %Y"
                     ).date()
 
-                    # Create dictionary mapping month to gas usage in CCF.
+                    # Create dictionary mapping month to natural gas usage in CCF.
                     usage = {"month": row_dt, "ccf": row_ccf}
 
-                    # Update or create the gas usage object in the database.
-                    obj, created = GasUsage.objects.update_or_create(
+                    # Update or create the natural gas usage object in the database.
+                    obj, created = NaturalGasUsage.objects.update_or_create(
                         **usage,
                         defaults=usage
                     )
 
-                    # Show any newly created gas usage database objects.
+                    # Show any newly created natural gas usage database objects.
                     if created:
                         num_created += 1
                         self.stdout.write(self.style.SUCCESS(
@@ -62,7 +62,7 @@ class Command(BaseCommand):
                             f" ({obj.month}) [{obj.ccf} CCF]"
                         ))
 
-            # List total count of newly created gas usage database objects.
+            # List total count of newly created natural gas usage database objects.
             if num_created > 0:
                 self.stdout.write(self.style.SUCCESS(
                     f"Total:\t\t{num_created}"

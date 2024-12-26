@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from .models import GasUsage
+from .models import NaturalGasUsage
 
 
 # Create and register natural gas usage admin model.
-@admin.register(GasUsage)
-class GasUsageAdmin(admin.ModelAdmin):
+@admin.register(NaturalGasUsage)
+class NaturalGasUsageAdmin(admin.ModelAdmin):
     """Natural gas usage administration."""
 
     date_hierarchy = "month"
@@ -14,7 +14,7 @@ class GasUsageAdmin(admin.ModelAdmin):
         ("Usage", {"fields": ("ccf",)},)
     )
     list_display = readonly_fields = ("month", "ccf",)
-    model = GasUsage
+    model = NaturalGasUsage
     ordering = ("-month",)
     show_facets = admin.ShowFacets.ALWAYS
     show_full_result_count = True

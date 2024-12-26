@@ -1,4 +1,4 @@
 from .core import CoreConfig
 from .electric import ElectricConfig
-from .gas import GasConfig
+from .natural_gas import NaturalGasConfig
 from .water import WaterConfig

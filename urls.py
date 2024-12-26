@@ -10,7 +10,7 @@ urlpatterns = [
     path("", include("apps.core.urls"), name="core"),
     path("api/", include(api_router.urls), name="api"),
     path("electric/", include("apps.electric.urls"), name="electric"),
-    path("gas/", include("apps.gas.urls"), name="gas"),
+    path("natural_gas/", include("apps.natural_gas.urls"), name="natural_gas"),
     path("water/", include("apps.water.urls"), name="water"),
 ]
 
