@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
         try:
             # UsageData12142024.xlsx (UsageDataMMDDYYYY.xlsx)
-            xlsx_prefix = settings.GAS_PREFIX
+            xlsx_prefix = settings.NATURAL_GAS_PREFIX
             spreadsheets = sorted(
                 list(Path(".").glob(f"{xlsx_prefix}*.xlsx")),
                 reverse=True
