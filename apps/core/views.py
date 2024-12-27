@@ -10,7 +10,7 @@ class BaseView(TemplateView):
     page_length = 12
     thresholds = ()
     time_format = None
-    title = "Utilities"
+    title = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -21,9 +21,11 @@ class BaseView(TemplateView):
         context["time_format"] = self.time_format
         context["timezone"] = settings.TIME_ZONE
         context["title"] = self.title
+        context["website_title"] = settings.WEBSITE_TITLE
         return context
 
 
 class IndexView(BaseView):
     """Index view."""
     template_name = "index.html"
+    title = "Home"
