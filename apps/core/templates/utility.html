@@ -58,10 +58,9 @@
 
                     const utilityHighChart = new Highcharts.Chart({
                         title: {
-                            style: chartColorTitle,
-                            text: `${utilityTitle} Usage`
+                            style: { color: chartColors.textColor },
+                            text: utilityTitle
                         },
-                        subtitle: chartSubtitle,
                         chart: chartChart,
                         xAxis: { title: { text: utilityTimeDesc }, type: 'datetime' },
                         yAxis: { title: { text: utilityUnitDesc }, type: 'num' },
@@ -78,7 +77,7 @@
 
                     const pageTotalNode = document.getElementById('page-total')
                     const allTotalNode = document.getElementById('all-total')
-                    function footerTotal (api, col=1, digits=0) {
+                    function footerTotal (api, col=1, digits=4) {
                         const pageUtility = DataTable.render.number(',', '.', digits).display(api.column(col, {page: 'current'}).data().sum())
                         pageTotalNode.innerHTML = `<code class="fw-bolder" title="Page Total: ${pageUtility} ${utilityUnitDesc} [This Page]">${pageUtility}</code>`
                         const totalUtility = DataTable.render.number(',', '.', digits).display(api.column(col).data().sum())
@@ -120,12 +119,16 @@
                             footerTotal(this.api())
                         },
                         language: {
-                            'emptyTable': `No ${resultName} available in table`,
-                            'info': `Showing _START_ to _END_ of _TOTAL_ ${resultName}`,
-                            'infoEmpty': `Showing 0 to 0 of 0 ${resultName}`,
-                            'infoFiltered': `(filtered from _MAX_ total ${resultName})`,
-                            'lengthMenu': `_MENU_ ${resultName}`,
-                            'zeroRecords': `No matching ${resultName} found`
+                            emptyTable: `No ${resultName} available in table`,
+                            info: `_START_ to _END_ of _TOTAL_ ${resultName}`,
+                            infoEmpty: `0 to 0 of 0 ${resultName}`,
+                            infoFiltered: `(of _MAX_ total ${resultName})`,
+                            lengthMenu: `_MENU_ ${resultName}`,
+                            searchBuilder: {
+                                button: 'Search',
+                                title: 'Search'
+                            },
+                            zeroRecords: `No ${resultName} found`
                         },
                         layout: chartLayout,
                         lengthMenu: [
@@ -149,16 +152,6 @@
                 lineColor: '#{{ color }}',
                 textColor: '#f8f9fa',
                 backgroundColor: '#212529'
-            }
-            const chartColorTitle = { color: chartColors.textColor }
-
-            const chartTitle = {
-                style: chartColorTitle,
-                text: `${utilityTitle} Usage`
-            }
-            const chartSubtitle = {
-                style: chartColorTitle,
-                text: document.ontouchstart === undefined ? 'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
             }
             const chartChart = {
                 backgroundColor: chartColors.backgroundColor,
