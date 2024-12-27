@@ -64,21 +64,21 @@
                         </a>
                     </li>
                     <li class="nav-item{% if title and title == 'Electric' %} border-electric rounded{% endif %}" title="Electric">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Electric' %} active" aria-current="page{% endif %}" href="{% url 'electric' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="Electric" data-bs-placement="bottom">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Electric' %} active" aria-current="page{% endif %}" href="{% url 'electric' %}#chart" data-bs-toggle="tooltip" data-bs-title="Electric" data-bs-placement="bottom">
                             <svg class="bi color-electric" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use>
                             </svg>
                         </a>
                     </li>
                     <li class="nav-item{% if title and title == 'Natural Gas' %} border-gas rounded{% endif %}" title="Natural Gas">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Natural Gas' %} active" aria-current="page{% endif %}" href="{% url 'natural_gas' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="Natural Gas" data-bs-placement="bottom">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Natural Gas' %} active" aria-current="page{% endif %}" href="{% url 'natural_gas' %}#chart" data-bs-toggle="tooltip" data-bs-title="Natural Gas" data-bs-placement="bottom">
                             <svg class="bi color-gas" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#fan"></use>
                             </svg>
                         </a>
                     </li>
                     <li class="nav-item{% if title and title == 'Water' %} border-water rounded{% endif %}" title="Water">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Water' %} active" aria-current="page{% endif %}" href="{% url 'water' %}#utility-chart" data-bs-toggle="tooltip" data-bs-title="Water" data-bs-placement="bottom">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Water' %} active" aria-current="page{% endif %}" href="{% url 'water' %}#chart" data-bs-toggle="tooltip" data-bs-title="Water" data-bs-placement="bottom">
                             <svg class="bi color-water" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#droplet"></use>
                             </svg>
@@ -88,7 +88,6 @@
             </nav>
         </header>
         <main class="container-fluid">
-            <div id="utility-chart"></div>
             {% block main %}{% endblock main %}
         </main>
         <footer class="container-fluid footer mt-5 mb-3">
@@ -105,7 +104,7 @@
         <script>
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-        </script>
         {% block scripts %}{% endblock scripts %}
+        </script>
     </body>
 </html>
