@@ -8,14 +8,14 @@ from .models import WaterUsage
 class WaterUsageAdmin(admin.ModelAdmin):
     """Water usage administration."""
 
-    date_hierarchy = "date"
+    date_hierarchy = "day"
     fieldsets = (
-        ("Date", {"fields": ("date",)},),
+        ("Day", {"fields": ("day",)},),
         ("Usage", {"fields": ("gallons",)},)
     )
-    list_display = readonly_fields = ("date", "gallons",)
+    list_display = readonly_fields = ("day", "gallons",)
     model = WaterUsage
-    ordering = ("-date",)
+    ordering = ("-day",)
     show_facets = admin.ShowFacets.ALWAYS
     show_full_result_count = True
     verbose_name = verbose_name_plural = "Water Usage"

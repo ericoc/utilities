@@ -22,29 +22,31 @@ class Command(BaseCommand):
         dt_fmt = "%A, %B %d, %Y"
 
         # Minimum ("From") date.
-        min_date = usage.first()
+        min_row = usage.first()
+        min_day = min_row.day
         self.stdout.write(self.style.SUCCESS(
-            f'From:\t\t{min_date.date.strftime(dt_fmt)} ({min_date.date})'
+            f'From:\t\t{min_day.strftime(dt_fmt)} ({min_day})'
         ))
 
         # Maximum ("To") date.
-        max_date = usage.last()
+        max_row = usage.last()
+        max_day = max_row.day
         self.stdout.write(self.style.SUCCESS(
-            f'To:\t\t{max_date.date.strftime(dt_fmt)} ({max_date.date})'
+            f'To:\t\t{max_day.strftime(dt_fmt)} ({max_day})'
         ))
 
         ## Iterate all water usage data, calculating weekend vs. weekday usage.
-        for day in usage.all():
+        for row in usage.all():
 
             # Weekend.
-            if day.date.strftime('%A') in ('Saturday', 'Sunday'):
+            if row.day.strftime('%A') in ('Saturday', 'Sunday'):
                 num_weekend += 1
-                usage_weekend += day.gallons
+                usage_weekend += row.gallons
 
             # Weekday.
             else:
                 num_weekday += 1
-                usage_weekday += day.gallons
+                usage_weekday += row.gallons
 
 
         ## Show usage separately for weekdays and weekends.

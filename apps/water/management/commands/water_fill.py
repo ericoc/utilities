@@ -32,7 +32,7 @@ class Command(BaseCommand):
 
                     # Create dictionary mapping date to water usage in gallons.
                     usage = {
-                        "date": date.fromisoformat(date_iso),
+                        "day": date.fromisoformat(date_iso),
                         "gallons": float(csv_row[" Consumption"].strip())
                     }
 
@@ -46,8 +46,8 @@ class Command(BaseCommand):
                     if created:
                         num_created += 1
                         self.stdout.write(self.style.SUCCESS(
-                            f"Created:\t{obj.date.strftime('%A, %B %d, %Y')}"
-                            f" ({obj.date}) [{obj.gallons} gallons]"
+                            f"Created:\t{obj.day.strftime('%A, %B %d, %Y')}"
+                            f" ({obj.day}) [{obj.gallons} gallons]"
                         ))
 
             # List total count of newly created water usage database objects.
