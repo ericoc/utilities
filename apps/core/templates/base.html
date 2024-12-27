@@ -33,6 +33,9 @@
                 --color-electric: #e4a11b;
                 --color-gas: #853cfd;
                 --color-water: #2caffe;
+                {% if color %}
+                --color-utility: #{{ color }};
+                {% endif %}
             }
             .border-electric { border-color: var(--color-electric); border-style: solid; }
             .color-electric { color: var(--color-electric); }
@@ -40,6 +43,10 @@
             .color-gas { color: var(--color-gas); }
             .border-water { border-color: var(--color-water); border-style: solid; }
             .color-water { color: var(--color-water); }
+            {% if color %}
+            .border-utility { border-color: var(--color-utility); }
+            .color-utility { color: var(--color-utility); }
+            {% endif %}
             .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
             .icon-link-hover svg { --bs-icon-link-transform: translate3d(0, -.5rem, 0); }
             .navbar-expand .navbar-nav .nav-link { font-size: 2.5rem; }
@@ -82,9 +89,7 @@
         </header>
         <main class="container-fluid">
             <div id="utility-chart"></div>
-            {% block main %}
-                <!-- -->
-            {% endblock main %}
+            {% block main %}{% endblock main %}
         </main>
         <footer class="container-fluid footer mt-5 mb-3">
             <a class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/ericoc/utilities" target="_blank" data-bs-toggle="tooltip" data-bs-title="GitHub <https://github.com/ericoc/utilities>">
@@ -98,72 +103,9 @@
             </a>
         </footer>
         <script>
-        {% if title and title != "Utilities" %}
-            const chartColors = {
-                textColor: '#f8f9fa',
-                backgroundColor: '#212529'
-            }
-            const chartColorTitle = { color: chartColors.textColor }
-            const chartTitle = {
-                style: chartColorTitle,
-                text: '{{ title }} Usage'
-            }
-            const chartSubtitle = {
-                style: chartColorTitle,
-                text: document.ontouchstart === undefined ? 'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
-            }
-            const chartChart = {
-                backgroundColor: chartColors.backgroundColor,
-                renderTo: 'utility-chart',
-                zoomType: 'x'
-            }
-            const chartLayout = {
-                topStart: {
-                    buttons: [
-                        {
-                            extend: 'searchBuilder',
-                            config: {depthLimit: 1},
-                        }
-                    ]
-                },
-                topEnd: {
-                    buttons: [
-                        {
-                            extend: 'copyHtml5',
-                            text: '<span class="bi bi-clipboard" title="Copy rows to clipboard"> Copy</span>'
-                        },
-                        {
-                            extend: 'csvHtml5',
-                            text: '<span class="bi bi-filetype-csv" title="Comma-Separated Values (.csv)"> CSV</span>'
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            text: '<span class="bi bi-filetype-xlsx" title="Excel (.xlsx)"> Excel</span>'
-                        },
-                        {
-                            extend: 'pdfHtml5',
-                            text: '<span class="bi bi-filetype-pdf" title="Portable Data Format (.pdf)"> PDF</span>'
-                        },
-                        {
-                            extend: 'print',
-                            text: '<span class="bi bi-printer" title="Print"> Print</span>'
-                        },
-                    ]
-                },
-                bottomStart: 'pageLength',
-                bottom1: 'paging',
-                bottomEnd: 'info'
-            }
-            const chartOrder = [[0, 'desc']]
-            const chartSave = true
-            const chartStyled = true
-            const chartTime = { timezone: 'America/New_York' }
-        {% endif %}
-            {% block scripts %}
-                <!-- -->
-            {% endblock scripts %}
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         </script>
+        {% block scripts %}{% endblock scripts %}
     </body>
 </html>
