@@ -88,13 +88,13 @@
                     }
                     const resultName = `${utilityTimeName}s`
 
-                    const defaultPageLength = {{ page_length|default_if_none:12 }}
+                    const defaultPageLength = 12
                     new DataTable('#utility-table', {
                         data: utilityUsageData,
                         columns: [
                             {
                                 data: utilityTimeName,
-                                render: {{ time_format|safe }},
+                                render: DataTable.render.{{ datatable_time_format|safe }},
                             },
                             {
                                 data: utilityUnitName,

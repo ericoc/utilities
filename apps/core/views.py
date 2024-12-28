@@ -3,22 +3,13 @@ from django.views.generic.base import TemplateView
 
 
 class BaseView(TemplateView):
-    """Base view."""
+    """Base template view."""
     http_method_names = ("get",)
     template_name = "utility.html"
-    color = None
-    page_length = 12
-    thresholds = ()
-    time_format = None
     title = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["color"] = self.color
-        context["debug"] = settings.DEBUG
-        context["page_length"] = self.page_length
-        context["thresholds"] = self.thresholds
-        context["time_format"] = self.time_format
         context["timezone"] = settings.TIME_ZONE
         context["title"] = self.title
         context["website_title"] = settings.WEBSITE_TITLE
@@ -26,6 +17,21 @@ class BaseView(TemplateView):
 
 
 class IndexView(BaseView):
-    """Index view."""
+    """Main/index view."""
     template_name = "index.html"
     title = "Home"
+
+
+class UtilityView(BaseView):
+    """Base view for utility usage data."""
+    color = None
+    datatable_time_format = None
+    template_name = "utility.html"
+    thresholds = ()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["color"] = self.color
+        context["datatable_time_format"] = self.datatable_time_format
+        context["thresholds"] = self.thresholds
+        return context

@@ -31,7 +31,7 @@
         <style>
             :root {
                 --color-electric: #e4a11b;
-                --color-gas: #853cfd;
+                --color-natural-gas: #853cfd;
                 --color-water: #2caffe;
                 {% if color %}
                 --color-utility: #{{ color }};
@@ -39,8 +39,8 @@
             }
             .border-electric { border-color: var(--color-electric); border-style: solid; }
             .color-electric { color: var(--color-electric); }
-            .border-gas { border-color: var(--color-gas); border-style: solid; }
-            .color-gas { color: var(--color-gas); }
+            .border-natural-gas { border-color: var(--color-natural-gas); border-style: solid; }
+            .color-natural-gas { color: var(--color-natural-gas); }
             .border-water { border-color: var(--color-water); border-style: solid; }
             .color-water { color: var(--color-water); }
             {% if color %}
@@ -70,9 +70,9 @@
                             </svg>
                         </a>
                     </li>
-                    <li class="nav-item{% if title and title == 'Natural Gas' %} border-gas rounded{% endif %}" title="Natural Gas">
+                    <li class="nav-item{% if title and title == 'Natural Gas' %} border-natural-gas rounded{% endif %}" title="Natural Gas">
                         <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Natural Gas' %} active" aria-current="page{% endif %}" href="{% url 'natural_gas' %}#chart" data-bs-toggle="tooltip" data-bs-title="Natural Gas" data-bs-placement="bottom">
-                            <svg class="bi color-gas" aria-hidden="true">
+                            <svg class="bi color-natural-gas" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#fan"></use>
                             </svg>
                         </a>

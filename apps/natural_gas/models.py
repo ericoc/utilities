@@ -4,7 +4,6 @@ from django.utils.translation import gettext_lazy as _
 
 class NaturalGasUsage(models.Model):
     """Natural gas usage table."""
-
     month = models.DateField(
         primary_key=True,
         help_text=_("Billing month of natural gas usage."),

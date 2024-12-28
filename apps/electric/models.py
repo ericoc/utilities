@@ -4,11 +4,10 @@ from django.utils.translation import gettext_lazy as _
 
 class ElectricUsage(models.Model):
     """Electric usage table."""
-
     hour = models.DateTimeField(
         primary_key=True,
-        help_text="Start of an hour of electricity usage.",
-        verbose_name="Hour"
+        help_text=_("Start of an hour of electricity usage."),
+        verbose_name=_("Hour")
     )
     kwh = models.DecimalField(
         max_digits=7,
@@ -16,7 +15,7 @@ class ElectricUsage(models.Model):
         help_text=_(
             "Amount of electricity used, in kilowatt-hours (kWh), in an hour."
         ),
-        verbose_name="Kilowatt-Hours (kWh)",
+        verbose_name=_("Kilowatt-Hours (kWh)"),
     )
 
     class Meta:
