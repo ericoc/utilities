@@ -9,5 +9,4 @@ class APIElectricUsageViewSet(APIUtilityViewSet):
     """Django-Rest-Framework (DRF) natural gas usage API view-set."""
     model = ElectricUsage
     queryset = model.objects
-    filterable = ("months", "years")
     serializer_class = ElectricUsageSerializer

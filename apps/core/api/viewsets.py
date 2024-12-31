@@ -11,8 +11,7 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 class APIUtilityViewSet(ReadOnlyModelViewSet):
     """Base read-only Django-Rest-Framework (DRF) utility usage API view-set."""
     fields = filterset_fields = "__all__"
-    filterable = ()
-    not_filterable = ("hours", "days", "weeks", "months", "years")
+    filterable = ("hours", "days", "weeks", "months", "years")
     model = None
     serializer_class = None
 
