@@ -1,12 +1,9 @@
-from apps.core.views import UtilityView
-
-from .models import WaterUsage
+from apps.core.views.utility import UtilityView
 
 
 class WaterView(UtilityView):
     """Water usage view."""
     color = "2caffe"
     datatable_time_format = "date('DDDD')"
-    model = WaterUsage
+    # icon = "droplet"
     thresholds = (100, 75, 50)
-    title = "Water"

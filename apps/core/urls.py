@@ -1,11 +1,6 @@
-from django.contrib import admin
-from django.urls import include, path
+from django.urls import path
 
-from .views import IndexView
+from .views.home import HomeView
 
 
-urlpatterns = [
-    path("", IndexView.as_view(), name="index"),
-    path("admin/", admin.site.urls, name="admin"),
-    path("i18n/", include('django.conf.urls.i18n')),
-]
+urlpatterns = [path("", HomeView.as_view(), name="home")]
