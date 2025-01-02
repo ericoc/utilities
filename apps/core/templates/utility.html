@@ -102,11 +102,11 @@
                                 render: (data, type) => {
                                     if (type === 'display') {
                                         let utilityTextColor = 'primary'
-                                        if (data > {{ thresholds.0 }}) {
+                                        if (data >= {{ thresholds.0 }}) {
                                             utilityTextColor = 'danger'
-                                        } else if (data > {{ thresholds.1 }}) {
+                                        } else if (data >= {{ thresholds.1 }}) {
                                             utilityTextColor = 'warning'
-                                        } else if (data > {{ thresholds.2 }} ) {
+                                        } else if (data >= {{ thresholds.2 }} ) {
                                             utilityTextColor = 'info'
                                         }
                                         return `<code class="fw-bold text-${utilityTextColor}-emphasis" title="${data} ${utilityUnitDesc}">${data}</code>`
