@@ -106,7 +106,7 @@
                                             utilityTextColor = 'danger'
                                         } else if (data >= {{ thresholds.1 }}) {
                                             utilityTextColor = 'warning'
-                                        } else if (data >= {{ thresholds.2 }} ) {
+                                        } else if (data >= {{ thresholds.2 }}) {
                                             utilityTextColor = 'info'
                                         }
                                         return `<code class="fw-bold text-${utilityTextColor}-emphasis" title="${data} ${utilityUnitDesc}">${data}</code>`
