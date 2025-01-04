@@ -18,6 +18,5 @@ class UtilityView(BaseView):
         context = super().get_context_data(**kwargs)
         context["color"] = self.color
         context["datatable_time_format"] = self.datatable_time_format
-        # context["icon"] = self.icon
         context["thresholds"] = self.thresholds
         return context

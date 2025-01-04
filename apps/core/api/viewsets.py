@@ -1,7 +1,8 @@
+from datetime import date
 from dateutil.relativedelta import relativedelta
 
 from django.utils.decorators import method_decorator
-from django.utils.timezone import localtime
+from django.utils.timezone import localdate, localtime
 from django.views.decorators.cache import cache_page
 
 from rest_framework.exceptions import ParseError
@@ -21,6 +22,26 @@ class APIUtilityViewSet(ReadOnlyModelViewSet):
 
     def get_queryset(self):
         qs = super().get_queryset()
+
+        start_date = None
+        start_search = self.request.query_params.get("start")
+        if start_search:
+            try:
+                start_date = date.fromisoformat(start_search)
+            except ValueError:
+                pass
+
+        end_date = None
+        end_search = self.request.query_params.get("end")
+        if end_search:
+            try:
+                end_date = date.fromisoformat(end_search)
+            except ValueError:
+                pass
+
+        if start_date and end_date:
+            return qs.filter(pk__range=[start_date, end_date])
+
 
         if self.filterable:
             for filterable in self.filterable:
