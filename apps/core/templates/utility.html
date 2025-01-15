@@ -80,9 +80,9 @@
                     const allTotalNode = document.getElementById('all-total')
                     function footerTotal (api, col=1, digits=4) {
                         const pageUtility = DataTable.render.number(',', '.', digits).display(api.column(col, {page: 'current'}).data().sum())
-                        pageTotalNode.innerHTML = `<code class="fw-bolder" title="Page Total: ${pageUtility} ${utilityUnitDesc} [This Page]">${pageUtility}</code>`
+                        pageTotalNode.innerHTML = `<code class="fw-bolder" title="Page Total: ${pageUtility} ${utilityUnitDesc} [This Page]" data-bs-toggle="tooltip" data-bs-title="Page Total: ${pageUtility} ${utilityUnitDesc} [This Page]">${pageUtility}</code>`
                         const totalUtility = DataTable.render.number(',', '.', digits).display(api.column(col).data().sum())
-                        allTotalNode.innerHTML = `<code class="fw-bolder" title="Total: ${totalUtility} ${utilityUnitDesc} [All Pages]">${totalUtility}</code>`
+                        allTotalNode.innerHTML = `<code class="fw-bolder" title="Total: ${totalUtility} ${utilityUnitDesc} [All Pages]" data-bs-toggle="tooltip" data-bs-title="Total: ${totalUtility} ${utilityUnitDesc} [All Pages]">${totalUtility}</code>`
                         if (chartLoading && chartLoading.visibility === true) {
                             chartLoading.visibility = false
                         }
@@ -109,16 +109,18 @@
                                         } else if (data >= {{ thresholds.2 }}) {
                                             utilityTextColor = 'info'
                                         }
-                                        return `<code class="fw-bold text-${utilityTextColor}-emphasis" title="${data} ${utilityUnitDesc}">${data}</code>`
+                                        return `<code class="fw-bold text-${utilityTextColor}-emphasis" title="${data} ${utilityUnitDesc}" data-bs-toggle="tooltip" data-bs-title="${data} ${utilityUnitDesc}">${data}</code>`
                                     }
                                     return data
                                 },
                                 type: 'num'
                             }
                         ],
+                        drawCallback: function () { renderTooltips() },
                         footerCallback: async function () {
                             footerTotal(this.api())
                         },
+                        initComplete: function () { renderTooltips() },
                         language: {
                             emptyTable: `No ${resultName} available in table`,
                             info: `_START_ to _END_ of _TOTAL_ ${resultName}`,
@@ -126,8 +128,8 @@
                             infoFiltered: `(of _MAX_ total ${resultName})`,
                             lengthMenu: `_MENU_ ${resultName}`,
                             searchBuilder: {
-                                button: 'Search',
-                                title: 'Search'
+                                button: '<span class="bi bi-search" title="Search"> Search</span>',
+                                title: '<span class="bi bi-search" title="Search"> Search</span>'
                             },
                             zeroRecords: `No ${resultName} found`
                         },
@@ -172,23 +174,23 @@
                     buttons: [
                         {
                             extend: 'copyHtml5',
-                            text: '<span class="bi bi-clipboard" title="Copy rows to clipboard"> Copy</span>'
+                            text: '<span class="bi bi-clipboard" data-bs-toggle="tooltip" data-bs-title="Copy rows to clipboard" title="Copy rows to clipboard"> Copy</span>'
                         },
                         {
                             extend: 'csvHtml5',
-                            text: '<span class="bi bi-filetype-csv" title="Comma-Separated Values (.csv)"> CSV</span>'
+                            text: '<span class="bi bi-filetype-csv" data-bs-toggle="tooltip" data-bs-title="Comma-Separated Values (.csv)" title="Comma-Separated Values (.csv)"> CSV</span>'
                         },
                         {
                             extend: 'excelHtml5',
-                            text: '<span class="bi bi-filetype-xlsx" title="Excel (.xlsx)"> Excel</span>'
+                            text: '<span class="bi bi-filetype-xlsx" data-bs-toggle="tooltip" data-bs-title="Microsoft Excel (.xlsx)" title="Microsoft Excel (.xlsx)"> Excel</span>'
                         },
                         {
                             extend: 'pdfHtml5',
-                            text: '<span class="bi bi-filetype-pdf" title="Portable Data Format (.pdf)"> PDF</span>'
+                            text: '<span class="bi bi-filetype-pdf" data-bs-toggle="tooltip" data-bs-title="Portable Data Format (.pdf)" title="Portable Data Format (.pdf)"> PDF</span>'
                         },
                         {
                             extend: 'print',
-                            text: '<span class="bi bi-printer" title="Print"> Print</span>'
+                            text: '<span class="bi bi-printer" data-bs-toggle="tooltip" data-bs-title="Print" title="Print"> Print</span>'
                         },
                     ]
                 },
