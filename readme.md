@@ -54,12 +54,12 @@ The `electric_fill` Django management command imports this file into the databas
 The `electric_weekend` Django management command does some calculations based
 upon the data to compare electric usage on weekdays vs. weekends:
 > ```
-> $ python3 manage.py electric_weekend                                             
-> From:           Sun Jan 22 04:00:00 2023 (2023-01-22 04:00:00+00:00)
-> To:             Wed Dec 18 04:00:00 2024 (2024-12-18 04:00:00+00:00)
-> Weekdays:       7,726.0700 total kWh / 11,933 total hours = average 0.6475 kWh.
-> Weekends:       3,549.1300 total kWh / 4,770 total hours = average 0.7441 kWh.
-> Total:          11,275.2000 kWh / 16,703 hours = average 0.6750 kWh.
+> $ python3 manage.py electric_weekend
+> From:           Sat Jan 21 23:00:00 2023 (2023-01-21 23:00:00-05:00) [2 years ago]
+> To:             Sun Jan 19 23:00:00 2025 (2025-01-19 23:00:00-05:00) [4 days, 22 hours ago]
+> Weekdays:       8,075.9400 total kWh / 12,480 total hours = average 0.6471 kWh over 1 year, 5 months.
+> Weekends:       3,655.5800 total kWh / 5,015 total hours = average 0.7289 kWh over 6 months, 3 weeks.
+> Total:          11,731.5200 kWh / 17,495 hours = average 0.6706 kWh over 1 year, 11 months.
 > ```
 
 ## Natural Gas
