@@ -1,5 +1,7 @@
 #!/usr/bin/env python3.13
 from django.core.management.base import BaseCommand
+from django.utils.timesince import timesince
+from django.utils.timezone import localtime, timedelta
 from ...models import WaterUsage
 
 class Command(BaseCommand):
@@ -10,6 +12,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
+        now = localtime()
         num_weekday = 0
         num_weekend = 0
         usage_weekday = 0
@@ -52,27 +55,33 @@ class Command(BaseCommand):
         ## Show usage separately for weekdays and weekends.
 
         # Weekdays.
+        num_weekday_ago = timesince(now - timedelta(days=num_weekday), now)
         average_weekday = usage_weekday / num_weekday
         self.stdout.write(self.style.SUCCESS(
             f"Weekdays:\t{'{0:,.4f}'.format(usage_weekday)} gallons /"
             f" {num_weekday} week days ="
-            f" average {'{0:,.4f}'.format(average_weekday)} gallons."
+            f" average {'{0:,.4f}'.format(average_weekday)} gallons"
+            f" over {num_weekday_ago}."
         ))
 
         # Weekends.
+        num_weekend_ago = timesince(now - timedelta(days=num_weekend), now)
         average_weekend = usage_weekend / num_weekend
         self.stdout.write(self.style.SUCCESS(
             f"Weekends:\t{'{0:,.4f}'.format(usage_weekend)} gallons /"
             f" {num_weekend} weekend days ="
-            f" average {'{0:,.4f}'.format(average_weekend)} gallons."
+            f" average {'{0:,.4f}'.format(average_weekend)} gallons"
+            f" over {num_weekend_ago}."
         ))
 
         # Show total usage, number of days, and average usage per day.
         total_days = usage.count()
+        total_ago = timesince(now - timedelta(days=total_days), now)
         total_usage = usage_weekday + usage_weekend
         average_gallons = total_usage / total_days
         self.stdout.write(self.style.SUCCESS(
             f"Total:\t\t{'{0:,.4f}'.format(total_usage)} gallons /"
             f" {total_days} days ="
-            f" average {'{0:,.4f}'.format(average_gallons)} gallons."
+            f" average {'{0:,.4f}'.format(average_gallons)} gallons"
+            f" over {total_ago}."
         ))

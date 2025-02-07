@@ -134,12 +134,12 @@ The `water_fill` Django management command imports this file into the database:
 The `water_weekend` Django management command does some calculations based
 upon the data to compare water usage on weekdays vs. weekends:
 > ```
-> $ python3 manage.py water_weekend   
+> $ python3 manage.py water_weekend
 > From:           Thursday, September 15, 2022 (2022-09-15)
-> To:             Monday, December 16, 2024 (2024-12-16)
-> Weekdays:       19,604.9468 gallons / 586 week days = average 33.4555 gallons.
-> Weekends:       13,288.3955 gallons / 233 weekend days = average 57.0317 gallons.
-> Total:          32,893.3423 gallons / 819 days = average 40.1628 gallons.
+> To:             Tuesday, February 04, 2025 (2025-02-04)
+> Weekdays:       20,831.0039 gallons / 622 week days = average 33.4904 gallons over 1 year, 8 months.
+> Weekends:       13,859.1591 gallons / 247 weekend days = average 56.1100 gallons over 8 months.
+> Total:          34,690.1630 gallons / 869 days = average 39.9196 gallons over 2 years, 4 months.
 > ```
 
 ## API
