@@ -34,7 +34,7 @@
             const chartLoading = document.getElementById('chart-loading')
             const utilityTitle = '{{ title }}'
             const xhr = new XMLHttpRequest()
-            xhr.open("GET", `/api/${utilityTitle.replace(" ", "_").toLowerCase()}/?format=json&start={{ start }}&end={{ end }}`)
+            xhr.open("GET", `/api/${utilityTitle.replace(" ", "_").toLowerCase()}/?format=json`)
             xhr.onreadystatechange = async () => {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     const utilityUsageData = JSON.parse(xhr.responseText)

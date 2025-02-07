@@ -65,7 +65,7 @@
             .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
             .icon-link-hover svg { --bs-icon-link-transform: translate3d(0, -.5rem, 0); }
             .navbar-expand .navbar-nav .nav-link { font-size: 2.5rem; }
-            a[target="_blank"] { svg[role="img"] { --bs-icon-link-transform: none; } }
+            a[target="_blank"] svg[role="img"] { --bs-icon-link-transform: none; }
         </style>
     </head>
     <body class="container-fluid">
@@ -101,13 +101,6 @@
                         </a>
                     </li>
                 </ul>
-                <!-- start: "{{ start }}" -->
-                <!-- end: "{{ end }}" -->
-                <form class="d-flex gap-2" method="post" role="search">
-                    {% csrf_token %}
-                    {{ form.as_div }}
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </nav>
         </header>
         <main class="container-fluid">
