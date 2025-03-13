@@ -8,116 +8,95 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'Example123!'
+SECRET_KEY = "Example123!"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['utilities.ericoc.com']
+ALLOWED_HOSTS = ("utilities.ericoc.com",)
 
-REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-    ],
-    'DEFAULT_PARSER_CLASSES': [
-        'rest_framework.parsers.JSONParser',
-    ],
-    'COERCE_DECIMAL_TO_STRING': False
-}
+REST_FRAMEWORK = {"COERCE_DECIMAL_TO_STRING": False}
 
 # Application definition
-INSTALLED_APPS = [
-    'jazzmin',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework',
+INSTALLED_APPS = (
+    "jazzmin",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "rest_framework",
     "apps.CoreConfig",
     "apps.ElectricConfig",
     "apps.NaturalGasConfig",
     "apps.WaterConfig"
-]
+)
 
-MIDDLEWARE = [
-    'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
-]
+MIDDLEWARE = (
+    "django.middleware.cache.UpdateCacheMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware",
+)
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = "urls"
 SITE_ID = 1
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'wsgi.application'
+WSGI_APPLICATION = "wsgi.application"
 
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'utilities',
-        'USER': 'utilities',
-        'PASSWORD': 'Secret123!',
-        'HOST': 'localhost',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "utilities",
+        "USER": "utilities",
+        "PASSWORD": "Secret123!",
+        "HOST": "localhost",
     },
 }
 
 # Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+AUTH_PASSWORD_VALIDATORS = (
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+)
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'America/New_York'
+LANGUAGE_CODE = "en-us"
+TIME_ZONE = "America/New_York"
 USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
 STATIC_URL = "static/"
 STATIC_ROOT = Path(BASE_DIR, STATIC_URL)
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 CACHES = {
     "default": {
@@ -128,10 +107,10 @@ CACHES = {
 }
 
 # peco_electric_usage_interval_data_Service 1_1_2023-01-21_to_2023-12-07.csv
-ELECTRIC_PREFIX = 'peco_electric_usage_interval_data_Service'
+ELECTRIC_PREFIX = "peco_electric_usage_interval_data_Service"
 # UsageData12142024.xlsx (UsageDataMMDDYYYY.xlsx)
-NATURAL_GAS_PREFIX = 'UsageData'
-WATER_FILENAME = 'ChartData.csv'
+NATURAL_GAS_PREFIX = "UsageData"
+WATER_FILENAME = "ChartData.csv"
 
 WEBSITE_TITLE = "Utilities"
 
