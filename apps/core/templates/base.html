@@ -59,8 +59,21 @@
             .border-water { border-color: var(--color-water); border-style: solid; }
             .color-water { color: var(--color-water); }
             {% if color %}
-            .border-utility { border-color: var(--color-utility); }
+            .border-utility { border: var(--bs-border-width) solid var(--color-utility); }
             .color-utility { color: var(--color-utility); }
+            .buttons-colvis, .dt-buttons, .dt-buttons button, .dt-buttons.button {
+                --bs-btn-bg: var(--bs-dark);
+                --bs-btn-border-color: var(--color-utility);
+                --bs-btn-color: var(--color-utility);
+
+                --bs-btn-active-bg: var(--color-utility);
+                --bs-btn-active-border-color: var(--color-utility);
+                --bs-btn-active-color: var(--bs-secondary);
+
+                --bs-btn-hover-bg: var(--color-utility);
+                --bs-btn-hover-border-color: var(--color-utility);
+                --bs-btn-hover-color: var(--bs-light);
+            }
             {% endif %}
             .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
             .icon-link-hover svg { --bs-icon-link-transform: translate3d(0, -.5rem, 0); }
