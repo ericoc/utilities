@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block main %}
-    <!-- {{ icon }} / {{ color }} -->
             <div id="chart"></div>
             <hr class="border-utility">
             <table class="display small table table-borderless table-dark table-hover table-responsive table-sm table-striped" id="utility-table">
@@ -32,6 +31,12 @@
             </table>
 {% endblock main %}
 {% block scripts %}
+        <script>
+            const chartColors = {
+                lineColor: '#{{ color }}',
+                textColor: '#f8f9fa',
+                backgroundColor: '#212529'
+            }
             const chartLoading = document.getElementById('chart-loading')
             const utilityTitle = '{{ title }}'
             const xhr = new XMLHttpRequest()
@@ -64,8 +69,6 @@
                             text: utilityTitle
                         },
                         chart: chartChart,
-                        xAxis: { title: { text: utilityTimeDesc }, type: 'datetime' },
-                        yAxis: { title: { text: utilityUnitDesc }, type: 'num' },
                         series: [{
                             color: chartColors.lineColor,
                             data: utilityUsageOverTime,
@@ -74,7 +77,16 @@
                             type: 'line'
                         }],
                         styledMode: true,
-                        time: { timezone: '{{ timezone }}' }
+                        time: { timezone: '{{ timezone }}' },
+                        title: { text: utilityTitle },
+                        xAxis: {
+                            title: { text: utilityTimeDesc },
+                            type: 'datetime'
+                        },
+                        yAxis: {
+                            title: { text: utilityUnitDesc },
+                            type: 'num'
+                        },
                     })
 
                     const pageTotalNode = document.getElementById('page-total')
@@ -123,14 +135,26 @@
                         },
                         initComplete: function () { renderTooltips() },
                         language: {
+                            buttons: {
+                                createState: '<span data-bs-toggle="tooltip" data-bs-title="Save State" title="Save State"><i class="bi bi-save"></i> Save State</span>',
+                                savedStates: {
+                                    0: '<span data-bs-toggle="tooltip" data-bs-title="Saved States" title="Saved States"><i class="bi bi-floppy"></i> Saved States</span>',
+                                    1: '<span data-bs-toggle="tooltip" data-bs-title="Saved States (1)" title="Saved States (1)"><i class="bi bi-floppy"></i> Saved States (<b class="font-monospace">1</b>)</span>',
+                                    _: '<span data-bs-toggle="tooltip" data-bs-title="Saved States" title="Saved States"><i class="bi bi-floppy"></i> Saved States (<b class="font-monospace">%d</span>)</span>',
+                                },
+                            },
                             emptyTable: `No ${resultName} available in table`,
                             info: `_START_ to _END_ of _TOTAL_ ${resultName}`,
                             infoEmpty: `0 to 0 of 0 ${resultName}`,
                             infoFiltered: `(of _MAX_ total ${resultName})`,
                             lengthMenu: `_MENU_ ${resultName}`,
                             searchBuilder: {
-                                button: '<span class="bi bi-search" title="Search" data-bs-toggle="tooltip" data-bs-title="Search" > Search</span>',
-                                title: '<span class="bi bi-search" title="Search" data-bs-toggle="tooltip" data-bs-title="Search" > Search</span>'
+                                button: {
+                                    0: '<span data-bs-toggle="tooltip" data-bs-title="Search" title="Search"><i class="bi bi-search"></i> Search</span>',
+                                    1: '<span data-bs-toggle="tooltip" data-bs-title="Search (1)" title="Search (1)"><i class="bi bi-search"></i> Search (<b class="font-monospace">1</b>)</span>',
+                                    _: '<span data-bs-toggle="tooltip" data-bs-title="Search" title="Search"><i class="bi bi-search"></i> Search <b class="font-monospace">(%d)</b></span>',
+                                },
+                                title: '<span data-bs-toggle="tooltip" data-bs-title="Search" title="Search"><i class="bi bi-search"></i> Search</span>',
                             },
                             zeroRecords: `No ${resultName} found`
                         },
@@ -151,12 +175,6 @@
                 }
             }
             xhr.send()
-
-            const chartColors = {
-                lineColor: '#{{ color }}',
-                textColor: '#f8f9fa',
-                backgroundColor: '#212529'
-            }
             const chartChart = {
                 backgroundColor: chartColors.backgroundColor,
                 renderTo: 'chart',
@@ -175,23 +193,23 @@
                     buttons: [
                         {
                             extend: 'copyHtml5',
-                            text: '<span class="bi bi-clipboard" data-bs-toggle="tooltip" data-bs-title="Copy rows to clipboard" title="Copy rows to clipboard"> Copy</span>'
+                            text: '<span data-bs-toggle="tooltip" data-bs-title="Copy rows to clipboard" title="Copy rows to clipboard"><i class="bi bi-clipboard"></i> Copy</span>'
                         },
                         {
                             extend: 'csvHtml5',
-                            text: '<span class="bi bi-filetype-csv" data-bs-toggle="tooltip" data-bs-title="Comma-Separated Values (.csv)" title="Comma-Separated Values (.csv)"> CSV</span>'
+                            text: '<span data-bs-toggle="tooltip" data-bs-title="Comma-Separated Values (.csv)" title="Comma-Separated Values (.csv)"><i class="bi bi-filetype-csv"></i> CSV</span>'
                         },
                         {
                             extend: 'excelHtml5',
-                            text: '<span class="bi bi-filetype-xlsx" data-bs-toggle="tooltip" data-bs-title="Microsoft Excel (.xlsx)" title="Microsoft Excel (.xlsx)"> Excel</span>'
+                            text: '<span data-bs-toggle="tooltip" data-bs-title="Microsoft Excel (.xlsx)" title="Microsoft Excel (.xlsx)"><i class="bi bi-filetype-xlsx"></i> Excel</span>'
                         },
                         {
                             extend: 'pdfHtml5',
-                            text: '<span class="bi bi-filetype-pdf" data-bs-toggle="tooltip" data-bs-title="Portable Data Format (.pdf)" title="Portable Data Format (.pdf)"> PDF</span>'
+                            text: '<span data-bs-toggle="tooltip" data-bs-title="Portable Data Format (.pdf)" title="Portable Data Format (.pdf)"><i class="bi bi-filetype-pdf"></i> PDF</span>'
                         },
                         {
                             extend: 'print',
-                            text: '<span class="bi bi-printer" data-bs-toggle="tooltip" data-bs-title="Print" title="Print"> Print</span>'
+                            text: '<span data-bs-toggle="tooltip" data-bs-title="Print" title="Print"><i class="bi bi-printer"></i> Print</span>'
                         },
                     ]
                 },
@@ -199,5 +217,5 @@
                 bottom1: 'paging',
                 bottomEnd: 'info'
             }
+        </script>
 {% endblock scripts %}
-
