@@ -64,10 +64,6 @@
                     }
 
                     const utilityHighChart = new Highcharts.Chart({
-                        title: {
-                            style: { color: chartColors.textColor },
-                            text: utilityTitle
-                        },
                         chart: chartChart,
                         series: [{
                             color: chartColors.lineColor,
@@ -78,7 +74,10 @@
                         }],
                         styledMode: true,
                         time: { timezone: '{{ timezone }}' },
-                        title: { text: utilityTitle },
+                        title: {
+                            style: { color: chartColors.textColor },
+                            text: utilityTitle
+                        },
                         xAxis: {
                             title: { text: utilityTimeDesc },
                             type: 'datetime'
