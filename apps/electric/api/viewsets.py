@@ -6,7 +6,7 @@ from ..models import ElectricUsage
 
 
 class APIElectricUsageViewSet(APIUtilityViewSet):
-    """Django-Rest-Framework (DRF) natural gas usage API view-set."""
+    """Django-Rest-Framework (DRF) electric usage API view-set."""
     model = ElectricUsage
     queryset = model.objects
     serializer_class = ElectricUsageSerializer
