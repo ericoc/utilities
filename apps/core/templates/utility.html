@@ -143,9 +143,9 @@
                                 },
                             },
                             emptyTable: `No ${resultName} available in table`,
-                            info: `_START_ to _END_ of _TOTAL_ ${resultName}`,
-                            infoEmpty: `0 to 0 of 0 ${resultName}`,
-                            infoFiltered: `(of _MAX_ total ${resultName})`,
+                            info: `<span data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<b>_START_</b> &mdash; <b>_END_</b> / <b>_TOTAL_</b> ${resultName}" title="_START_ &mdash; _END_ / _TOTAL_ ${resultName}"><i class="bi bi-info-circle color-utility"></i> <b>_START_</b> &mdash; <b>_END_</b> / <b>_TOTAL_</b></span>`,
+                            infoEmpty: `<span data-bs-toggle="tooltip" data-bs-title="0 ${resultName}" title="0 ${resultName}"><i class="bi bi-patch-exclamation text-danger"></i> <b>0</b> ${resultName}</span>`,
+                            infoFiltered: `<span data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Total: <b>_MAX_</b> ${resultName}" title="Total: _MAX_">(of <b>_MAX_</b> total)</span>`,
                             lengthMenu: `_MENU_ ${resultName}`,
                             searchBuilder: {
                                 button: {
@@ -183,14 +183,6 @@
                 topStart: {
                     buttons: [
                         {
-                            extend: 'searchBuilder',
-                            config: {depthLimit: 1},
-                        }
-                    ]
-                },
-                topEnd: {
-                    buttons: [
-                        {
                             extend: 'copyHtml5',
                             text: '<span data-bs-toggle="tooltip" data-bs-title="Copy rows to clipboard" title="Copy rows to clipboard"><i class="bi bi-clipboard"></i> Copy</span>'
                         },
@@ -210,11 +202,15 @@
                             extend: 'print',
                             text: '<span data-bs-toggle="tooltip" data-bs-title="Print" title="Print"><i class="bi bi-printer"></i> Print</span>'
                         },
-                    ]
+                        {
+                            extend: 'searchBuilder',
+                            config: { depthLimit: 1 },
+                        },
+                    ],
                 },
-                bottomStart: 'pageLength',
-                bottom1: 'paging',
-                bottomEnd: 'info'
+                topEnd: 'pageLength',
+                bottomStart: 'paging',
+                bottomEnd: 'info',
             }
         </script>
 {% endblock scripts %}

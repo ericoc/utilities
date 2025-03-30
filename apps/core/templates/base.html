@@ -48,10 +48,16 @@
                 --color-electric: #e4a11b;
                 --color-natural-gas: #853cfd;
                 --color-water: #2caffe;
-                {% if color %}
+        {% if color %}
                 --color-utility: #{{ color }};
-                {% endif %}
+        {% endif %}
             }
+        {% if color  %}
+            .pagination, .pagination-sm {
+                --bs-pagination-active-bg: var(--color-utility);
+                --bs-pagination-active-border-color: var(--color-utility);
+            }
+        {% endif %}
             .border-electric { border-color: var(--color-electric); border-style: solid; }
             .color-electric { color: var(--color-electric); }
             .border-natural-gas { border-color: var(--color-natural-gas); border-style: solid; }
@@ -73,6 +79,12 @@
                 --bs-btn-hover-bg: var(--color-utility);
                 --bs-btn-hover-border-color: var(--color-utility);
                 --bs-btn-hover-color: var(--bs-light);
+            }
+            .form-select, .form-select-sm, .table-group-divider {
+                border-color: var(--color-utility);
+            }
+            .active>.page-link, .page-link.active {
+
             }
             {% endif %}
             .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
