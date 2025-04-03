@@ -96,7 +96,11 @@ used each billing month:
 The `gas_fill` Django management command imports this file into the database:
 > ```
 > $ python3 manage.py natural_gas_fill
-> TODO: Output Example
+> (venv) ➜ eric@pro:~/code/utilities git:(main) ✗ $ python3 manage.py natural_gas_fill                
+> 1 spreadsheet(s) found.
+> ...
+> Created:        Saturday 2025 (2025-03-01) [33.0 CCF]
+> Total:          1
 > Done.
 > ```
 
@@ -126,8 +130,13 @@ Each row of the PWD file includes the number of gallons of water used each day:
 The `water_fill` Django management command imports this file into the database:
 > ```
 > $ python3 manage.py water_fill
-> Created:        Monday, December 16, 2024 (2024-12-16) [80.7896 gallons]
-> Total:          1
+> Created:        Wednesday, March 26, 2025 (2025-03-26) [18.7013 gallons]
+> Created:        Thursday, March 27, 2025 (2025-03-27) [23.1896 gallons]
+> Created:        Friday, March 28, 2025 (2025-03-28) [43.387 gallons]
+> Created:        Saturday, March 29, 2025 (2025-03-29) [35.9065 gallons]
+> Created:        Sunday, March 30, 2025 (2025-03-30) [35.1584 gallons]
+> Created:        Monday, March 31, 2025 (2025-03-31) [56.1039 gallons]
+> Total:          6
 > Done.
 > ```
 
