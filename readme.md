@@ -93,13 +93,12 @@ used each billing month:
 > Jun, 2021     5.0                     05/20/21        06/18/21
 > ```
 
-The `gas_fill` Django management command imports this file into the database:
-> ```
+The `natural_gas_fill` Django management command imports this file into the database:
+```
 > $ python3 manage.py natural_gas_fill
-> (venv) ➜ eric@pro:~/code/utilities git:(main) ✗ $ python3 manage.py natural_gas_fill                
 > 1 spreadsheet(s) found.
 > ...
-> Created:        Saturday 2025 (2025-03-01) [33.0 CCF]
+> Created:        March 2025 (2025-03-01) [33.0 CCF]
 > Total:          1
 > Done.
 > ```

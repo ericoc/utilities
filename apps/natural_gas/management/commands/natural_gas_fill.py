@@ -58,7 +58,7 @@ class Command(BaseCommand):
                     if created:
                         num_created += 1
                         self.stdout.write(self.style.SUCCESS(
-                            f"Created:\t{obj.month.strftime('%A %Y')}"
+                            f"Created:\t{obj.month.strftime('%B %Y')}"
                             f" ({obj.month}) [{obj.ccf} CCF]"
                         ))
 
