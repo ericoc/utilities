@@ -2,7 +2,7 @@ from datetime import date
 from dateutil.relativedelta import relativedelta
 
 from django.utils.decorators import method_decorator
-from django.utils.timezone import localdate, localtime
+from django.utils.timezone import localtime
 from django.views.decorators.cache import cache_page
 
 from rest_framework.exceptions import ParseError
@@ -10,7 +10,9 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 
 
 class APIUtilityViewSet(ReadOnlyModelViewSet):
-    """Base read-only Django-Rest-Framework (DRF) utility usage API view-set."""
+    """
+    Base read-only Django-Rest-Framework (DRF) utility usage API view-set.
+    """
     fields = filterset_fields = "__all__"
     filterable = ("hours", "days", "weeks", "months", "years")
     model = None
