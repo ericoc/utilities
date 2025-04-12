@@ -20,11 +20,11 @@
                 </tbody>
                 <tfoot class="h6">
                     <tr>
-                        <td class="table-group-divider"><b title="Page Total">Page Total</b>:</td>
+                        <td class="table-group-divider"><b title="This Page">This Page</b>:</td>
                         <td class="table-group-divider" id="page-total"></td>
                     </tr>
                     <tr>
-                        <td><b title="All Total">All</b>:</td>
+                        <td><b title="All Pages">All Pages</b>:</td>
                         <td id="all-total"></td>
                     </tr>
                 </tfoot>
@@ -93,9 +93,9 @@
                     const allTotalNode = document.getElementById('all-total')
                     function footerTotal (api, col=1, digits=4) {
                         const pageUtility = DataTable.render.number(',', '.', digits).display(api.column(col, {page: 'current'}).data().sum())
-                        pageTotalNode.innerHTML = `<span class="badge bg-black font-monospace" title="Page Total: ${pageUtility} ${utilityUnitDesc} [This Page]"> ${pageUtility} ${utilityUnitDesc}</span>`
+                        pageTotalNode.innerHTML = `<span class="badge font-monospace" title="This Page: ${pageUtility} ${utilityUnitDesc}"> ${pageUtility} ${utilityUnitDesc}</span>`
                         const totalUtility = DataTable.render.number(',', '.', digits).display(api.column(col).data().sum())
-                        allTotalNode.innerHTML = `<span class="badge bg-black font-monospace" title="Total: ${totalUtility} ${utilityUnitDesc} [All Pages]"> ${totalUtility} ${utilityUnitDesc}</span>`
+                        allTotalNode.innerHTML = `<span class="badge border-utility font-monospace" title="All Pages: ${totalUtility} ${utilityUnitDesc}"> ${totalUtility} ${utilityUnitDesc}</span>`
                         if (chartLoading && chartLoading.visibility === true) {
                             chartLoading.visibility = false
                         }
@@ -189,15 +189,15 @@
                         },
                         {
                             extend: 'excelHtml5',
-                            text: '<span class="bi bi-filetype-xlsx" title="Microsoft Excel (.xlsx)"> Excel</span>'
+                            text: '<i class="bi bi-filetype-xlsx" title="Microsoft Excel (.xlsx)"></i> Excel'
                         },
                         {
                             extend: 'pdfHtml5',
-                            text: '<span class="bi bi-filetype-pdf" title="Portable Data Format (.pdf)"> PDF</span>'
+                            text: '<i class="bi bi-filetype-pdf" title="Portable Data Format (.pdf)"></i> PDF'
                         },
                         {
                             extend: 'print',
-                            text: '<span class="bi bi-printer" title="Print"> Print</span>'
+                            text: '<i class="bi bi-printer" title="Print"></i> Print'
                         },
                         {
                             extend: 'searchBuilder',

@@ -48,6 +48,7 @@
             .color-natural-gas { color: var(--color-natural-gas); }
             .color-water { color: var(--color-water); }
         {% if color %}
+            .bg-utility { background-color: var(--color-utility); }
             .border-utility {
                 border-radius: var(--bs-border-radius);
                 border-color: var(--color-utility);
@@ -55,7 +56,7 @@
                 border-width: 0.15rem;
             }
             .color-utility { color: var(--color-utility); }
-            .buttons-colvis, .dt-buttons, .dt-buttons button, .dt-buttons.button {
+            .dt-buttons button {
                 --bs-btn-bg: var(--bs-dark);
                 --bs-btn-border-color: var(--color-utility);
                 --bs-btn-color: var(--bs-light);
