@@ -20,11 +20,11 @@
                 </tbody>
                 <tfoot class="h6">
                     <tr>
-                        <td class="table-group-divider"><b>Total</b>:</td>
+                        <td class="table-group-divider"><b title="Page Total">Page Total</b>:</td>
                         <td class="table-group-divider" id="page-total"></td>
                     </tr>
                     <tr>
-                        <td><b>All</b>:</td>
+                        <td><b title="All Total">All</b>:</td>
                         <td id="all-total"></td>
                     </tr>
                 </tfoot>
@@ -93,9 +93,9 @@
                     const allTotalNode = document.getElementById('all-total')
                     function footerTotal (api, col=1, digits=4) {
                         const pageUtility = DataTable.render.number(',', '.', digits).display(api.column(col, {page: 'current'}).data().sum())
-                        pageTotalNode.innerHTML = `<code class="fw-bolder" title="Page Total: ${pageUtility} ${utilityUnitDesc} [This Page]" data-bs-toggle="tooltip" data-bs-title="Page Total: ${pageUtility} ${utilityUnitDesc} [This Page]">${pageUtility}</code>`
+                        pageTotalNode.innerHTML = `<span class="badge bg-black font-monospace" title="Page Total: ${pageUtility} ${utilityUnitDesc} [This Page]"> ${pageUtility} ${utilityUnitDesc}</span>`
                         const totalUtility = DataTable.render.number(',', '.', digits).display(api.column(col).data().sum())
-                        allTotalNode.innerHTML = `<code class="fw-bolder" title="Total: ${totalUtility} ${utilityUnitDesc} [All Pages]" data-bs-toggle="tooltip" data-bs-title="Total: ${totalUtility} ${utilityUnitDesc} [All Pages]">${totalUtility}</code>`
+                        allTotalNode.innerHTML = `<span class="badge bg-black font-monospace" title="Total: ${totalUtility} ${utilityUnitDesc} [All Pages]"> ${totalUtility} ${utilityUnitDesc}</span>`
                         if (chartLoading && chartLoading.visibility === true) {
                             chartLoading.visibility = false
                         }
@@ -122,39 +122,35 @@
                                         } else if (data >= {{ thresholds.2 }}) {
                                             utilityTextColor = 'info'
                                         }
-                                        return `<code class="fw-bold text-${utilityTextColor}-emphasis" title="${data} ${utilityUnitDesc}" data-bs-toggle="tooltip" data-bs-title="${data} ${utilityUnitDesc}">${data}</code>`
+                                        return `<code class="fw-bold text-${utilityTextColor}-emphasis" title="${data} ${utilityUnitDesc}">${data}</code>`
                                     }
                                     return data
                                 },
                                 type: 'num'
                             }
                         ],
-                        drawCallback: function () { renderTooltips() },
-                        footerCallback: async function () {
-                            footerTotal(this.api())
-                        },
-                        initComplete: function () { renderTooltips() },
+                        footerCallback: async function () {footerTotal(this.api()) },
                         language: {
                             buttons: {
-                                createState: '<span data-bs-toggle="tooltip" data-bs-title="Save State" title="Save State"><i class="bi bi-save"></i> Save State</span>',
+                                createState: '<span class="bi bi-save" title="Save State"> Save State</span>',
                                 savedStates: {
-                                    0: '<span data-bs-toggle="tooltip" data-bs-title="Saved States" title="Saved States"><i class="bi bi-floppy"></i> Saved States</span>',
-                                    1: '<span data-bs-toggle="tooltip" data-bs-title="Saved States (1)" title="Saved States (1)"><i class="bi bi-floppy"></i> Saved States (<b class="font-monospace">1</b>)</span>',
-                                    _: '<span data-bs-toggle="tooltip" data-bs-title="Saved States" title="Saved States"><i class="bi bi-floppy"></i> Saved States (<b class="font-monospace">%d</span>)</span>',
+                                    0: '<span class="bi bi-floppy" title="Saved States"> Saved States</span>',
+                                    1: '<span class="bi bi-floppy" title="Saved States (1)"> Saved States (1)</span>',
+                                    _: '<span class="bi bi-floppy" title="Saved States">Saved States (%d)</span>',
                                 },
                             },
                             emptyTable: `No ${resultName} available in table`,
-                            info: `<span data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<b>_START_</b> &mdash; <b>_END_</b> / <b>_TOTAL_</b> ${resultName}" title="_START_ &mdash; _END_ / _TOTAL_ ${resultName}"><i class="bi bi-info-circle color-utility"></i> <b>_START_</b> &mdash; <b>_END_</b> / <b>_TOTAL_</b></span>`,
-                            infoEmpty: `<span data-bs-toggle="tooltip" data-bs-title="0 ${resultName}" title="0 ${resultName}"><i class="bi bi-patch-exclamation text-danger"></i> <b>0</b> ${resultName}</span>`,
-                            infoFiltered: `<span data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Total: <b>_MAX_</b> ${resultName}" title="Total: _MAX_">(of <b>_MAX_</b> total)</span>`,
+                            info: `<span title="_START_ &mdash; _END_ / _TOTAL_ ${resultName}"><i class="bi bi-info-circle color-utility"></i> <b>_START_</b> &mdash; <b>_END_</b> / <b>_TOTAL_</b> ${resultName}</span>`,
+                            infoEmpty: `<span class="bi bi-patch-exclamation text-danger" title="0 ${resultName}"> <b>0</b> ${resultName}</span>`,
+                            infoFiltered: `<span title="(of _MAX_ total)">(of <b>_MAX_</b> total)</span>`,
                             lengthMenu: `_MENU_ ${resultName}`,
                             searchBuilder: {
                                 button: {
-                                    0: '<span data-bs-toggle="tooltip" data-bs-title="Search" title="Search"><i class="bi bi-search"></i> Search</span>',
-                                    1: '<span data-bs-toggle="tooltip" data-bs-title="Search (1)" title="Search (1)"><i class="bi bi-search"></i> Search (<b class="font-monospace">1</b>)</span>',
-                                    _: '<span data-bs-toggle="tooltip" data-bs-title="Search" title="Search"><i class="bi bi-search"></i> Search <b class="font-monospace">(%d)</b></span>',
+                                    0: '<span class="bi bi-search" title="Search"> Search</span>',
+                                    1: '<span class="bi bi-search" title="Search (1)"> Search (1)</span>',
+                                    _: '<span class="bi bi-search" title="Search"></span> Search (%d)</i>',
                                 },
-                                title: '<span data-bs-toggle="tooltip" data-bs-title="Search" title="Search"><i class="bi bi-search"></i> Search</span>',
+                                title: '<span class="bi bi-search" title="Search"> Search</span>',
                             },
                             zeroRecords: `No ${resultName} found`
                         },
@@ -185,23 +181,23 @@
                     buttons: [
                         {
                             extend: 'copyHtml5',
-                            text: '<span data-bs-toggle="tooltip" data-bs-title="Copy rows to clipboard" title="Copy rows to clipboard"><i class="bi bi-clipboard"></i> Copy</span>'
+                            text: '<span class="bi bi-clipboard" title="Copy rows to clipboard"> Copy</span>'
                         },
                         {
                             extend: 'csvHtml5',
-                            text: '<span data-bs-toggle="tooltip" data-bs-title="Comma-Separated Values (.csv)" title="Comma-Separated Values (.csv)"><i class="bi bi-filetype-csv"></i> CSV</span>'
+                            text: '<span class="bi bi-filetype-csv" title="Comma-Separated Values (.csv)"> CSV</span>'
                         },
                         {
                             extend: 'excelHtml5',
-                            text: '<span data-bs-toggle="tooltip" data-bs-title="Microsoft Excel (.xlsx)" title="Microsoft Excel (.xlsx)"><i class="bi bi-filetype-xlsx"></i> Excel</span>'
+                            text: '<span class="bi bi-filetype-xlsx" title="Microsoft Excel (.xlsx)"> Excel</span>'
                         },
                         {
                             extend: 'pdfHtml5',
-                            text: '<span data-bs-toggle="tooltip" data-bs-title="Portable Data Format (.pdf)" title="Portable Data Format (.pdf)"><i class="bi bi-filetype-pdf"></i> PDF</span>'
+                            text: '<span class="bi bi-filetype-pdf" title="Portable Data Format (.pdf)"> PDF</span>'
                         },
                         {
                             extend: 'print',
-                            text: '<span data-bs-toggle="tooltip" data-bs-title="Print" title="Print"><i class="bi bi-printer"></i> Print</span>'
+                            text: '<span class="bi bi-printer" title="Print"> Print</span>'
                         },
                         {
                             extend: 'searchBuilder',

@@ -28,21 +28,7 @@
         <script src="{% static 'highcharts/offline-exporting.js' %}"></script>
         <script src="{% static 'highcharts/export-data.js' %}"></script>
         <script src="{% static 'highcharts/accessibility.js' %}"></script>
-        <script>
-            const DateTime = luxon.DateTime;
-            function renderTooltips (tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')) {
-                let tooltipList = [...tooltipTriggerList].map(
-                    tooltipTriggerEl => new bootstrap.Tooltip(
-                        tooltipTriggerEl, {
-                            boundary: document.body,
-                            container: 'body',
-                            trigger: 'hover'
-                        }
-                    )
-                )
-                tooltipList.forEach((tooltip) => { $('.tooltip').hide() })
-            }
-        </script>
+        <script>const DateTime = luxon.DateTime;</script>
         <style>
             :root {
                 --color-electric: #e4a11b;
@@ -91,6 +77,9 @@
                 --bs-pagination-active-bg: var(--color-utility);
                 --bs-pagination-active-border-color: var(--color-utility);
             }
+            .page-link {
+                color: var(--color-utility);
+            }
             {% endif %}
             .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
             .icon-link-hover svg { --bs-icon-link-transform: translate3d(0, -.5rem, 0); }
@@ -103,28 +92,28 @@
             <nav class="navbar navbar-dark navbar-expand">
                 <ul class="navbar-nav gap-3 mx-3">
                     <li class="{% if title and title == 'Utilities' %}active border-home {% endif %}nav-item" title="Utilities (Home)">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Utilities' %} active" aria-current="page{% endif %}" href="{% url 'index' %}" data-bs-toggle="tooltip" data-bs-title="Utilities (Home)" data-bs-placement="bottom">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Utilities' %} active" aria-current="page{% endif %}" href="{% url 'index' %}" title="Utilities (Home)">
                             <svg class="bi text-primary" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#house"></use>
                             </svg>
                         </a>
                     </li>
                     <li class="{% if title and title == 'Electric' %}active border-utility {% endif %}nav-item" title="Electric">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Electric' %} active" aria-current="page{% endif %}" href="{% url 'electric' %}#chart" data-bs-toggle="tooltip" data-bs-title="Electric" data-bs-placement="bottom">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Electric' %} active" aria-current="page{% endif %}" href="{% url 'electric' %}#chart" title="Electric">
                             <svg class="bi color-electric" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use>
                             </svg>
                         </a>
                     </li>
                     <li class="{% if title and title == 'Natural Gas' %}active border-utility {% endif %}nav-item" title="Natural Gas">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Natural Gas' %} active" aria-current="page{% endif %}" href="{% url 'natural_gas' %}#chart" data-bs-toggle="tooltip" data-bs-title="Natural Gas" data-bs-placement="bottom">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Natural Gas' %} active" aria-current="page{% endif %}" href="{% url 'natural_gas' %}#chart" title="Natural Gas">
                             <svg class="bi color-natural-gas" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#fan"></use>
                             </svg>
                         </a>
                     </li>
                     <li class="{% if title and title == 'Water' %}active border-utility {% endif %}nav-item" title="Water">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Water' %} active" aria-current="page{% endif %}" href="{% url 'water' %}#chart" data-bs-toggle="tooltip" data-bs-title="Water" data-bs-placement="bottom">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Water' %} active" aria-current="page{% endif %}" href="{% url 'water' %}#chart" title="Water">
                             <svg class="bi color-water" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#droplet"></use>
                             </svg>
@@ -137,7 +126,7 @@
             {% block main %}{% endblock main %}
         </main>
         <footer class="container-fluid footer mt-5 mb-3">
-            <a class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/ericoc/utilities" target="_blank" data-bs-toggle="tooltip" data-bs-title="GitHub <https://github.com/ericoc/utilities>">
+            <a class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/ericoc/utilities" target="_blank" title="GitHub <https://github.com/ericoc/utilities>">
                 <svg class="bi text-primary-emphasis" aria-hidden="true">
                     <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#code-slash"></use>
                 </svg>
@@ -148,6 +137,5 @@
             </a>
         </footer>
         {% block scripts %}{% endblock scripts %}
-        <script>renderTooltips()</script>
     </body>
 </html>
