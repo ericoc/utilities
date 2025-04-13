@@ -19,7 +19,8 @@ class Command(BaseCommand):
             # Open comma-separated values ("CSV") file of water usage data.
             with open(file=settings.WATER_FILENAME, mode="r") as csv_fh:
 
-                # Iterate each row of the CSV file.
+                # Parse the following columns of data:
+                #   Access Code, Time Interval, Consumption, Units
                 for csv_row in DictReader(csv_fh):
 
                     # Ensure the row is measuring gallons (not CCFs, etc.)
