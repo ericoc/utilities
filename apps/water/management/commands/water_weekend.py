@@ -21,7 +21,7 @@ class Command(BaseCommand):
         # Get all water usage from the database.
         usage = WaterUsage.objects
 
-        ## Show/format the minimum and maximum dates of water usage.
+        # Show/format the minimum and maximum dates of water usage.
         dt_fmt = "%A, %B %d, %Y"
 
         # Minimum ("From") date.
@@ -38,7 +38,7 @@ class Command(BaseCommand):
             f'To:\t\t{max_day.strftime(dt_fmt)} ({max_day})'
         ))
 
-        ## Iterate all water usage data, calculating weekend vs. weekday usage.
+        # Iterate all water usage data, calculating weekend vs. weekday usage.
         for row in usage.all():
 
             # Weekend.
@@ -52,7 +52,7 @@ class Command(BaseCommand):
                 usage_weekday += row.gallons
 
 
-        ## Show usage separately for weekdays and weekends.
+        # Show usage separately for weekdays and weekends.
 
         # Weekdays.
         num_weekday_ago = timesince(now - timedelta(days=num_weekday), now)

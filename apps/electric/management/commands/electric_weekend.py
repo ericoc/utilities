@@ -22,7 +22,7 @@ class Command(BaseCommand):
         # Get all electric usage from the database.
         usage = ElectricUsage.objects
 
-        ## Format of minimum and maximum hour of electric usage.
+        # Format of minimum and maximum hour of electric usage.
         dt_fmt = "%c"
 
         # Minimum ("From") date.
@@ -43,7 +43,7 @@ class Command(BaseCommand):
             f"To:\t\t{max_hour_fmt} ({max_hour_local}) [{max_hour_ago} ago]"
         ))
 
-        ## Iterate all electric usage data, calculating weekend vs. weekday kWh.
+        # Iterate all electric usage data, calculating weekend vs. weekday kWh.
         for row in usage.all():
 
             # Weekend.
@@ -59,7 +59,7 @@ class Command(BaseCommand):
                 usage_weekday += row.kwh
 
 
-        ## Show usage separately for weekdays and weekends.
+        # Show usage separately for weekdays and weekends.
 
         # Weekdays.
         num_weekday_ago = timesince(now - timedelta(hours=num_weekday), now)

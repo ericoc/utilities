@@ -30,7 +30,7 @@ class Command(BaseCommand):
                     date_iso = \
                         f"{date_parts[2]}-{date_parts[0]}-{date_parts[1]}"
 
-                    # Create dictionary mapping date to water usage in gallons.
+                    # Map date to water usage, in gallons.
                     usage = {
                         "day": date.fromisoformat(date_iso),
                         "gallons": float(csv_row[" Consumption"].strip())
@@ -50,7 +50,7 @@ class Command(BaseCommand):
                             f" ({obj.day}) [{obj.gallons} gallons]"
                         ))
 
-            # List total count of newly created water usage database objects.
+            # List count of newly created water usage database objects.
             if num_created > 0:
                 self.stdout.write(self.style.SUCCESS(
                     f"Total:\t\t{num_created}"

@@ -17,7 +17,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         try:
-            # peco_electric_usage_interval_data_Service 1_1_2023-01-21_to_2023-12-07.csv
+            # Find CSV files containing usage data, based on filename prefix.
+            #   peco_electric_usage_interval_data_Service 1_1_2023-01-21_to_2023-12-07.csv
             csv_prefix = settings.ELECTRIC_PREFIX
             csv_files = sorted(
                 list(Path(".").glob(f"{csv_prefix}*.csv")),
@@ -28,19 +29,29 @@ class Command(BaseCommand):
             )
             num_created = 0
 
+            # Loop through each CSV file found.
             for csv_file in csv_files:
                 csv_path = Path(csv_file)
                 csv_name = csv_path.name.replace(csv_prefix, "")
                 csv_stat = csv_path.stat()
                 csv_size = csv_stat.st_size
 
+                # Skip empty file (that only contains a header?).
                 if csv_size == 241:
-                    self.stdout.write(self.style.NOTICE(f"Skipped: {csv_name}"))
+                    self.stdout.write(
+                        self.style.NOTICE(f"Skipped: {csv_name}")
+                    )
                     continue
 
+                # Open the CSV file.
                 with csv_path.open(mode="r", encoding="utf-8-sig") as read_fh:
                     csv_lines = read_fh.readlines()
+
+                    # Skip header to parse the following columns of data:
+                    #   TYPE,DATE,START TIME,END TIME,USAGE (kWh),NOTES
                     for row in DictReader(csv_lines[6:]):
+
+                        # Ensure that the row is detailing "Electric usage".
                         assert row["TYPE"] == "Electric usage", "Invalid type!"
 
                         # Parse the date and time columns within each CSV row.
@@ -75,7 +86,7 @@ class Command(BaseCommand):
                                 f" ({obj.hour}) [{obj.kwh} kWh]"
                             ))
 
-            # List total count of newly created electric usage database objects.
+            # List count of newly created electric usage database objects.
             if num_created > 0:
                 self.stdout.write(self.style.SUCCESS(
                     f"Total:\t\t{num_created}"
