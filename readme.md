@@ -94,7 +94,7 @@ used each billing month:
 > ```
 
 The `natural_gas_fill` Django management command imports this file into the database:
-```
+> ```
 > $ python3 manage.py natural_gas_fill
 > 1 spreadsheet(s) found.
 > ...
@@ -102,6 +102,7 @@ The `natural_gas_fill` Django management command imports this file into the data
 > Total:          1
 > Done.
 > ```
+
 
 ## Water
 #### Philadelphia Water Department ("PWD")
