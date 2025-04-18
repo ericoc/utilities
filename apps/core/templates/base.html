@@ -1,3 +1,4 @@
+{% load admin_urls %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" class="dark" data-bs-theme="dark">
@@ -35,7 +36,7 @@
                 --color-natural-gas: #853cfd;
                 --color-water: #2caffe;
         {% if color %}
-                --color-utility: #{{ color }};
+                --color-utility: {{ color }};
         {% endif %}
             }
             .border-home {
@@ -120,22 +121,47 @@
                             </svg>
                         </a>
                     </li>
+{% if request.user.is_staff %}
+                    <li class="{% if title and title == 'Add' %}active border-utility {% endif %}nav-item" title="Add">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Add' %} active" aria-current="page{% endif %}" href="{% url 'add' %}#add" title="Add">
+                            <svg class="bi text-success" aria-hidden="true">
+                                <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#plus-lg"></use>
+                            </svg>
+                        </a>
+                    </li>
+{% endif %}
                 </ul>
             </nav>
         </header>
         <main class="container-fluid">
             {% block main %}{% endblock main %}
         </main>
-        <footer class="container-fluid footer mt-5 mb-3">
-            <a class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/ericoc/utilities" target="_blank" title="GitHub <https://github.com/ericoc/utilities>">
+        <footer class="container-fluid footer mt-5 mb-3 row">
+            <div class="col text-start">
+                <a class="font-monospace icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/ericoc/utilities/" target="_blank" title="GitHub <https://github.com/ericoc/utilities/>">
+                    <svg class="bi text-primary-emphasis" aria-hidden="true">
+                        <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#code-slash"></use>
+                    </svg>
+                    https://github.com/ericoc/utilities/
+                    <svg class="bi text-secondary-emphasis" aria-hidden="true" role="img">
+                        <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#box-arrow-up-right"></use>
+                    </svg>
+                </a>
+            </div>
+            <div class="col text-end">
+    {% if request.user.is_staff %}
+            <a class="font-monospace icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{% url "admin:index" %}" target="_blank" title="Administration ({% url "admin:index" %})">
                 <svg class="bi text-primary-emphasis" aria-hidden="true">
-                    <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#code-slash"></use>
+                    <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#window-sidebar"></use>
                 </svg>
-                <code>https://github.com/ericoc/utilities</code>
+                {% url "admin:index" %}
                 <svg class="bi text-secondary-emphasis" aria-hidden="true" role="img">
                     <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#box-arrow-up-right"></use>
                 </svg>
             </a>
+    {% else %}
+    {% endif %}
+            </div>
         </footer>
         {% block scripts %}{% endblock scripts %}
     </body>

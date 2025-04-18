@@ -33,6 +33,10 @@ INSTALLED_APPS = (
     "apps.WaterConfig"
 )
 
+LOGIN_REDIRECT_URL = "/add/"
+LOGIN_URL = "/admin/login/"
+LOGOUT_URL = "/admin/logout/"
+
 MIDDLEWARE = (
     "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.security.SecurityMiddleware",

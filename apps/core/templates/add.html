@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block main %}
+    <div class="border m-3 p-3 rounded">
+        <form action="{% url 'add' %}" method="post">
+            {{ form.as_p }}
+            <p>
+                <input class="btn btn-outline-primary" type="submit" value="Upload!">
+            </p>
+        </form>
+    </div>
+{% endblock main %}
+{% block scripts %}{% endblock scripts %}

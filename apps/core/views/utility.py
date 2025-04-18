@@ -5,7 +5,6 @@ from .base import BaseView
 
 class UtilityView(BaseView):
     """Base utility view."""
-    color = None
     datatable_time_format = None
     thresholds = ()
     utility = None
@@ -16,7 +15,6 @@ class UtilityView(BaseView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["color"] = self.color
         context["datatable_time_format"] = self.datatable_time_format
         context["thresholds"] = self.thresholds
         return context
