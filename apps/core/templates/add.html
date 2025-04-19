@@ -1,12 +1,41 @@
 {% extends 'base.html' %}
 {% block main %}
-    <div class="border m-3 p-3 rounded">
-        <form action="{% url 'add' %}" method="post">
-            {{ form.as_p }}
+    <div id="add">
+    {% if form.errors %}
+        <div class="alert alert-danger border list-group m-3 p-3 errors rounded">
+        {% for error in form.errors.values %}
+            <div class="list-group-item list-group-item-danger">{{ error }}</div>
+        {% endfor %}
+        </div>
+    {% endif %}
+    {% if messages %}
+        <div class="alert border list-group m-3 p-3 messages rounded">
+        {% for message in messages %}
+            <div class="list-group-item list-group-item-{% if message.tags %}{{ message.tags }}{% else %}success{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+    {% if form %}
+        <form action="{% url 'add' %}" class="border m-3 p-3 rounded" enctype="multipart/form-data" method="post">
+            <h3 title="{{ title }}">
+                {{ title }}
+            </h3>
+            <p class="form-text">
+                Please upload a comma-separated values (<span class="font-monospace">csv</span> - electric or water)
+                file, or Microsoft Excel (<span class="font-monospace">xlsx</span> - natural gas) spreadsheet
+                to add new data.
+            </p>
             <p>
-                <input class="btn btn-outline-primary" type="submit" value="Upload!">
+                {{ form.file }}
+            </p>
+            {% csrf_token %}
+            <p>
+                <button class="btn btn-outline-primary" type="submit">{{ title }}</button>
             </p>
         </form>
+    {% endif %}
     </div>
 {% endblock main %}
 {% block scripts %}{% endblock scripts %}

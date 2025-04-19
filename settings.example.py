@@ -116,6 +116,8 @@ ELECTRIC_PREFIX = "peco_electric_usage_interval_data_Service"
 NATURAL_GAS_PREFIX = "UsageData"
 WATER_FILENAME = "ChartData.csv"
 
+USAGE_FILE_SUFFIXES = ("csv", "xlsx")
+
 WEBSITE_TITLE = "Utilities"
 
 JAZZMIN_SETTINGS = {
