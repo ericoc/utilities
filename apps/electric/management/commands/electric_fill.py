@@ -89,7 +89,7 @@ class Command(BaseCommand):
             # List count of newly created electric usage database objects.
             if num_created > 0:
                 self.stdout.write(self.style.SUCCESS(
-                    f"Total:\t\t{num_created}"
+                    f"Total:\t{num_created}"
                 ))
             self.stdout.write(self.style.SUCCESS("Done."))
 

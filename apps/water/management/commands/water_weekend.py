@@ -28,14 +28,14 @@ class Command(BaseCommand):
         min_row = usage.first()
         min_day = min_row.day
         self.stdout.write(self.style.SUCCESS(
-            f'From:\t\t{min_day.strftime(dt_fmt)} ({min_day})'
+            f'From:\t{min_day.strftime(dt_fmt)} ({min_day})'
         ))
 
         # Maximum ("To") date.
         max_row = usage.last()
         max_day = max_row.day
         self.stdout.write(self.style.SUCCESS(
-            f'To:\t\t{max_day.strftime(dt_fmt)} ({max_day})'
+            f'To:\t{max_day.strftime(dt_fmt)} ({max_day})'
         ))
 
         # Iterate all water usage data, calculating weekend vs. weekday usage.
@@ -80,7 +80,7 @@ class Command(BaseCommand):
         total_usage = usage_weekday + usage_weekend
         average_gallons = total_usage / total_days
         self.stdout.write(self.style.SUCCESS(
-            f"Total:\t\t{'{0:,.4f}'.format(total_usage)} gallons /"
+            f"Total:\t{'{0:,.4f}'.format(total_usage)} gallons /"
             f" {total_days} days ="
             f" average {'{0:,.4f}'.format(average_gallons)} gallons"
             f" over {total_ago}."

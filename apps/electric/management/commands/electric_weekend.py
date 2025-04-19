@@ -31,7 +31,7 @@ class Command(BaseCommand):
         min_hour_ago = timesince(min_hour_local)
         min_hour_fmt = min_hour_local.strftime(dt_fmt)
         self.stdout.write(self.style.SUCCESS(
-            f"From:\t\t{min_hour_fmt} ({min_hour_local}) [{min_hour_ago} ago]"
+            f"From:\t{min_hour_fmt} ({min_hour_local}) [{min_hour_ago} ago]"
         ))
 
         # Maximum ("To") date.
@@ -40,7 +40,7 @@ class Command(BaseCommand):
         max_hour_ago = timesince(max_hour_local)
         max_hour_fmt = max_hour_local.strftime(dt_fmt)
         self.stdout.write(self.style.SUCCESS(
-            f"To:\t\t{max_hour_fmt} ({max_hour_local}) [{max_hour_ago} ago]"
+            f"To:\t{max_hour_fmt} ({max_hour_local}) [{max_hour_ago} ago]"
         ))
 
         # Iterate all electric usage data, calculating weekend vs. weekday kWh.
@@ -87,7 +87,7 @@ class Command(BaseCommand):
         total_usage = usage_weekday + usage_weekend
         average_kwh = total_usage / total_hours
         self.stdout.write(self.style.SUCCESS(
-            f"Total:\t\t{'{0:,.4f}'.format(total_usage)} kWh /"
+            f"Total:\t{'{0:,.4f}'.format(total_usage)} kWh /"
             f" {'{0:,}'.format(total_hours)} hours ="
             f" average {'{0:,.4f}'.format(average_kwh)} kWh"
             f" over {total_ago}."
