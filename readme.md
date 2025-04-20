@@ -33,8 +33,10 @@ Examples of each of these management commands, including output, is below per ut
 
 ## Electric
 ### Pennsylvania Electric Company ("PECO")
+##### https://www.peco.com/
 
 ![Electric Screenshot](apps/electric/static/electric_page.png)
+#### https://utilities.ericoc.com/electric/
 
 A ZIP (`.zip`) archive containing a comma-separated values (`.csv`) file, of
 electricity used in kilowatt-hours (kWh), can be downloaded from the
@@ -95,8 +97,10 @@ Total:  12,876.9400 kWh / 19,534 hours = average 0.6592 kWh over 2 years, 2 mont
 
 ## Natural Gas
 ### Philadelphia Gas Works ("PGW")
+##### https://www.pgworks.com/
 
 ![Natural Gas Screenshot](apps/natural_gas/static/natural_gas_page.png)
+#### https://utilities.ericoc.com/natural_gas/
 
 An Excel (`.xlsx`) spreadsheet file of natural gas, used in hundreds of cubic
 feet (CCF), each (billing) month can be downloaded from the
@@ -141,8 +145,10 @@ Done.
 
 ## Water
 #### Philadelphia Water Department ("PWD")
+##### https://water.phila.gov/
 
 ![Water Screenshot](apps/water/static/water_page.png)
+#### https://utilities.ericoc.com/water/
 
 Comma-separated values ("CSV" / `.csv`) file of water used, in gallons, daily.
 
