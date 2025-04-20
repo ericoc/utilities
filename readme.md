@@ -100,8 +100,9 @@ Total:  12,876.9400 kWh / 19,534 hours = average 0.6592 kWh over 2 years, 2 mont
 
 An Excel (`.xlsx`) spreadsheet file of natural gas, used in hundreds of cubic
 feet (CCF), each (billing) month can be downloaded from the
-"[usage section](https://myaccount.pgworks.com/portal/usages.aspx?type=GU)"
-of the Philadelphia Gas Works (PGW) website;
+["usage" section](https://myaccount.pgworks.com/portal/usages.aspx?type=GU)
+of the Philadelphia Gas Works (PGW) website:
+
 ![Export Philadelphia Gas Works Natural Gas Usage Screenshot](apps/natural_gas/static/natural_gas_export.png)
 
 The Excel spreadsheet from PGW is named by the date it was exported
