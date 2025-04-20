@@ -5,7 +5,7 @@ allow for a residential account holder to access (and export!) their own usage
 data.
 
 This Django web application imports utility usage data.
-The data is then displayed with HighCharts and DataTables:
+The data is then displayed with HighCharts and DataTables.
 
 The website is publicly available online at:
 #### https://utilities.ericoc.com/
