@@ -199,6 +199,9 @@ Total:  37,214.0909 gallons / 941 days = average 39.5474 gallons over 2 years, 6
 ## API
 Highcharts and DataTables are rendered using the JSON data from the
 Django REST Framework read-only API endpoint for each utility:
-- Electric: [`https://utilities.ericoc.com/api/electric/`](https://utilities.ericoc.com/api/electric/)
-- Natural Gas: [`https://utilities.ericoc.com/api/natural_gas/`](https://utilities.ericoc.com/api/natural_gas/)
-- Water: [`https://utilities.ericoc.com/api/water/`](https://utilities.ericoc.com/api/water/)
+- Electric
+    - https://utilities.ericoc.com/api/electric/
+- Natural Gas
+    - https://utilities.ericoc.com/api/natural_gas/
+- Water
+    - https://utilities.ericoc.com/api/water/
