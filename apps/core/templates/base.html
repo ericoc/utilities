@@ -121,7 +121,7 @@
                             </svg>
                         </a>
                     </li>
-{% if request.user.is_staff %}
+    {% if request.user.is_staff %}
                     <li class="{% if title and title == 'Add' %}active border-utility {% endif %}nav-item" title="Add">
                         <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Add' %} active" aria-current="page{% endif %}" href="{% url 'add' %}#add" title="Add">
                             <svg class="bi text-success" aria-hidden="true">
@@ -129,7 +129,24 @@
                             </svg>
                         </a>
                     </li>
-{% endif %}
+    {% endif %}
+    {% if request.user.is_authenticated %}
+                    <li class="nav-item" title="Admin">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover" href="{% url 'admin:index' %}" target="_blank" title="Admin">
+                            <svg class="bi text-secondary-emphasis" aria-hidden="true">
+                                <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#window-sidebar"></use>
+                            </svg>
+                        </a>
+                    </li>
+    {% else %}
+                    <li class="nav-item" title="Log In">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover" href="{% url 'admin:index' %}" title="Log In">
+                            <svg class="bi text-success-emphasis" aria-hidden="true">
+                                <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#door-open"></use>
+                            </svg>
+                        </a>
+                    </li>
+    {% endif %}
                 </ul>
             </nav>
         </header>
@@ -147,20 +164,6 @@
                         <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#box-arrow-up-right"></use>
                     </svg>
                 </a>
-            </div>
-            <div class="col text-end">
-    {% if request.user.is_staff %}
-            <a class="font-monospace icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{% url "admin:index" %}" target="_blank" title="Administration ({% url "admin:index" %})">
-                <svg class="bi text-primary-emphasis" aria-hidden="true">
-                    <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#window-sidebar"></use>
-                </svg>
-                {% url "admin:index" %}
-                <svg class="bi text-secondary-emphasis" aria-hidden="true" role="img">
-                    <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#box-arrow-up-right"></use>
-                </svg>
-            </a>
-    {% else %}
-    {% endif %}
             </div>
         </footer>
         {% block scripts %}{% endblock scripts %}
