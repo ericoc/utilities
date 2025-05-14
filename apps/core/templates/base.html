@@ -115,7 +115,7 @@
                     </a>
     {% if request.user.is_staff %}
                     <div class="{% if title and title == 'Add' %}active border-utility {% endif %}nav-item" title="Add">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover me-3{% if title and title == 'Add' %} active" aria-current="page{% endif %}" href="{% url 'add' %}#add" title="Add">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Add' %} active" aria-current="page{% endif %}" href="{% url 'add' %}#add" title="Add">
                             <svg class="bi text-success" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#plus-lg"></use>
                             </svg>
