@@ -82,6 +82,12 @@ DATABASES = {
     },
 }
 
+UTILITIES = {
+    "electric": ("kWh", "Kilowatt-Hour"),
+    "natural_gas": ("CCF", "Hundreds of Cubic Feet"),
+    "water": ("gal", "Gallons"),
+}
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = (
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
