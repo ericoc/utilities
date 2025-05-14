@@ -10,12 +10,12 @@
         <meta name="robots" content="noindex,nofollow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:type" content="website">
-        <meta property="og:site_name" content="{{ website_title }}">
+        <meta property="og:site_name" content="{{ WEBSITE_TITLE }}">
         <meta property="og:title" content="{{ title }}">
         <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
         <link rel="shortcut-icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
         <link rel="apple-touch-icon" href="{% static 'logo.png' %}" type="image/png">
-        <title>{{ website_title }}: {{ title }}</title>
+        <title>{{ WEBSITE_TITLE }}: {{ title }}</title>
         <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
         <script src="{% static 'luxon.min.js' %}"></script>
         <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -89,65 +89,40 @@
             a[target="_blank"] svg[role="img"] { --bs-icon-link-transform: none; }
         </style>
     </head>
-    <body class="container-fluid">
-        <header>
+    <body>
+        <header class="container-fluid">
             <nav class="navbar navbar-dark navbar-expand">
-                <ul class="navbar-nav gap-3 mx-3">
-                    <li class="{% if title and title == 'Utilities' %}active border-home {% endif %}nav-item" title="Utilities (Home)">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Utilities' %} active" aria-current="page{% endif %}" href="{% url 'index' %}" title="Utilities (Home)">
-                            <svg class="bi text-primary" aria-hidden="true">
-                                <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#house"></use>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="{% if title and title == 'Electric' %}active border-utility {% endif %}nav-item" title="Electric">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Electric' %} active" aria-current="page{% endif %}" href="{% url 'electric' %}#chart" title="Electric">
-                            <svg class="bi color-electric" aria-hidden="true">
-                                <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="{% if title and title == 'Natural Gas' %}active border-utility {% endif %}nav-item" title="Natural Gas">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Natural Gas' %} active" aria-current="page{% endif %}" href="{% url 'natural_gas' %}#chart" title="Natural Gas">
-                            <svg class="bi color-natural-gas" aria-hidden="true">
-                                <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#fan"></use>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="{% if title and title == 'Water' %}active border-utility {% endif %}nav-item" title="Water">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Water' %} active" aria-current="page{% endif %}" href="{% url 'water' %}#chart" title="Water">
-                            <svg class="bi color-water" aria-hidden="true">
-                                <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#droplet"></use>
-                            </svg>
-                        </a>
-                    </li>
+                <div class="navbar-nav align-content-between">
+                    <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-5{% if title and title == 'Home' %} active border-utility" aria-current="page{% endif %}" href="{% url 'home' %}" title="Home">
+                        <svg class="bi text-primary" aria-hidden="true">
+                            <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#house"></use>
+                        </svg>
+                    </a>
+                    <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == 'Electric' %} active border-utility" aria-current="page{% endif %}" href="{% url 'electric' %}#chart" title="Electric">
+                        <svg class="bi color-electric" aria-hidden="true">
+                            <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use>
+                        </svg>
+                    </a>
+                    <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == 'Natural Gas' %} active border-utility" aria-current="page{% endif %}" href="{% url 'natural_gas' %}#chart" title="Natural Gas">
+                        <svg class="bi color-natural-gas" aria-hidden="true">
+                            <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#fan"></use>
+                        </svg>
+                    </a>
+                    <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == 'Water' %} active border-utility" aria-current="page{% endif %}" href="{% url 'water' %}#chart" title="Water">
+                        <svg class="bi color-water" aria-hidden="true">
+                            <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#droplet"></use>
+                        </svg>
+                    </a>
     {% if request.user.is_staff %}
-                    <li class="{% if title and title == 'Add' %}active border-utility {% endif %}nav-item" title="Add">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Add' %} active" aria-current="page{% endif %}" href="{% url 'add' %}#add" title="Add">
+                    <div class="{% if title and title == 'Add' %}active border-utility {% endif %}nav-item" title="Add">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover me-3{% if title and title == 'Add' %} active" aria-current="page{% endif %}" href="{% url 'add' %}#add" title="Add">
                             <svg class="bi text-success" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#plus-lg"></use>
                             </svg>
                         </a>
-                    </li>
+                    </div>
     {% endif %}
-    {% if request.user.is_authenticated %}
-                    <li class="nav-item" title="Admin">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover" href="{% url 'admin:index' %}" target="_blank" title="Admin">
-                            <svg class="bi text-secondary-emphasis" aria-hidden="true">
-                                <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#window-sidebar"></use>
-                            </svg>
-                        </a>
-                    </li>
-    {% else %}
-                    <li class="nav-item" title="Log In">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover" href="{% url 'admin:index' %}" title="Log In">
-                            <svg class="bi text-success-emphasis" aria-hidden="true">
-                                <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#door-open"></use>
-                            </svg>
-                        </a>
-                    </li>
-    {% endif %}
-                </ul>
+                </div>
             </nav>
         </header>
         <main class="container-fluid">
