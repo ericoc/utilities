@@ -1,5 +1,5 @@
 asgiref==3.8.1
-Django==5.2.1
+Django==5.2.3
 django-jazzmin==3.0.1
 django-redis==5.4.0
 djangorestframework==3.16.0
@@ -9,6 +9,6 @@ openpyxl==3.1.5
 packaging==25.0
 psycopg==3.2.9
 python-dateutil==2.9.0.post0
-redis==6.1.0
+redis==6.2.0
 six==1.17.0
 sqlparse==0.5.3
