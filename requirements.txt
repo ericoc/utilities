@@ -1,7 +1,7 @@
 asgiref==3.8.1
 Django==5.2.3
 django-jazzmin==3.0.1
-django-redis==5.4.0
+django-redis==6.0.0
 djangorestframework==3.16.0
 et_xmlfile==2.0.0
 gunicorn==23.0.0
