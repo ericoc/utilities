@@ -18,9 +18,8 @@
         <title>{{ WEBSITE_TITLE }}: {{ title }}</title>
         <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
         <script src="{% static 'luxon.min.js' %}"></script>
-        <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-        <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'bootstrap-icons/font/bootstrap-icons.min.css' %}">
+        <link href="{% static 'bootstrap-5.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+        <script src="{% static 'bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js' %}"></script>
         <link href="{% static 'datatables/datatables.min.css' %}" rel="stylesheet">
         <script src="{% static 'datatables/datatables.min.js' %}"></script>
         <script src="{% static 'datatables/sum.js' %}"></script>
@@ -95,29 +94,29 @@
                 <div class="navbar-nav align-content-between">
                     <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-5{% if title and title == 'Home' %} active border-utility" aria-current="page{% endif %}" href="{% url 'home' %}" title="Home">
                         <svg class="bi text-primary" aria-hidden="true">
-                            <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#house"></use>
+                            <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#house"></use>
                         </svg>
                     </a>
                     <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == 'Electric' %} active border-utility" aria-current="page{% endif %}" href="{% url 'electric' %}#chart" title="Electric">
                         <svg class="bi color-electric" aria-hidden="true">
-                            <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#lightbulb"></use>
+                            <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#lightbulb"></use>
                         </svg>
                     </a>
                     <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == 'Natural Gas' %} active border-utility" aria-current="page{% endif %}" href="{% url 'natural_gas' %}#chart" title="Natural Gas">
                         <svg class="bi color-natural-gas" aria-hidden="true">
-                            <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#fan"></use>
+                            <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#fan"></use>
                         </svg>
                     </a>
                     <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == 'Water' %} active border-utility" aria-current="page{% endif %}" href="{% url 'water' %}#chart" title="Water">
                         <svg class="bi color-water" aria-hidden="true">
-                            <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#droplet"></use>
+                            <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#droplet"></use>
                         </svg>
                     </a>
     {% if request.user.is_staff %}
                     <div class="{% if title and title == 'Add' %}active border-utility {% endif %}nav-item" title="Add">
                         <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Add' %} active" aria-current="page{% endif %}" href="{% url 'add' %}#add" title="Add">
                             <svg class="bi text-success" aria-hidden="true">
-                                <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#plus-lg"></use>
+                                <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#plus-lg"></use>
                             </svg>
                         </a>
                     </div>
@@ -132,11 +131,11 @@
             <div class="col text-start">
                 <a class="font-monospace icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/ericoc/utilities/" target="_blank" title="GitHub <https://github.com/ericoc/utilities/>">
                     <svg class="bi text-primary-emphasis" aria-hidden="true">
-                        <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#code-slash"></use>
+                        <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#code-slash"></use>
                     </svg>
                     https://github.com/ericoc/utilities/
                     <svg class="bi text-secondary-emphasis" aria-hidden="true" role="img">
-                        <use xlink:href="{% static 'bootstrap-icons/bootstrap-icons.svg' %}#box-arrow-up-right"></use>
+                        <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#box-arrow-up-right"></use>
                     </svg>
                 </a>
             </div>
