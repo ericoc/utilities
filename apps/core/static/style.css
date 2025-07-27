@@ -1,0 +1,69 @@
+:root {
+    --color-electric: #e4a11b;
+    --color-natural-gas: #853cfd;
+    --color-water: #2caffe;
+}
+
+.icon-link-hover svg { --bs-icon-link-transform: translate3d(0, -.5rem, 0); }
+.navbar-expand .navbar-nav .nav-link { font-size: 2.5rem; }
+a[target="_blank"] svg[role="img"] { --bs-icon-link-transform: none; }
+
+.border-home {
+    border-color: var(--bs-primary);
+    border-radius: var(--bs-border-radius);
+    border-style: solid;
+    border-width: 0.15rem;
+}
+
+.color-electric { color: var(--color-electric); }
+.color-natural-gas { color: var(--color-natural-gas); }
+.color-water { color: var(--color-water); }
+
+.bg-utility { background-color: var(--color-utility); }
+.border-utility {
+    border-radius: var(--bs-border-radius);
+    border-color: var(--color-utility);
+    border-style: solid;
+    border-width: 0.15rem;
+}
+.color-utility { color: var(--color-utility); }
+
+/* DataTables. */
+.dt-buttons button {
+    --bs-btn-bg: var(--bs-dark);
+    --bs-btn-border-color: var(--color-utility);
+    --bs-btn-color: var(--bs-light);
+
+    --bs-btn-active-bg: var(--color-utility);
+    --bs-btn-active-border-color: var(--color-utility);
+    --bs-btn-active-color: var(--bs-secondary);
+
+    --bs-btn-hover-bg: var(--color-utility);
+    --bs-btn-hover-border-color: var(--color-utility);
+    --bs-btn-hover-color: var(--bs-light);
+}
+.form-select, .form-select-sm, .table-group-divider {
+    border-color: var(--color-utility);
+    background-color: var(--bs-dark);
+    color: var(--bs-light);
+}
+.pagination, .pagination-sm {
+    --bs-pagination-active-bg: var(--color-utility);
+    --bs-pagination-active-border-color: var(--color-utility);
+}
+.page-link { color: var(--color-utility); }
+
+/* Highcharts. */
+.highcharts-background { fill: var(--bs-dark); }
+.highcharts-graph { stroke: var(--color-utility); }
+.highcharts-color-0 { fill: var(--color-utility); }
+.highcharts-data-label text, .highcharts-axis-labels text {
+    stroke: var(--bs-light);
+}
+.highcharts-series { stroke:  var(--color-utility); }
+.highcharts-title text { fill:  var(--color-utility); }
+.highcharts-tooltip-point { color: var(--color-utility); }
+
+:root {
+    --highcharts-color-0: var(--color-utility);
+}

@@ -18,6 +18,7 @@
         <title>{{ WEBSITE_TITLE }}: {{ title }}</title>
         <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
         <script src="{% static 'luxon.min.js' %}"></script>
+        <script>const DateTime = luxon.DateTime</script>
         <link href="{% static 'bootstrap-5.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
         <script src="{% static 'bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js' %}"></script>
         <link href="{% static 'datatables/datatables.min.css' %}" rel="stylesheet">
@@ -25,68 +26,11 @@
         <script src="{% static 'datatables/sum.js' %}"></script>
         <script src="{% static 'highcharts/highcharts.js' %}"></script>
         <script src="{% static 'highcharts/exporting.js' %}"></script>
-        <script src="{% static 'highcharts/offline-exporting.js' %}"></script>
         <script src="{% static 'highcharts/export-data.js' %}"></script>
         <script src="{% static 'highcharts/accessibility.js' %}"></script>
-        <script>const DateTime = luxon.DateTime;</script>
-        <style>
-            :root {
-                --color-electric: #e4a11b;
-                --color-natural-gas: #853cfd;
-                --color-water: #2caffe;
-        {% if color %}
-                --color-utility: {{ color }};
-        {% endif %}
-            }
-            .border-home {
-                border-color: var(--bs-primary);
-                border-radius: var(--bs-border-radius);
-                border-style: solid;
-                border-width: 0.15rem;
-            }
-            .color-electric { color: var(--color-electric); }
-            .color-natural-gas { color: var(--color-natural-gas); }
-            .color-water { color: var(--color-water); }
-        {% if color %}
-            .bg-utility { background-color: var(--color-utility); }
-            .border-utility {
-                border-radius: var(--bs-border-radius);
-                border-color: var(--color-utility);
-                border-style: solid;
-                border-width: 0.15rem;
-            }
-            .color-utility { color: var(--color-utility); }
-            .dt-buttons button {
-                --bs-btn-bg: var(--bs-dark);
-                --bs-btn-border-color: var(--color-utility);
-                --bs-btn-color: var(--bs-light);
-
-                --bs-btn-active-bg: var(--color-utility);
-                --bs-btn-active-border-color: var(--color-utility);
-                --bs-btn-active-color: var(--bs-secondary);
-
-                --bs-btn-hover-bg: var(--color-utility);
-                --bs-btn-hover-border-color: var(--color-utility);
-                --bs-btn-hover-color: var(--bs-light);
-            }
-            .form-select, .form-select-sm, .table-group-divider {
-                border-color: var(--color-utility);
-                background-color: var(--bs-dark);
-                color: var(--bs-light);
-            }
-            .pagination, .pagination-sm {
-                --bs-pagination-active-bg: var(--color-utility);
-                --bs-pagination-active-border-color: var(--color-utility);
-            }
-            .page-link {
-                color: var(--color-utility);
-            }
-            {% endif %}
-            .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
-            .icon-link-hover svg { --bs-icon-link-transform: translate3d(0, -.5rem, 0); }
-            .navbar-expand .navbar-nav .nav-link { font-size: 2.5rem; }
-            a[target="_blank"] svg[role="img"] { --bs-icon-link-transform: none; }
-        </style>
+        <link href="{% static 'highcharts/highcharts.css' %}" rel="stylesheet">
+        <style>:root { --color-utility: {{ color|default:"var(--bs-light)" }}; }</style>
+        <link href="{% static 'style.css' %}" rel="stylesheet">
     </head>
     <body>
         <header class="container-fluid">
