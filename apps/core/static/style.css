@@ -55,15 +55,4 @@ a[target="_blank"] svg[role="img"] { --bs-icon-link-transform: none; }
 
 /* Highcharts. */
 .highcharts-background { fill: var(--bs-dark); }
-.highcharts-graph { stroke: var(--color-utility); }
-.highcharts-color-0 { fill: var(--color-utility); }
-.highcharts-data-label text, .highcharts-axis-labels text {
-    stroke: var(--bs-light);
-}
-.highcharts-series { stroke:  var(--color-utility); }
-.highcharts-title text { fill:  var(--color-utility); }
-.highcharts-tooltip-point { color: var(--color-utility); }
-
-:root {
-    --highcharts-color-0: var(--color-utility);
-}
+.highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }

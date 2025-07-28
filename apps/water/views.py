@@ -5,4 +5,4 @@ class WaterView(UtilityView):
     """Water usage view."""
     color = "#2caffe"
     datatable_time_format = "date('DDDD')"
-    thresholds = (100, 75, 50)
+    thresholds = (75, 50, 25)
