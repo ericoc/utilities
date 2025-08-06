@@ -1,4 +1,3 @@
-{% load admin_urls %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" class="dark" data-bs-theme="dark">
@@ -9,9 +8,9 @@
         <meta name="format-detection" content="telephone=no">
         <meta name="robots" content="noindex,nofollow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta property="og:type" content="website">
         <meta property="og:site_name" content="{{ WEBSITE_TITLE }}">
         <meta property="og:title" content="{{ title }}">
+        <meta property="og:type" content="website">
         <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
         <link rel="apple-touch-icon" href="{% static 'logo.png' %}" type="image/png">
         <title>{{ WEBSITE_TITLE }}: {{ title }}</title>
@@ -86,6 +85,8 @@
                 </a>
             </div>
         </footer>
-        {% block scripts %}{% endblock scripts %}
+        {% block scripts %}
+            {{ UTILITIES|json_script:"utilities" }}
+        {% endblock scripts %}
     </body>
 </html>
