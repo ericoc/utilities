@@ -5,22 +5,22 @@ from django.contrib.humanize.templatetags.humanize import intcomma
 from django.core.management.base import BaseCommand
 from django.utils.translation import ngettext
 
-from ...models import ElectricUsage as model
+from ...models import WaterUsage as model
 
 
 class Command(BaseCommand):
     """
     Export usage data from PostgreSQL to SQLite.
     """
-    help = "Convert latest electric usage for Datasette."
+    help = "Convert latest water usage for Datasette."
 
     def handle(self, *args, **options):
 
         # Find latest in SQLite.
         latest = None
         try:
-            latest = model.objects.using("sqlite"). \
-                order_by("-hour").first().hour
+            latest = model.objects.using("sqlite").\
+                order_by("-day").first().day
             self.stdout.write(
                 self.style.SUCCESS(
                     f"Latest SQLite: {latest.strftime(settings.TIME_FMT)}"
@@ -37,7 +37,7 @@ class Command(BaseCommand):
         usage = model.objects
         if latest:
             usage = usage.filter(pk__gt=latest)
-        usage = usage.order_by("hour")
+        usage = usage.order_by("day")
         num_found = usage.count()
 
         # Exit if nothing was found to export.
@@ -68,12 +68,12 @@ class Command(BaseCommand):
 
             # Create a dictionary from PostgreSQL object.
             row_dict = vars(row_obj)
-            hour = row_dict.pop("hour")
+            day = row_dict.pop("day")
             del row_dict["_state"]
 
             # Create record in SQLite, using the PostgreSQL dictionary.
             (obj, ctd) = model.objects.using("sqlite").update_or_create(
-                hour=hour,
+                day=day,
                 defaults=row_dict,
                 create_defaults=row_dict
             )
