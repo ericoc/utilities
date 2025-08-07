@@ -1,0 +1,21 @@
+title: Eric's Utilities @ Datasette
+description: Testing out Datasette with my utility data.
+source: ericoc/utilities @ GitHub
+source_url: https://github.com/ericoc/utilities/
+allow_sql: false
+
+databases:
+  allow_sql: false
+  utilities:
+    allow_sql: false
+    source: https://utilities.ericoc.com/
+    tables:
+      ELECTRIC:
+        description_html: Electricity usage in kilowatt-hours (kWh).
+        sort_desc: HOUR
+      NATURAL_GAS:
+        description_html: Natural gas usage in hundreds of cubic feet (CCF) per month.
+        sort_desc: MONTH
+      WATER:
+        description_html: Water usage in gallons per day.
+        sort_desc: DAY
