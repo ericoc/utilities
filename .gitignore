@@ -8,6 +8,7 @@ settings.py
 *.json
 *.pdf
 *.pyc
+*.sqlite3
 *.xls
 *.xlsx
 *.zip

@@ -80,6 +80,11 @@ DATABASES = {
         "PASSWORD": "Secret123!",
         "HOST": "localhost",
     },
+    "sqlite": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": Path(Path(BASE_DIR), Path("utilities.sqlite3")),
+        "SCHEMA": "utilities",
+    },
 }
 
 UTILITIES = {
@@ -125,6 +130,7 @@ WATER_FILENAME = "ChartData.csv"
 
 USAGE_FILE_SUFFIXES = ("csv", "xlsx")
 
+TIME_FMT = '%A, %B %d, %Y @ %I:%M:%S %p %Z %z'
 WEBSITE_TITLE = "Utilities"
 
 JAZZMIN_SETTINGS = {

@@ -10,12 +10,12 @@ databases:
     allow_sql: false
     source: https://utilities.ericoc.com/
     tables:
-      ELECTRIC:
+      electric:
         description_html: Electricity usage in kilowatt-hours (kWh).
         sort_desc: HOUR
-      NATURAL_GAS:
+      natural_gas:
         description_html: Natural gas usage in hundreds of cubic feet (CCF) per month.
         sort_desc: MONTH
-      WATER:
+      water:
         description_html: Water usage in gallons per day.
         sort_desc: DAY
