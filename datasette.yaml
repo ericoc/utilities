@@ -12,10 +12,10 @@ databases:
     tables:
       electric:
         description_html: Electricity usage in kilowatt-hours (kWh).
-        sort_desc: HOUR
+        sort_desc: hour
       natural_gas:
         description_html: Natural gas usage in hundreds of cubic feet (CCF) per month.
-        sort_desc: MONTH
+        sort_desc: month
       water:
         description_html: Water usage in gallons per day.
-        sort_desc: DAY
+        sort_desc: day
