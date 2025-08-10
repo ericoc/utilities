@@ -22,7 +22,7 @@ databases:
         hidden: true
       auth_user_user_permissions:
         hidden: true
-      djang_admin_log:
+      django_admin_log:
         hidden: true
       django_content_type:
         hidden: true
