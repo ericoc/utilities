@@ -74,13 +74,6 @@ WSGI_APPLICATION = "wsgi.application"
 # Database
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "utilities",
-        "USER": "utilities",
-        "PASSWORD": "Secret123!",
-        "HOST": "localhost",
-    },
-    "sqlite": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": Path(Path(BASE_DIR), Path("utilities.sqlite3")),
         "SCHEMA": "utilities",
