@@ -81,9 +81,27 @@ DATABASES = {
 }
 
 UTILITIES = {
-    "electric": ("kWh", "Kilowatt-Hour"),
-    "natural_gas": ("CCF", "Hundreds of Cubic Feet"),
-    "water": ("gal", "Gallons"),
+    "electric": {
+        "short": "kWh",
+        "long": "Kilowatt-Hours",
+        "color": "#e4a11b",
+        "datatables_fmt": "datetime('DDDD, tt')",
+        "thresholds": (1, 0.75, 0.5),
+    },
+    "natural_gas": {
+        "short": "CCF",
+        "long": "Hundreds of Cubic Feet",
+        "color": "#853cfd",
+        "datatables_fmt": "datetime('MMMM y')",
+        "thresholds": (50, 25, 10),
+    },
+    "water": {
+        "short": "gal",
+        "long": "Gallons",
+        "color": "#2caffe",
+        "datatables_fmt": "date('DDDD')",
+        "thresholds": (100, 75, 50),
+    },
 }
 
 # Password validation

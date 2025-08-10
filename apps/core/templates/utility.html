@@ -51,11 +51,9 @@
                     document.getElementById('time-col').innerText = utilityTimeDesc
 
                     const utilityUnitName = utilityKeys[1]
-                    const utilityUnitDesc = (utilityUnitName.charAt(0).toUpperCase() + utilityUnitName.slice(1))
-                    document.getElementById('unit-col').innerText = utilityUnitDesc
+                    document.getElementById('unit-col').innerText = '{{ long_name }} ({{ short_name }})'
 
                     const utilityUsageOverTime = []
-
                     for (const item in utilityUsageData) {
                         utilityUsageOverTime.push([
                             DateTime.fromISO(utilityUsageData[item][utilityTimeName]).toMillis(),
@@ -69,7 +67,7 @@
                         series: [{
                             color: chartColors.lineColor,
                             data: utilityUsageOverTime,
-                            name: utilityUnitDesc,
+                            name: '{{ long_name }} ({{ short_name }})',
                             states: { hover: { lineWidthPlus: 0 } },
                             type: 'line'
                         }],
@@ -84,7 +82,7 @@
                             type: 'datetime'
                         },
                         yAxis: {
-                            title: { text: utilityUnitDesc },
+                            title: { text: '{{ long_name }} ({{ short_name }})' },
                             type: 'num'
                         },
                     })
@@ -93,9 +91,9 @@
                     const allTotalNode = document.getElementById('all-total')
                     function footerTotal (api, col=1, digits=4) {
                         const pageUtility = DataTable.render.number(',', '.', digits).display(api.column(col, {page: 'current'}).data().sum())
-                        pageTotalNode.innerHTML = `<span class="badge font-monospace" title="This Page: ${pageUtility} ${utilityUnitDesc}"> ${pageUtility} ${utilityUnitDesc}</span>`
+                        pageTotalNode.innerHTML = `<span class="badge font-monospace" title="This Page: ${pageUtility} {{ long_name }} ({{ short_name }})"> ${pageUtility} ({{ short_name }})</span>`
                         const totalUtility = DataTable.render.number(',', '.', digits).display(api.column(col).data().sum())
-                        allTotalNode.innerHTML = `<span class="badge border-utility font-monospace" title="All Pages: ${totalUtility} ${utilityUnitDesc}"> ${totalUtility} ${utilityUnitDesc}</span>`
+                        allTotalNode.innerHTML = `<span class="badge border-utility font-monospace" title="All Pages: ${totalUtility} {{ long_name }} ({{ short_name }})"> ${totalUtility} {{ short_name }}</span>`
                         if (chartLoading && chartLoading.visibility === true) {
                             chartLoading.visibility = false
                         }
@@ -108,7 +106,7 @@
                         columns: [
                             {
                                 data: utilityTimeName,
-                                render: DataTable.render.{{ datatable_time_format|safe }},
+                                render: DataTable.render.{{ datatables_fmt|safe }},
                             },
                             {
                                 data: utilityUnitName,
@@ -122,7 +120,7 @@
                                         } else if (data >= {{ thresholds.2 }}) {
                                             utilityTextColor = 'info'
                                         }
-                                        return `<code class="fw-bold text-${utilityTextColor}-emphasis" title="${data} ${utilityUnitDesc}">${data}</code>`
+                                        return `<code class="fw-bold text-${utilityTextColor}-emphasis" title="${data} {{ long_name }} ({{ short_name }})">${data}</code>`
                                     }
                                     return data
                                 },
@@ -136,7 +134,7 @@
                                 savedStates: {
                                     0: '<span class="bi bi-floppy" title="Saved States"> Saved States</span>',
                                     1: '<span class="bi bi-floppy" title="Saved States (1)"> Saved States (1)</span>',
-                                    _: '<span class="bi bi-floppy" title="Saved States">Saved States (%d)</span>',
+                                    _: '<span class="bi bi-floppy" title="Saved States"> Saved States (%d)</span>',
                                 },
                             },
                             emptyTable: `No ${resultName} available in table`,
