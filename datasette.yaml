@@ -10,6 +10,28 @@ databases:
     allow_sql: false
     source: https://utilities.ericoc.com/
     tables:
+      auth_group:
+        hidden: true
+      auth_group_permissions:
+        hidden: true
+      auth_permission:
+        hidden: true
+      auth_user:
+        hidden: true
+      auth_user_groups:
+        hidden: true
+      auth_user_user_permissions:
+        hidden: true
+      djang_admin_log:
+        hidden: true
+      django_content_type:
+        hidden: true
+      django_migrations:
+        hidden: true
+      django_session:
+        hidden: true
+      sqlite_sequence:
+        hidden: true
       electric:
         description_html: Electricity usage in kilowatt-hours (kWh).
         sort_desc: hour
