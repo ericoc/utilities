@@ -38,7 +38,6 @@ LOGIN_URL = "/admin/login/"
 LOGOUT_URL = "/admin/logout/"
 
 MIDDLEWARE = (
-    "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -46,7 +45,6 @@ MIDDLEWARE = (
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django.middleware.cache.FetchFromCacheMiddleware",
 )
 
 ROOT_URLCONF = "urls"
@@ -133,14 +131,6 @@ STATIC_ROOT = Path(BASE_DIR, STATIC_URL)
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
-
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
-        "KEY_PREFIX": "utilities_",
-    }
-}
 
 # peco_electric_usage_interval_data_Service 1_1_2023-01-21_to_2023-12-07.csv
 ELECTRIC_PREFIX = "peco_electric_usage_interval_data_Service"
