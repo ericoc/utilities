@@ -64,6 +64,7 @@
                     const utilityHighChart = new Highcharts.Chart({
                         chart: chartChart,
                         credits: false,
+                        exporting: { buttons: { contextButton: { menuItems: ["printChart", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG"] } } },
                         series: [{
                             color: chartColors.lineColor,
                             data: utilityUsageOverTime,
@@ -127,7 +128,7 @@
                                 type: 'num'
                             }
                         ],
-                        footerCallback: async function () {footerTotal(this.api()) },
+                        footerCallback: async function () { footerTotal(this.api()) },
                         language: {
                             buttons: {
                                 createState: '<span class="bi bi-save" title="Save State"> Save State</span>',
@@ -172,7 +173,7 @@
             const chartChart = {
                 backgroundColor: chartColors.backgroundColor,
                 renderTo: 'chart',
-                zoomType: 'x'
+                zoomType: 'x',
             }
             const chartLayout = {
                 topStart: {
