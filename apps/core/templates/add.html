@@ -12,7 +12,7 @@
         <div class="alert border list-group m-3 p-3 messages rounded">
         {% for message in messages %}
             <div class="list-group-item list-group-item-{% if message.tags %}{{ message.tags }}{% else %}success{% endif %}">
-                {{ message }}
+                {{ message|default:"" }}
             </div>
         {% endfor %}
         </div>

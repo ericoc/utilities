@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.views.generic.base import TemplateView
 
 
@@ -7,11 +8,13 @@ class BaseView(TemplateView):
     http_method_names = ("get",)
     template_name = "utility.html"
     title = ""
+    utilities = settings.UTILITIES
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["color"] = self.color
-        context["title"] = self.title.replace("_", " ").title()
+        context["title"] = self.title
+        context["utilities"] = self.utilities
         return context
 
     def get_success_url(self):

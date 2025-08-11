@@ -82,25 +82,34 @@ DATABASES = {
 
 UTILITIES = {
     "electric": {
-        "short": "kWh",
-        "long": "Kilowatt-Hours",
         "color": "#e4a11b",
         "datatables_fmt": "datetime('DDDD, tt')",
+        "icon": "lightbulb",
+        "long": "Kilowatt-Hours",
+        "page_length": "24",
+        "short": "kWh",
         "thresholds": (1, 0.75, 0.5),
+        "title": "Electric",
     },
     "natural_gas": {
-        "short": "CCF",
-        "long": "Hundreds of Cubic Feet",
         "color": "#853cfd",
         "datatables_fmt": "datetime('MMMM y')",
+        "icon": "fan",
+        "long": "Hundreds of Cubic Feet",
+        "page_length": "12",
+        "short": "CCF",
         "thresholds": (50, 25, 10),
+        "title": "Natural Gas",
     },
     "water": {
-        "short": "gal",
-        "long": "Gallons",
         "color": "#2caffe",
         "datatables_fmt": "date('DDDD')",
+        "icon": "droplet",
+        "long": "Gallons",
+        "page_length": "30",
+        "short": "gal",
         "thresholds": (100, 75, 50),
+        "title": "Water",
     },
 }
 

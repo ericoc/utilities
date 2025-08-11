@@ -51,7 +51,7 @@
                     document.getElementById('time-col').innerText = utilityTimeDesc
 
                     const utilityUnitName = utilityKeys[1]
-                    document.getElementById('unit-col').innerText = '{{ long_name }} ({{ short_name }})'
+                    document.getElementById('unit-col').innerText = '{{ utility.long }} ({{ utility.short }})'
 
                     const utilityUsageOverTime = []
                     for (const item in utilityUsageData) {
@@ -67,7 +67,7 @@
                         series: [{
                             color: chartColors.lineColor,
                             data: utilityUsageOverTime,
-                            name: '{{ long_name }} ({{ short_name }})',
+                            name: '{{ utility.long }} ({{ utility.short }})',
                             states: { hover: { lineWidthPlus: 0 } },
                             type: 'line'
                         }],
@@ -82,7 +82,7 @@
                             type: 'datetime'
                         },
                         yAxis: {
-                            title: { text: '{{ long_name }} ({{ short_name }})' },
+                            title: { text: '{{ utility.long }} ({{ utility.short }})' },
                             type: 'num'
                         },
                     })
@@ -91,36 +91,36 @@
                     const allTotalNode = document.getElementById('all-total')
                     function footerTotal (api, col=1, digits=4) {
                         const pageUtility = DataTable.render.number(',', '.', digits).display(api.column(col, {page: 'current'}).data().sum())
-                        pageTotalNode.innerHTML = `<span class="badge font-monospace" title="This Page: ${pageUtility} {{ long_name }} ({{ short_name }})"> ${pageUtility} ({{ short_name }})</span>`
+                        pageTotalNode.innerHTML = `<span class="badge font-monospace" title="This Page: ${pageUtility} {{ utility.long }} ({{ utility.short }})"> ${pageUtility}</span>`
                         const totalUtility = DataTable.render.number(',', '.', digits).display(api.column(col).data().sum())
-                        allTotalNode.innerHTML = `<span class="badge border-utility font-monospace" title="All Pages: ${totalUtility} {{ long_name }} ({{ short_name }})"> ${totalUtility} {{ short_name }}</span>`
+                        allTotalNode.innerHTML = `<span class="big badge border-utility font-monospace" title="All Pages: ${totalUtility} {{ utility.long }} ({{ utility.short }})"> ${totalUtility}</span>`
                         if (chartLoading && chartLoading.visibility === true) {
                             chartLoading.visibility = false
                         }
                     }
                     const resultName = `${utilityTimeName}s`
 
-                    const defaultPageLength = 12
+                    const defaultPageLength = {{ utility.page_length }}
                     new DataTable('#utility-table', {
                         data: utilityUsageData,
                         columns: [
                             {
                                 data: utilityTimeName,
-                                render: DataTable.render.{{ datatables_fmt|safe }},
+                                render: DataTable.render.{{ utility.datatables_fmt|safe }},
                             },
                             {
                                 data: utilityUnitName,
                                 render: (data, type) => {
                                     if (type === 'display') {
                                         let utilityTextColor = 'primary'
-                                        if (data >= {{ thresholds.0 }}) {
+                                        if (data >= {{ utility.thresholds.0 }}) {
                                             utilityTextColor = 'danger'
-                                        } else if (data >= {{ thresholds.1 }}) {
+                                        } else if (data >= {{ utility.thresholds.1 }}) {
                                             utilityTextColor = 'warning'
-                                        } else if (data >= {{ thresholds.2 }}) {
+                                        } else if (data >= {{ utility.thresholds.2 }}) {
                                             utilityTextColor = 'info'
                                         }
-                                        return `<code class="fw-bold text-${utilityTextColor}-emphasis" title="${data} {{ long_name }} ({{ short_name }})">${data}</code>`
+                                        return `<code class="fw-bold text-${utilityTextColor}-emphasis" title="${data} {{ utility.long }} ({{ utility.short }})">${data}</code>`
                                     }
                                     return data
                                 },
@@ -154,13 +154,13 @@
                         },
                         layout: chartLayout,
                         lengthMenu: [
-                            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
                             {label: `${defaultPageLength} *`, value: defaultPageLength},
-                            13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
-                            28, 29, 30, 31, 32, 35, 36, 42, 48, 50, 60, 64, 70, 72, 84,
-                            96, 100, 108, 120, 132, 144, 150, 160, 180, 200, 250, 300,
-                            500, 750, 1000, 1500, 2000, 2500, 3000, 3600, 4000, 5000,
-                            7500, 10000, {label: 'All', value: -1}
+                            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+                            17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+                            35, 36, 42, 48, 50, 60, 64, 70, 72, 84, 96, 100,
+                            108, 120, 132, 144, 150, 160, 180, 200, 250, 300, 500, 750, 1000,
+                            1500, 2000, 2500, 3000, 3600, 4000, 5000, 7500, 10000,
+                            {label: 'All', value: -1}
                         ],
                         order: [[0, 'desc']],
                         pageLength: defaultPageLength,
@@ -179,23 +179,28 @@
                     buttons: [
                         {
                             extend: 'copyHtml5',
-                            text: '<span class="bi bi-clipboard" title="Copy rows to clipboard"> Copy</span>'
+                            text: '<span class="bi bi-clipboard" title="Copy rows to clipboard"> Copy</span>',
+                            title: 'Utilities_{{ utility_title }}',
                         },
                         {
                             extend: 'csvHtml5',
-                            text: '<span class="bi bi-filetype-csv" title="Comma-Separated Values (.csv)"> CSV</span>'
+                            text: '<span class="bi bi-filetype-csv" title="Comma-Separated Values (.csv)"> CSV</span>',
+                            title: `Utilities_${utilityTitle}_${DateTime.now()}`,
                         },
                         {
                             extend: 'excelHtml5',
-                            text: '<i class="bi bi-filetype-xlsx" title="Microsoft Excel (.xlsx)"></i> Excel'
+                            text: '<i class="bi bi-filetype-xlsx" title="Microsoft Excel (.xlsx)"></i> Excel',
+                            title: `Utilities_${utilityTitle}_${DateTime.now()}`,
                         },
                         {
                             extend: 'pdfHtml5',
-                            text: '<i class="bi bi-filetype-pdf" title="Portable Data Format (.pdf)"></i> PDF'
+                            text: '<i class="bi bi-filetype-pdf" title="Portable Data Format (.pdf)"></i> PDF',
+                            title: `Utilities_${utilityTitle}_${DateTime.now()}`,
                         },
                         {
                             extend: 'print',
-                            text: '<i class="bi bi-printer" title="Print"></i> Print'
+                            text: '<i class="bi bi-printer" title="Print"></i> Print',
+                            title: `Utilities_${utilityTitle}_${DateTime.now()}`,
                         },
                         {
                             extend: 'searchBuilder',
