@@ -33,13 +33,13 @@
             {% for utility_name, utility_settings in utilities.items %}
                 --color-{{ utility_name }}: {{ utility_settings.color }};
             {% endfor %}
+            {% if color %}
+                --color-utility: {{ color }};
+            {% endif %}
             }
         {% for utility_name in utilities.keys %}
             .color-{{ utility_name }} { color: var(--color-{{ utility_name }}); }
         {% endfor %}
-        {% if color %}
-            --color-utility: {{ color }};
-        {% endif %}
             .border-home {
                 border-color: var(--bs-primary);
                 border-radius: var(--bs-border-radius);
