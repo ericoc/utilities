@@ -56,7 +56,7 @@ class AddView(LoginRequiredMixin, BaseView, FormView):
         messages.add_message(
             request=self.request,
             level=messages.INFO,
-            message=format_html(f"<b>Utility</b>: {utility_title.title()}")
+            message=format_html("<b>Utility</b>: {}", utility_title.title())
         )
 
         # Message the count of usage events that were found in the file.
@@ -68,7 +68,7 @@ class AddView(LoginRequiredMixin, BaseView, FormView):
         messages.add_message(
             request=self.request,
             level=messages.INFO,
-            message=format_html(f"<b>Found</b>: {found_msg}")
+            message=format_html("<b>Found</b>: {}", found_msg)
         )
 
         # Add each usage item to database.
@@ -92,7 +92,7 @@ class AddView(LoginRequiredMixin, BaseView, FormView):
         messages.add_message(
             request=self.request,
             level=create_level,
-            message=format_html(f"<b>Created</b>: {create_msg}")
+            message=format_html("<b>Created</b>: {}", create_msg)
         )
 
         return super().form_valid(form)
