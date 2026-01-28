@@ -9,6 +9,7 @@ datasette==0.65.2
 Django==6.0.1
 django-redis==6.0.0
 djangorestframework==3.16.1
+djangorestframework-csv==3.0.2
 flexcache==0.3
 flexparser==0.4
 gunicorn==24.1.1
