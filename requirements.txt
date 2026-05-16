@@ -34,4 +34,4 @@ setuptools==82.0.1
 six==1.17.0
 sqlparse==0.5.5
 typing_extensions==4.15.0
-uvicorn==0.46.0
+uvicorn==0.47.0
