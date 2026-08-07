@@ -3,8 +3,10 @@ anyio==4.14.2
 asgi-csrf==0.11
 asgiref==3.12.1
 certifi==2026.7.22
+cffi==2.1.1
 click==8.4.2
 click-default-group==1.2.4
+cryptography==50.0.0
 datasette==0.65.3
 Django==6.1
 djangorestframework==3.17.2
@@ -27,6 +29,7 @@ packaging==26.3
 platformdirs==4.11.0
 pluggy==1.6.0
 psycopg==3.3.4
+pycparser==3.0
 python-dateutil==2.9.0.post0
 python-multipart==0.0.32
 PyYAML==6.0.3
@@ -35,3 +38,4 @@ six==1.17.0
 sqlparse==0.5.5
 typing_extensions==4.16.0
 uvicorn==0.52.1
+wheel==0.47.0
