@@ -131,11 +131,9 @@ STATIC_ROOT = Path(BASE_DIR, STATIC_URL)
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
-# peco_electric_usage_interval_data_Service 1_1_2023-01-21_to_2023-12-07.csv
-ELECTRIC_PREFIX = "peco_electric_usage_interval_data_Service"
-# UsageData12142024.xlsx (UsageDataMMDDYYYY.xlsx)
-NATURAL_GAS_PREFIX = "UsageData"
-WATER_FILENAME = "ChartData.csv"
+ELECTRIC_PREFIX = "peco_electric_usage_interval_data" # peco_electric_usage_interval_data_12345679876543210_1_YYYY-MM-DD_to_YYYY-MM-DD.csv
+NATURAL_GAS_PREFIX = "UsageData" # UsageDatsMMDDYYYY.xlsx
+WATER_FILENAME = "ChartData.csv" # ChartData.csv
 
 USAGE_FILE_SUFFIXES = ("csv", "xlsx")
 
