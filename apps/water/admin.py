@@ -8,12 +8,16 @@ from .models import WaterUsage
 class WaterUsageAdmin(admin.ModelAdmin):
     """Water usage administration."""
 
+    def round_gallons(self, obj):
+        return round(obj.gallons, 4)
+
     date_hierarchy = "day"
     fieldsets = (
         ("Day", {"fields": ("day",)},),
-        ("Usage", {"fields": ("gallons",)},)
+        ("Usage", {"fields": ("round_gallons",)},)
     )
-    list_display = readonly_fields = ("day", "gallons",)
+    list_display = readonly_fields = ("day", "round_gallons",)
+    list_filter = ("day",)
     model = WaterUsage
     ordering = ("-day",)
     show_facets = admin.ShowFacets.ALWAYS
