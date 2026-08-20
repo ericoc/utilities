@@ -8,12 +8,22 @@ from .models import NaturalGasUsage
 class NaturalGasUsageAdmin(admin.ModelAdmin):
     """Natural gas usage administration."""
 
+    def format_date_to_month(self, obj):
+        return obj.month.strftime("%B %Y")
+
+    format_date_to_month.admin_order_field = "month"
+    format_date_to_month.short_description = "Month"
+
+    def round_ccf(self, obj):
+        return round(obj.ccf)
+
     date_hierarchy = "month"
     fieldsets = (
-        ("Month", {"fields": ("month",)},),
-        ("Usage", {"fields": ("ccf",)},)
+        ("Month", {"fields": ("format_date_to_month",)},),
+        ("Usage", {"fields": ("round_ccf",)},)
     )
-    list_display = readonly_fields = ("month", "ccf",)
+    list_display = readonly_fields = ("format_date_to_month", "round_ccf",)
+    list_filter = ("month",)
     model = NaturalGasUsage
     ordering = ("-month",)
     show_facets = admin.ShowFacets.ALWAYS
