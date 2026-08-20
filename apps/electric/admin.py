@@ -8,12 +8,16 @@ from .models import ElectricUsage
 class ElectricUsageAdmin(admin.ModelAdmin):
     """Electric usage administration."""
 
+    def round_kwh(self, obj):
+        return round(obj.kwh, 2)
+
     date_hierarchy = "hour"
     fieldsets = (
         ("Hour", {"fields": ("hour",)},),
-        ("Usage", {"fields": ("kwh",)},)
+        ("Usage", {"fields": ("round_kwh",)},)
     )
-    list_display = readonly_fields = ("hour", "kwh",)
+    list_display = readonly_fields = ("hour", "round_kwh",)
+    list_filter = ("hour",)
     model = ElectricUsage
     ordering = ("-hour",)
     show_facets = admin.ShowFacets.ALWAYS
