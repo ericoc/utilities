@@ -14,21 +14,22 @@ class NaturalGasUsageAdmin(admin.ModelAdmin):
     format_date_to_month.admin_order_field = "month"
     format_date_to_month.short_description = "Month"
 
-    def round_ccf(self, obj):
-        return round(obj.ccf)
-
     date_hierarchy = "month"
     fieldsets = (
         ("Month", {"fields": ("format_date_to_month",)},),
-        ("Usage", {"fields": ("round_ccf",)},)
+        ("Usage", {"fields": ("rounded_ccf",)},)
     )
-    list_display = readonly_fields = ("format_date_to_month", "round_ccf",)
+    list_display = readonly_fields = ("format_date_to_month", "rounded_ccf",)
     list_filter = ("month",)
     model = NaturalGasUsage
     ordering = ("-month",)
     show_facets = admin.ShowFacets.ALWAYS
     show_full_result_count = True
     verbose_name = verbose_name_plural = "Natural Gas Usage"
+
+    @admin.display(description="CCF")
+    def rounded_ccf(self, obj):
+        return round(obj.ccf)
 
     def has_module_permission(self, request) -> bool:
         if request.user and not request.user.is_anonymous:

@@ -8,21 +8,22 @@ from .models import ElectricUsage
 class ElectricUsageAdmin(admin.ModelAdmin):
     """Electric usage administration."""
 
-    def round_kwh(self, obj):
-        return round(obj.kwh, 2)
-
     date_hierarchy = "hour"
     fieldsets = (
         ("Hour", {"fields": ("hour",)},),
-        ("Usage", {"fields": ("round_kwh",)},)
+        ("Usage", {"fields": ("rounded_kwh",)},)
     )
-    list_display = readonly_fields = ("hour", "round_kwh",)
+    list_display = readonly_fields = ("hour", "rounded_kwh",)
     list_filter = ("hour",)
     model = ElectricUsage
     ordering = ("-hour",)
     show_facets = admin.ShowFacets.ALWAYS
     show_full_result_count = True
     verbose_name = verbose_name_plural = "Electric Usage"
+
+    @admin.display(description="kWh")
+    def rounded_kwh(self, obj):
+        return round(obj.kwh, 2)
 
     def has_module_permission(self, request) -> bool:
         if request.user and not request.user.is_anonymous:

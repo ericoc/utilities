@@ -8,21 +8,22 @@ from .models import WaterUsage
 class WaterUsageAdmin(admin.ModelAdmin):
     """Water usage administration."""
 
-    def round_gallons(self, obj):
-        return round(obj.gallons, 4)
-
     date_hierarchy = "day"
     fieldsets = (
         ("Day", {"fields": ("day",)},),
-        ("Usage", {"fields": ("round_gallons",)},)
+        ("Usage", {"fields": ("rounded_gallons",)},)
     )
-    list_display = readonly_fields = ("day", "round_gallons",)
+    list_display = readonly_fields = ("day", "rounded_gallons",)
     list_filter = ("day",)
     model = WaterUsage
     ordering = ("-day",)
     show_facets = admin.ShowFacets.ALWAYS
     show_full_result_count = True
     verbose_name = verbose_name_plural = "Water Usage"
+
+    @admin.display(description="Gallons")
+    def rounded_gallons(self, obj):
+        return round(obj.gallons, 4)
 
     def has_module_permission(self, request) -> bool:
         if request.user and not request.user.is_anonymous:
