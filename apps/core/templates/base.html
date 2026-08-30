@@ -40,19 +40,11 @@
         {% for utility_name in utilities.keys %}
             .color-{{ utility_name }} { color: var(--color-{{ utility_name }}); }
         {% endfor %}
-            .border-home {
-                border-color: var(--bs-primary);
-                border-radius: var(--bs-border-radius);
-                border-style: solid;
-                border-width: 0.15rem;
-            }
-        {% if color %}
             .bg-utility { background-color: var(--color-utility); }
             .border-utility {
-                border-radius: var(--bs-border-radius);
                 border-color: var(--color-utility);
                 border-style: solid;
-                border-width: 0.15rem;
+                border-width: 0.1rem;
             }
             .color-utility { color: var(--color-utility); }
             .dt-buttons button {
@@ -77,40 +69,39 @@
                 --bs-pagination-active-bg: var(--color-utility);
                 --bs-pagination-active-border-color: var(--color-utility);
             }
-            .page-link {
-                color: var(--color-utility);
-            }
-            {% endif %}
+            .page-link { color: var(--color-utility); }
             .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
             .icon-link-hover svg { --bs-icon-link-transform: translate3d(0, -.5rem, 0); }
             .navbar-expand .navbar-nav .nav-link { font-size: 2.5rem; }
-            a[target="_blank"] svg[role="img"] { --bs-icon-link-transform: none; }
         </style>
     </head>
     <body>
         <header class="container-fluid">
             <nav class="navbar navbar-dark navbar-expand">
                 <div class="navbar-nav align-content-between">
-                    <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-5{% if title and title == 'Home' %} active border-utility" aria-current="page{% endif %}" href="{% url 'home' %}" title="Home">
+                    <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == 'Home' %} border border-primary" aria-current="page{% endif %}" href="{% url 'home' %}" title="Home">
                         <svg class="bi text-primary" aria-hidden="true">
                             <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#house"></use>
                         </svg>
                     </a>
     {% for utility_name, utility_settings in utilities.items %}
-        <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == utility_settings.title %} active border-utility" aria-current="page{% endif %}" href="{% url utility_name %}#chart" title="{{ utility_settings.title }}">
-            <svg class="bi color-{{ utility_name }}" aria-hidden="true">
-                <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#{{ utility_settings.icon }}"></use>
-            </svg>
-        </a>
+                    <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover mx-2{% if title and title == utility_settings.title %}border border-utility" aria-current="page{% endif %}" href="{% url utility_name %}#chart" title="{{ utility_settings.title }}">
+                        <svg class="bi color-{{ utility_name }}" aria-hidden="true">
+                            <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#{{ utility_settings.icon }}"></use>
+                        </svg>
+                    </a>
     {% endfor %}
     {% if request.user.is_staff %}
-                    <div class="{% if title and title == 'Add' %}active border-utility {% endif %}nav-item" title="Add">
-                        <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Add' %} active" aria-current="page{% endif %}" href="{% url 'add' %}#add" title="Add">
-                            <svg class="bi text-success" aria-hidden="true">
-                                <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#plus-lg"></use>
-                            </svg>
-                        </a>
-                    </div>
+                    <a class="btn btn-lg nav-link icon-link icon-link-hover ms-3{% if title and title == 'Add' %} border border-success" aria-current="page{% endif %}" href="{% url 'add' %}#add" title="Add">
+                        <svg class="bi text-success" aria-hidden="true">
+                            <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#plus-lg"></use>
+                        </svg>
+                    </a>
+                    <a class="btn btn-lg nav-link icon-link icon-link-hover ms-2" href="{% url 'admin:index' %}" target="_blank" title="Administration">
+                        <svg class="bi text-danger" aria-hidden="true">
+                            <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#gear"></use>
+                        </svg>
+                    </a>
     {% endif %}
                 </div>
             </nav>
