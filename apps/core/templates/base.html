@@ -112,7 +112,7 @@
         {% if messages %}
             <div class="m-3 w-50 list-group messages">
                 {% for message in messages %}
-                <div class="alert list-group-item list-group-item-{% if message.tags %}{{ message.tags }}{% else %}success{% endif %}">
+                <div class="alert border rounded list-group-item list-group-item-{% if message.tags %}{{ message.tags }}{% else %}success{% endif %}">
                     {{ message|default:"" }}
                 </div>
             {% endfor %}

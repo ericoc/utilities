@@ -19,5 +19,6 @@ class UtilitiesLogoutView(LogoutView):
     title = "Log in"
 
     def get_success_url(self):
+        # Add message upon successful log out.
         messages.info(self.request, "You have been logged out.")
         return super().get_success_url()
