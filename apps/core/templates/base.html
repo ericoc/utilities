@@ -125,7 +125,7 @@
             </div>
             <div class="col text-end" id="login-logout-link">
     {% if not request.user.is_authenticated %}
-                <a class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{% url 'login' %}" target="_blank" title="Log in">
+                <a class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{% url 'login' %}"title="Log in">
                     <svg class="bi text-primary-emphasis" aria-hidden="true">
                         <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#door-open"></use>
                     </svg>
