@@ -7,7 +7,7 @@
     {% if form.errors %}
         <div class="alert alert-danger border list-group m-3 p-3 errors rounded">
         {% for error in form.errors.values %}
-            <div class="list-group-item list-group-item-danger">{{ error }}</div>
+            {{ error }}
         {% endfor %}
         </div>
     {% endif %}
