@@ -5,23 +5,14 @@
 {% block main %}
     <div id="login">
     {% if form.errors %}
-        <div class="alert alert-danger border list-group m-3 p-3 w-75 errors rounded">
+        <div class="alert alert-danger list-group m-3 p-3 w-75 errors rounded">
         {% for error in form.errors.values %}
-            {{ error }}
-        {% endfor %}
-        </div>
-    {% endif %}
-    {% if messages %}
-        <div class="alert border list-group m-3 p-3 messages rounded">
-        {% for message in messages %}
-            <div class="list-group-item list-group-item-{% if message.tags %}{{ message.tags }}{% else %}success{% endif %}">
-                {{ message|default:"" }}
-            </div>
+            <div class="list-group-item list-group-item-danger">{{ error }}</div>
         {% endfor %}
         </div>
     {% endif %}
     {% if form %}
-        <form action="{% url 'login' %}" class="border m-3 p-3 w-75 rounded" method="post">
+        <form action="{% url 'login' %}" class="border m-3 p-3 w-50 rounded" method="post">
             <p class="fs-6 form-text">
                 Please enter your username and password to add utility data.
             </p>

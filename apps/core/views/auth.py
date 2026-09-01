@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit import FormView
 
@@ -16,3 +17,7 @@ class UtilitiesLogoutView(LogoutView):
     """Log out view."""
     template_name = "login.html"
     title = "Log in"
+
+    def get_success_url(self):
+        messages.info(self.request, "You have been logged out.")
+        return super().get_success_url()

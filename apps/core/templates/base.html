@@ -109,7 +109,17 @@
             </nav>
         </header>
         <main class="container-fluid">
-            {% block main %}{% endblock main %}
+        {% if messages %}
+            <div class="m-3 w-50 list-group messages">
+                {% for message in messages %}
+                <div class="alert list-group-item list-group-item-{% if message.tags %}{{ message.tags }}{% else %}success{% endif %}">
+                    {{ message|default:"" }}
+                </div>
+            {% endfor %}
+            </div>
+            {% endif %}
+            {% block main %}
+            {% endblock main %}
         </main>
         <footer class="container-fluid footer mt-5 mb-3 row">
             <div class="col text-start">

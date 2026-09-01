@@ -8,15 +8,6 @@
         {% endfor %}
         </div>
     {% endif %}
-    {% if messages %}
-        <div class="alert border list-group m-3 p-3 messages rounded">
-        {% for message in messages %}
-            <div class="list-group-item list-group-item-{% if message.tags %}{{ message.tags }}{% else %}success{% endif %}">
-                {{ message|default:"" }}
-            </div>
-        {% endfor %}
-        </div>
-    {% endif %}
     {% if form %}
         <form action="{% url 'add' %}" class="border m-3 p-3 rounded" enctype="multipart/form-data" method="post">
             <p class="fs-6 form-text">
