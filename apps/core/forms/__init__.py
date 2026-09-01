@@ -1,2 +1,2 @@
-from .base import BaseView
 from .auth import UtilitiesLoginView, UtilitiesLogoutView
+from .add import AddDataForm

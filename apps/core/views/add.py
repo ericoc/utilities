@@ -1,5 +1,5 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import ValidationError
 from django.utils.html import format_html
 from django.utils.translation import ngettext
@@ -10,13 +10,13 @@ from apps.natural_gas.models import NaturalGasUsage
 from apps.water.models import WaterUsage
 
 from .base import BaseView
-from ..forms import UploadUsageDataForm
+from ..forms.add import AddDataForm
 
 
 class AddView(LoginRequiredMixin, BaseView, FormView):
     """Add data via upload form view."""
     color = "var(--bs-success)"
-    form_class = UploadUsageDataForm
+    form_class = AddDataForm
     http_method_names = ("get", "post")
     model = None
     success_url = "/add/"
@@ -24,7 +24,6 @@ class AddView(LoginRequiredMixin, BaseView, FormView):
     title = "Add"
 
     def form_valid(self, form):
-
         model = None
         num_created = 0
         utility = form.cleaned_data.get("utility")

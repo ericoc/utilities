@@ -29,6 +29,7 @@
         <script src="{% static 'highcharts/accessibility.js' %}"></script>
         <script>const DateTime = luxon.DateTime;</script>
         <style>
+    {% block css %}
             :root {
             {% for utility_name, utility_settings in utilities.items %}
                 --color-{{ utility_name }}: {{ utility_settings.color }};
@@ -73,6 +74,7 @@
             .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
             .icon-link-hover svg { --bs-icon-link-transform: translate3d(0, -.5rem, 0); }
             .navbar-expand .navbar-nav .nav-link { font-size: 2.5rem; }
+    {% endblock css %}
         </style>
     </head>
     <body>
@@ -120,6 +122,26 @@
                         <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#box-arrow-up-right"></use>
                     </svg>
                 </a>
+            </div>
+            <div class="col text-end" id="login-logout-link">
+    {% if not request.user.is_authenticated %}
+                <a class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{% url 'login' %}" target="_blank" title="Log in">
+                    <svg class="bi text-primary-emphasis" aria-hidden="true">
+                        <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#door-open"></use>
+                    </svg>
+                   Log in
+                </a>
+    {% else %}
+
+            <form action="{% url 'logout' %}" class="col" id="logout" method="post" title="Log out ({{ request.user.username }})">
+                {% csrf_token %}
+                <i class="bi bi-door-closed"></i>
+                <a href="#" onclick="document.getElementById('logout').submit()">Log out</a>
+                (<i>{{ request.user.username }}</i>)
+            </form>
+
+
+    {% endif %}
             </div>
         </footer>
         {% block scripts %}{% endblock scripts %}

@@ -36,6 +36,35 @@ LOGIN_REDIRECT_URL = "/add/"
 LOGIN_URL = "/admin/login/"
 LOGOUT_URL = "/admin/logout/"
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "WARNING",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+        "mail_admins": {
+            "level": "WARNING",
+            "class": "django.utils.log.AdminEmailHandler",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ("console", "mail_admins",),
+            "level": "WARNING",
+            "propagate": True,
+        },
+    },
+}
+
 MIDDLEWARE = (
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -139,3 +168,20 @@ USAGE_FILE_SUFFIXES = ("csv", "xlsx")
 
 TIME_FMT = '%A, %B %d, %Y @ %I:%M:%S %p %Z %z'
 WEBSITE_TITLE = "Utilities"
+
+EMAIL_SUBJECT_PREFIX = f"[{WEBSITE_TITLE}] "
+SERVER_EMAIL = 'utilities@example.com'
+ADMINS = [(f"{WEBSITE_TITLE} Administrator", SERVER_EMAIL)]
+DEFAULT_FROM_EMAIL = SERVER_EMAIL
+DEFAULT_TO_EMAIL = (SERVER_EMAIL,)
+
+MAILERS = {
+    "default": {
+        "BACKEND": "django.core.mail.backends.smtp.EmailBackend",
+        "OPTIONS": {
+            "host": "mail.example.com",
+            "use_tls": False,
+            "port": 25,
+        }
+    }
+}

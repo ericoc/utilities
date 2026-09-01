@@ -9,7 +9,7 @@ from pathlib import Path
 from warnings import catch_warnings, filterwarnings
 
 
-class UploadUsageDataForm(Form):
+class AddDataForm(Form):
     """
     Form to handle upload of utility usage data file.
     """

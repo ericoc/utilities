@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
+{% block css %}
+    {{ block.super }}
+{% endblock css %}
 {% block main %}
-    <div id="add">
+    <div id="login">
     {% if form.errors %}
         <div class="alert alert-danger border list-group m-3 p-3 errors rounded">
         {% for error in form.errors.values %}
@@ -18,18 +21,15 @@
         </div>
     {% endif %}
     {% if form %}
-        <form action="{% url 'add' %}" class="border m-3 p-3 rounded" enctype="multipart/form-data" method="post">
+        <form action="{% url 'login' %}" class="border m-3 p-3 rounded" method="post">
             <p class="fs-6 form-text">
-                Please upload a comma-separated values file (<code>csv</code> - <i>electric</i> or <i>water</i>),
-                or <i>Microsoft Excel</i> spreadsheet (<code>xlsx</code> - <i>natural gas</i>)
-                to add new data.
+                Please enter your username and password to add utility data.
             </p>
-            <p>
-                {{ form.file }}
-            </p>
+            {{ form.as_p }}
             {% csrf_token %}
             <p>
-                <button class="btn btn-outline-success" title="{{ title }}" type="submit">{{ title }}</button>
+                <button class="btn btn-outline-primary rounded m-1" title="{{ title }}" type="submit">{{ title }}</button>
+                <button class="btn btn-outline-secondary rounded m-1" title="Log out" type="submit">Log out</button>
             </p>
         </form>
     {% endif %}
