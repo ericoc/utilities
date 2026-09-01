@@ -25,11 +25,18 @@
             <p class="fs-6 form-text">
                 Please enter your username and password to add utility data.
             </p>
-            {{ form.as_p }}
+            <p>
+                <label for="id_username">Username:</label>
+                <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+            </p>
+            <p>
+                <label for="id_password">Password:</label>
+                <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
+            </p>
             {% csrf_token %}
             <p>
-                <button class="btn btn-outline-primary rounded m-1" title="{{ title }}" type="submit">{{ title }}</button>
-                <button class="btn btn-outline-secondary rounded m-1" title="Log out" type="submit">Log out</button>
+                <button class="btn btn-outline-primary rounded m-1" title="Log in" type="submit">Log in</button>
+                <button class="btn btn-outline-secondary rounded m-1" title="Reset" type="reset">Reset</button>
             </p>
         </form>
     {% endif %}
