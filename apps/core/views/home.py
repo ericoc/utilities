@@ -6,7 +6,7 @@ from .base import BaseView
 class HomeView(BaseView):
     """Home page view."""
     color = "var(--bs-primary)"
-    template_name = "home.html"
+    template_name = "base.html"
     title = "Home"
 
     def setup(self, request, *args, **kwargs):
