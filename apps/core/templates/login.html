@@ -5,9 +5,11 @@
 {% block main %}
     <div id="login">
     {% if form.errors %}
-        <div class="alert alert-danger list-group m-3 p-3 w-75 errors rounded">
+        <div class="m-3 w-50 list-group form-errors">
         {% for error in form.errors.values %}
-            <div class="list-group-item list-group-item-danger">{{ error }}</div>
+            <div class="alert border rounded list-group-item list-group-item-danger">
+                {{ error }}
+            </div>
         {% endfor %}
         </div>
     {% endif %}
