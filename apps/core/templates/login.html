@@ -1,37 +1,34 @@
 {% extends 'base.html' %}
-{% block css %}
-    {{ block.super }}
-{% endblock css %}
 {% block main %}
-    <div id="login">
-    {% if form.errors %}
-        <div class="m-3 w-50 list-group form-errors">
-        {% for error in form.errors.values %}
-            <div class="alert border rounded list-group-item list-group-item-danger">
-                {{ error }}
-            </div>
-        {% endfor %}
-        </div>
-    {% endif %}
     {% if form %}
-        <form action="{% url 'login' %}" class="border m-3 p-3 w-50 rounded" method="post">
-            <p class="fs-6 form-text">
-                Please enter your username and password to add utility data.
-            </p>
-            <p>
-                <label for="id_username">Username:</label>
-                <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
-            </p>
-            <p>
-                <label for="id_password">Password:</label>
-                <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
-            </p>
-            {% csrf_token %}
-            <p>
-                <button class="btn btn-outline-primary rounded m-1" title="Log in" type="submit">Log in</button>
-                <button class="btn btn-outline-secondary rounded m-1" title="Reset" type="reset">Reset</button>
-            </p>
-        </form>
+            <div id="login">
+        {% if form.errors %}
+                <div class="m-3 w-50 list-group form-errors">
+            {% for error in form.errors.values %}
+                    <div class="alert border rounded list-group-item list-group-item-danger">
+                        {{ error }}
+                    </div>
+            {% endfor %}
+                </div>
+        {% endif %}
+                <form action="{% url 'login' %}" class="border m-3 p-3 w-50 rounded" method="post">
+                    <p class="fs-6 form-text">
+                        Please enter your username and password to add utility data.
+                    </p>
+                    <p>
+                        <label for="id_username">Username:</label>
+                        <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+                    </p>
+                    <p>
+                        <label for="id_password">Password:</label>
+                        <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
+                    </p>
+                    <p>
+                        <button class="btn btn-outline-primary rounded m-1" title="Log in" type="submit">Log in</button>
+                        <button class="btn btn-outline-secondary rounded m-1" title="Reset" type="reset">Reset</button>
+                    </p>
+                    {% csrf_token %}
+                </form>
+            </div>
     {% endif %}
-    </div>
 {% endblock main %}

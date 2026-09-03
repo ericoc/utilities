@@ -29,18 +29,17 @@
         <script src="{% static 'highcharts/accessibility.js' %}"></script>
         <script>const DateTime = luxon.DateTime;</script>
         <style>
-    {% block css %}
             :root {
-            {% for utility_name, utility_settings in utilities.items %}
+    {% for utility_name, utility_settings in utilities.items %}
                 --color-{{ utility_name }}: {{ utility_settings.color }};
-            {% endfor %}
-            {% if color %}
+    {% endfor %}
+    {% if color %}
                 --color-utility: {{ color }};
-            {% endif %}
+    {% endif %}
             }
-        {% for utility_name in utilities.keys %}
+    {% for utility_name in utilities.keys %}
             .color-{{ utility_name }} { color: var(--color-{{ utility_name }}); }
-        {% endfor %}
+    {% endfor %}
             .bg-utility { background-color: var(--color-utility); }
             .border-utility {
                 border-color: var(--color-utility);
@@ -74,7 +73,6 @@
             .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
             .icon-link-hover svg { --bs-icon-link-transform: translate3d(0, -.5rem, 0); }
             .navbar-expand .navbar-nav .nav-link { font-size: 2.5rem; }
-    {% endblock css %}
         </style>
     </head>
     <body>
@@ -109,17 +107,17 @@
             </nav>
         </header>
         <main class="container-fluid">
-        {% if messages %}
+    {% if messages %}
             <div class="m-3 w-50 list-group messages">
-                {% for message in messages %}
+        {% for message in messages %}
                 <div class="alert border rounded list-group-item list-group-item-{% if message.tags %}{{ message.tags }}{% else %}success{% endif %}">
                     {{ message|default:"" }}
                 </div>
-            {% endfor %}
+        {% endfor %}
             </div>
-            {% endif %}
-            {% block main %}
-            {% endblock main %}
+    {% endif %}
+    {% block main %}
+    {% endblock main %}
         </main>
         <footer class="container-fluid footer mt-5 mb-3 row">
             <div class="col text-start">
@@ -142,22 +140,20 @@
                    Log in
                 </a>
     {% else %}
-
-            <form action="{% url 'logout' %}" class="col" id="logout" method="post">
-                <a href="#" class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" onclick="document.getElementById('logout').submit()" title="Log out ({{ request.user.username }})">
-                    <svg class="bi text-primary-emphasis" aria-hidden="true">
-                        <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#door-closed"></use>
-                    </svg>
-                    Log out
-                </a>
-                (<i>{{ request.user.username }}</i>)
-                {% csrf_token %}
-            </form>
-
-
+                <form action="{% url 'logout' %}" class="col" id="logout" method="post">
+                    <a href="#" class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" onclick="document.getElementById('logout').submit()" title="Log out ({{ request.user.username }})">
+                        <svg class="bi text-primary-emphasis" aria-hidden="true">
+                            <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#door-closed"></use>
+                        </svg>
+                        Log out
+                    </a>
+                    (<i>{{ request.user.username }}</i>)
+                    {% csrf_token %}
+                </form>
     {% endif %}
             </div>
         </footer>
-        {% block scripts %}{% endblock scripts %}
+        {% block scripts %}
+        {% endblock scripts %}
     </body>
 </html>
