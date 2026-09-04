@@ -79,7 +79,7 @@
         <header class="container-fluid">
             <nav class="navbar navbar-dark navbar-expand">
                 <div class="navbar-nav align-content-between">
-                    <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == 'Home' %} border border-primary" aria-current="page{% endif %}" href="{% url 'home' %}" title="Home">
+                    <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == 'Home' %} border border-primary" aria-current="page{% endif %}" href="{% url 'home' %}" title="{{ WEBSITE_TITLE }}: Home">
                         <svg class="bi text-primary" aria-hidden="true">
                             <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#house"></use>
                         </svg>
@@ -110,7 +110,7 @@
     {% if messages %}
             <div class="m-3 w-50 list-group messages">
         {% for message in messages %}
-                <div class="alert border rounded list-group-item list-group-item-{% if message.tags %}{{ message.tags }}{% else %}success{% endif %}">
+                <div class="alert border rounded list-group-item list-group-item-{% if message.tags %}{{ message.tags }}{% else %}success{% endif %}" title="{{ message|default:"" }}">
                     {{ message|default:"" }}
                 </div>
         {% endfor %}
@@ -140,8 +140,8 @@
                    Log in
                 </a>
     {% else %}
-                <form action="{% url 'logout' %}" class="col" id="logout" method="post">
-                    <a href="#" class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" onclick="document.getElementById('logout').submit()" title="Log out ({{ request.user.username }})">
+                <form action="{% url 'logout' %}" class="col" id="logout" method="post" title="Log out ({{ request.user.username }})">
+                    <a href="#" class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" onclick="document.getElementById('logout').submit()">
                         <svg class="bi text-primary-emphasis" aria-hidden="true">
                             <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#door-closed"></use>
                         </svg>

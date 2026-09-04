@@ -12,14 +12,14 @@
                 </div>
         {% endif %}
                 <form action="{% url 'login' %}" class="border m-3 p-3 w-50 rounded" method="post">
-                    <p class="fs-6 form-text">
+                    <p class="fs-6 form-text" title="Please enter your username and password to add utility data.">
                         Please enter your username and password to add utility data.
                     </p>
-                    <p>
+                    <p title=Username>
                         <label for="id_username">Username:</label>
                         <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
                     </p>
-                    <p>
+                    <p title="Password">
                         <label for="id_password">Password:</label>
                         <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
                     </p>
