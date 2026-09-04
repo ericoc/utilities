@@ -13,7 +13,6 @@ urlpatterns = [
     path("", include("apps.core.urls"), name="core"),
     path("admin/", admin.site.urls, name="admin"),
     path("api/", include(api_router.urls), name="api"),
-    path("i18n/", include("django.conf.urls.i18n"), name="i18n"),
 ]
 
 # Include URLs for apps named starting with "apps." which have models.

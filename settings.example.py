@@ -150,7 +150,6 @@ AUTH_PASSWORD_VALIDATORS = (
 # Internationalization
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "America/New_York"
-USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
@@ -167,7 +166,7 @@ WATER_FILENAME = "ChartData.csv" # ChartData.csv
 USAGE_FILE_SUFFIXES = ("csv", "xlsx")
 
 TIME_FMT = '%A, %B %d, %Y @ %I:%M:%S %p %Z %z'
-WEBSITE_TITLE = "Utilities"
+WEBSITE_TITLE = "Utilities Example"
 
 EMAIL_SUBJECT_PREFIX = f"[{WEBSITE_TITLE}] "
 SERVER_EMAIL = 'utilities@example.com'
