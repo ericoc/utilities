@@ -19,7 +19,7 @@
         <script src="{% static 'luxon.min.js' %}"></script>
         <link href="{% static 'bootstrap-5.3.8-dist/css/bootstrap.min.css' %}" rel="stylesheet">
         <script src="{% static 'bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js' %}"></script>
-    {% if title and title != 'Home' %}
+    {% if title and title != 'Home' and title != 'Log in' and title != 'Add' %}
         <link href="{% static 'datatables/datatables.min.css' %}" rel="stylesheet">
         <script src="{% static 'datatables/datatables.min.js' %}"></script>
         <script src="{% static 'datatables/sum.js' %}"></script>
@@ -49,7 +49,9 @@
                 border-width: 0.1rem;
             }
             .color-utility { color: var(--color-utility); }
-    {% if title and title != 'Home' %}
+            .icon-link-hover svg { --bs-icon-link-transform: translate3d(0, -.5rem, 0); }
+            .navbar-expand .navbar-nav .nav-link { font-size: 2.5rem; }
+    {% if title and title != 'Home' and title != 'Log in' and title != 'Add' %}
             .dt-buttons button {
                 --bs-btn-bg: var(--bs-dark);
                 --bs-btn-border-color: var(--color-utility);
@@ -75,8 +77,6 @@
             .page-link { color: var(--color-utility); }
             .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
     {% endif %}
-            .icon-link-hover svg { --bs-icon-link-transform: translate3d(0, -.5rem, 0); }
-            .navbar-expand .navbar-nav .nav-link { font-size: 2.5rem; }
         </style>
     </head>
     <body>
