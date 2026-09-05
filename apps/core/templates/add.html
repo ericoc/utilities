@@ -5,22 +5,24 @@
         {% if form.errors %}
                 <div class="m-3 w-50 list-group form-errors">
             {% for error in form.errors.values %}
-                    <div class="alert border rounded list-group-item list-group-item-danger">
+                    <div class="alert border rounded list-group-item list-group-item-danger" title="{{ error|striptags }}">
                         {{ error }}
                     </div>
             {% endfor %}
                 </div>
         {% endif %}
-                <form action="{% url 'add' %}" class="border m-3 p-3 rounded" enctype="multipart/form-data" method="post">
-                    <p class="fs-6 form-text" title="Please upload a file.">
+                <form action="{% url 'add' %}" class="border m-3 rounded" enctype="multipart/form-data" method="post">
+                    <label class="fs-6 m-3 form-text" for="id_file" id="add-desc" title="Please upload a file.">
                         Please upload a comma-separated values file (<code>csv</code> - <i>electric</i> or <i>water</i>),
                         or <i>Microsoft Excel</i> spreadsheet (<code>xlsx</code> - <i>natural gas</i>) to add new data.
-                    </p>
-                    <p>
+                    </label>
+                    <p class="m-3">
                         {{ form.file }}
                     </p>
-                    <p>
-                        <button class="btn btn-outline-success" title="{{ title }}" type="submit">{{ title }}</button>
+                    <p class="m-3">
+                        <button aria-label="{{ title }}" class="btn btn-outline-success" id="add-button" title="{{ title }}" type="submit">
+                            {{ title }}
+                        </button>
                     </p>
                     {% csrf_token %}
                 </form>
