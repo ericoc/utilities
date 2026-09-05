@@ -3,9 +3,11 @@
     {% if form %}
             <div id="add">
         {% if form.errors %}
-                <div class="alert alert-danger border list-group m-3 p-3 errors rounded">
+                <div class="m-3 w-50 list-group form-errors">
             {% for error in form.errors.values %}
-                    <div class="list-group-item list-group-item-danger">{{ error }}</div>
+                    <div class="alert border rounded list-group-item list-group-item-danger">
+                        {{ error }}
+                    </div>
             {% endfor %}
                 </div>
         {% endif %}
