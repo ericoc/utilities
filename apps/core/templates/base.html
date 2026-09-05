@@ -19,6 +19,7 @@
         <script src="{% static 'luxon.min.js' %}"></script>
         <link href="{% static 'bootstrap-5.3.8-dist/css/bootstrap.min.css' %}" rel="stylesheet">
         <script src="{% static 'bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js' %}"></script>
+    {% if title and title != 'Home' %}
         <link href="{% static 'datatables/datatables.min.css' %}" rel="stylesheet">
         <script src="{% static 'datatables/datatables.min.js' %}"></script>
         <script src="{% static 'datatables/sum.js' %}"></script>
@@ -28,6 +29,7 @@
         <script src="{% static 'highcharts/export-data.js' %}"></script>
         <script src="{% static 'highcharts/accessibility.js' %}"></script>
         <script>const DateTime = luxon.DateTime;</script>
+    {% endif %}
         <style>
             :root {
     {% for utility_name, utility_settings in utilities.items %}
@@ -47,6 +49,7 @@
                 border-width: 0.1rem;
             }
             .color-utility { color: var(--color-utility); }
+    {% if title and title != 'Home' %}
             .dt-buttons button {
                 --bs-btn-bg: var(--bs-dark);
                 --bs-btn-border-color: var(--color-utility);
@@ -71,6 +74,7 @@
             }
             .page-link { color: var(--color-utility); }
             .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
+    {% endif %}
             .icon-link-hover svg { --bs-icon-link-transform: translate3d(0, -.5rem, 0); }
             .navbar-expand .navbar-nav .nav-link { font-size: 2.5rem; }
         </style>
@@ -78,14 +82,14 @@
     <body>
         <header class="container-fluid">
             <nav class="navbar navbar-dark navbar-expand">
-                <div class="navbar-nav align-content-between">
-                    <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == 'Home' %} border border-primary" aria-current="page{% endif %}" href="{% url 'home' %}" title="{{ WEBSITE_TITLE }}: Home">
+                <div class="navbar-nav align-content-between" role="menu">
+                    <a aria-label="{{ WEBSITE_TITLE }}: Home" class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == 'Home' %} border border-primary" aria-current="page{% endif %}" href="{% url 'home' %}" title="{{ WEBSITE_TITLE }}: Home">
                         <svg class="bi text-primary" aria-hidden="true">
                             <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#house"></use>
                         </svg>
                     </a>
     {% for utility_name, utility_settings in utilities.items %}
-                    <a class="btn btn-lg nav-link nav-item icon-link icon-link-hover mx-2{% if title and title == utility_settings.title %}border border-utility" aria-current="page{% endif %}" href="{% url utility_name %}#chart" title="{{ utility_settings.title }}">
+                    <a aria-label="{{ utility_settings.title }}" class="btn btn-lg nav-link nav-item icon-link icon-link-hover mx-2{% if title and title == utility_settings.title %}border border-utility" aria-current="page{% endif %}" href="{% url utility_name %}#chart" role="menuitem" title="{{ utility_settings.title }}">
                         <svg class="bi color-{{ utility_name }}" aria-hidden="true">
                             <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#{{ utility_settings.icon }}"></use>
                         </svg>
@@ -121,7 +125,7 @@
         </main>
         <footer class="container-fluid footer mt-5 mb-3 row">
             <div class="col text-start">
-                <a class="font-monospace icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/ericoc/utilities/" target="_blank" title="GitHub <https://github.com/ericoc/utilities/>">
+                <a aria-label="View source on GitHub" class="font-monospace icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/ericoc/utilities/" target="_blank" title="View source on GitHub">
                     <svg class="bi text-primary-emphasis" aria-hidden="true">
                         <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#code-slash"></use>
                     </svg>
@@ -133,15 +137,15 @@
             </div>
             <div class="col text-end" id="login-logout-link">
     {% if not request.user.is_authenticated %}
-                <a class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{% url 'login' %}" title="Log in">
+                <a aria-label="Log in" class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{% url 'login' %}" title="Log in">
                     <svg class="bi text-primary-emphasis" aria-hidden="true">
                         <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#door-open"></use>
                     </svg>
                    Log in
                 </a>
     {% else %}
-                <form action="{% url 'logout' %}" class="col" id="logout" method="post" title="Log out ({{ request.user.username }})">
-                    <a href="#" class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" onclick="document.getElementById('logout').submit()">
+                <form action="{% url 'logout' %}" class="col" id="logout" method="post">
+                    <a aria-label="Log out" href="#" class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" onclick="document.getElementById('logout').submit()" title="Log out ({{ request.user.username }})">
                         <svg class="bi text-primary-emphasis" aria-hidden="true">
                             <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#door-closed"></use>
                         </svg>
