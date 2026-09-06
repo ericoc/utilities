@@ -83,12 +83,12 @@
         <header class="container-fluid">
             <nav class="navbar navbar-dark navbar-expand">
                 <div class="navbar-nav align-content-between" role="menu">
-                    <h1 title="{{ WEBSITE_TITLE }}: Home">
-                        <a aria-label="{{ WEBSITE_TITLE }}: Home" class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == 'Home' %} border border-primary" aria-current="page{% endif %}" href="{% url 'home' %}" role="menuitem">
+                    <h1 title="{{ WEBSITE_TITLE }}: {{ title }}">
+                        <a aria-label="{{ WEBSITE_TITLE }}: {{ title }}" class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == 'Home' %} border border-primary" aria-current="page{% endif %}" href="{% url 'home' %}" role="menuitem">
                             <svg class="bi text-primary" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#house"></use>
                             </svg>
-                            <span class="visually-hidden" aria-hidden="true">{{ WEBSITE_TITLE }}: Home</span>
+                            <span class="visually-hidden" aria-hidden="true">{{ WEBSITE_TITLE }}: {{ title }}</span>
                         </a>
                     </h1>
     {% for utility_name, utility_settings in utilities.items %}
