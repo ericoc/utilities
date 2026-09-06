@@ -83,29 +83,41 @@
         <header class="container-fluid">
             <nav class="navbar navbar-dark navbar-expand">
                 <div class="navbar-nav align-content-between" role="menu">
-                    <a aria-label="{{ WEBSITE_TITLE }}: Home" class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == 'Home' %} border border-primary" aria-current="page{% endif %}" href="{% url 'home' %}" role="menuitem" title="{{ WEBSITE_TITLE }}: Home">
-                        <svg class="bi text-primary" aria-hidden="true">
-                            <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#house"></use>
-                        </svg>
-                    </a>
+                    <h1 title="{{ WEBSITE_TITLE }}: Home">
+                        <a aria-label="{{ WEBSITE_TITLE }}: Home" class="btn btn-lg nav-link nav-item icon-link icon-link-hover me-3{% if title and title == 'Home' %} border border-primary" aria-current="page{% endif %}" href="{% url 'home' %}" role="menuitem">
+                            <svg class="bi text-primary" aria-hidden="true">
+                                <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#house"></use>
+                            </svg>
+                            <span class="visually-hidden" aria-hidden="true">{{ WEBSITE_TITLE }}: Home</span>
+                        </a>
+                    </h1>
     {% for utility_name, utility_settings in utilities.items %}
-                    <a aria-label="{{ utility_settings.title }} usage" class="btn btn-lg nav-link nav-item icon-link icon-link-hover mx-2{% if title and title == utility_settings.title %}border border-utility" aria-current="page{% endif %}" href="{% url utility_name %}#chart" role="menuitem" title="{{ utility_settings.title }}">
-                        <svg class="bi color-{{ utility_name }}" aria-hidden="true">
-                            <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#{{ utility_settings.icon }}"></use>
-                        </svg>
-                    </a>
+                    <h2 title="{{ utility_settings.title }}">
+                        <a aria-label="{{ utility_settings.title }} usage" class="btn btn-lg nav-link nav-item icon-link icon-link-hover mx-2{% if title and title == utility_settings.title %}border border-utility" aria-current="page{% endif %}" href="{% url utility_name %}#chart" role="menuitem">
+                            <svg class="bi color-{{ utility_name }}" aria-hidden="true">
+                                <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#{{ utility_settings.icon }}"></use>
+                            </svg>
+                            <span class="visually-hidden" aria-hidden="true">{{ utility_settings.title }}</span>
+                        </a>
+                    </h2>
     {% endfor %}
     {% if request.user.is_staff %}
-                    <a class="btn btn-lg nav-link icon-link icon-link-hover ms-3{% if title and title == 'Add' %} border border-success" aria-current="page{% endif %}" href="{% url 'add' %}#add" title="Add">
-                        <svg class="bi text-success" aria-hidden="true">
-                            <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#plus-lg"></use>
-                        </svg>
-                    </a>
-                    <a class="btn btn-lg nav-link icon-link icon-link-hover ms-2" href="{% url 'admin:index' %}" target="_blank" title="Administration">
-                        <svg class="bi text-danger" aria-hidden="true">
-                            <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#gear"></use>
-                        </svg>
-                    </a>
+                    <h2 title="Add">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover ms-3{% if title and title == 'Add' %} border border-success" aria-current="page{% endif %}" href="{% url 'add' %}#add">
+                            <svg class="bi text-success" aria-hidden="true">
+                                <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#plus-lg"></use>
+                            </svg>
+                             <span class="visually-hidden" aria-hidden="true">Add</span>
+                        </a>
+                    </h2>
+                    <h2 title="Administration">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover ms-2" href="{% url 'admin:index' %}" target="_blank">
+                            <svg class="bi text-danger" aria-hidden="true">
+                                <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#gear"></use>
+                            </svg>
+                             <span class="visually-hidden" aria-hidden="true">Administration</span>
+                        </a>
+                    </h2>
     {% endif %}
                 </div>
             </nav>
