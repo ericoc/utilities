@@ -51,6 +51,7 @@
             .color-utility { color: var(--color-utility); }
             .icon-link-hover svg { --bs-icon-link-transform: translate3d(0, -.5rem, 0); }
             .navbar-expand .navbar-nav .nav-link { font-size: 2.5rem; }
+            .color-datasette { color: #B7B9D9; }
     {% if title and title != 'Home' and title != 'Log in' and title != 'Add' %}
             .dt-buttons button {
                 --bs-btn-bg: var(--bs-dark);
@@ -101,6 +102,14 @@
                         </a>
                     </h2>
     {% endfor %}
+              <h2 title="Datasette">
+                        <a class="btn btn-lg nav-link icon-link icon-link-hover mx-2" href="/datasette/" target="_blank">
+                            <svg class="bi color-datasette" aria-hidden="true">
+                                <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#table"></use>
+                            </svg>
+                             <span class="visually-hidden" aria-hidden="true">Add</span>
+                        </a>
+                    </h2>
     {% if request.user.is_staff %}
                     <h2 title="Add">
                         <a class="btn btn-lg nav-link icon-link icon-link-hover ms-3{% if title and title == 'Add' %} border border-success" aria-current="page{% endif %}" href="{% url 'add' %}#add">
