@@ -15,7 +15,10 @@ DEBUG = False
 
 ALLOWED_HOSTS = ("utilities.ericoc.com",)
 
-REST_FRAMEWORK = {"COERCE_DECIMAL_TO_STRING": False}
+REST_FRAMEWORK = {
+    "COERCE_DECIMAL_TO_STRING": False,
+    "DEFAULT_PAGINATION_CLASS": "apps.core.api.pagination.APIUtilityPagination"
+}
 
 # Application definition
 INSTALLED_APPS = (
