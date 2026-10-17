@@ -8,5 +8,5 @@ from ..models import NaturalGasUsage
 class APINaturalGasUsageViewSet(APIUtilityViewSet):
     """Django-Rest-Framework (DRF) natural gas usage API view-set."""
     model = NaturalGasUsage
-    queryset = model.objects
+    queryset = model.objects.all()
     serializer_class = NaturalGasUsageSerializer

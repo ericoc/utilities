@@ -8,5 +8,5 @@ from ..models import WaterUsage
 class APIWaterUsageViewSet(APIUtilityViewSet):
     """Django-Rest-Framework (DRF) water usage API view-set."""
     model = WaterUsage
-    queryset = model.objects
+    queryset = model.objects.all()
     serializer_class = WaterUsageSerializer
