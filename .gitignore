@@ -13,5 +13,6 @@ settings.py
 *.xlsx
 *.zip
 __pycache__
+/media/
 /static/
 /venv/
