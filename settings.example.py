@@ -1,11 +1,8 @@
 from pathlib import Path
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+# Build paths inside the project like this: BASE_DIR / "subdir".
+BASE_DIR = Path(__file__).resolve().parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "Example123!"
@@ -15,9 +12,15 @@ DEBUG = False
 
 ALLOWED_HOSTS = ("utilities.ericoc.com",)
 
+# Django REST Framework API
 REST_FRAMEWORK = {
     "COERCE_DECIMAL_TO_STRING": False,
-    "DEFAULT_PAGINATION_CLASS": "apps.core.api.pagination.APIUtilityPagination"
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "DEFAULT_RENDERER_CLASSES": (
+        "rest_framework.renderers.BrowsableAPIRenderer",
+        "rest_framework.renderers.JSONRenderer",
+    ),
+    "PAGE_SIZE": 50,
 }
 
 # Application definition
@@ -29,15 +32,17 @@ INSTALLED_APPS = (
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "django_filters",
     "apps.CoreConfig",
     "apps.ElectricConfig",
     "apps.NaturalGasConfig",
     "apps.WaterConfig"
 )
 
+LOGIN_URL = "/login/"
+LOGOUT_URL = "/logout/"
 LOGIN_REDIRECT_URL = "/add/"
-LOGIN_URL = "/admin/login/"
-LOGOUT_URL = "/admin/logout/"
+LOGOUT_REDIRECT_URL = "/"
 
 LOGGING = {
     "version": 1,
@@ -154,6 +159,10 @@ AUTH_PASSWORD_VALIDATORS = (
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "America/New_York"
 USE_TZ = True
+
+# Media files
+MEDIA_URL = "media/"
+MEDIA_ROOT = Path(BASE_DIR, MEDIA_URL)
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"
