@@ -3,7 +3,7 @@
     {% if form %}
             <div id="add">
         {% if form.errors %}
-                <div class="m-3 w-50 list-group form-errors">
+                <div class="m-3 site-narrow list-group form-errors">
             {% for error in form.errors.values %}
                     <div class="alert border rounded list-group-item list-group-item-danger" title="{{ error|striptags }}">
                         {{ error }}

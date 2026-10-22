@@ -55,7 +55,11 @@
             }
             .color-utility { color: var(--color-utility); }
             .icon-link-hover svg { --bs-icon-link-transform: translate3d(0, -.5rem, 0); }
-            .navbar-expand .navbar-nav .nav-link { font-size: 2.5rem; }
+            .navbar-expand .navbar-nav { column-gap: clamp(0.25rem, 2vw, 1.5rem); }
+            .navbar-expand .navbar-nav h1, .navbar-expand .navbar-nav h2 { margin-bottom: 0; }
+            .navbar-expand .navbar-nav .nav-link { font-size: clamp(1.25rem, 6vw, 2.5rem); padding-inline: clamp(0.25rem, 1.5vw, 1rem); }
+            .navbar-expand .navbar-nav .nav-group-start { margin-left: clamp(0.5rem, 4vw, 3rem); }
+            .site-narrow { max-width: 36rem; }
             .color-datasette {
                 color: #B7B9D9;
                 --bs-tooltip-bg: none;
@@ -86,6 +90,9 @@
                 --bs-pagination-active-border-color: var(--color-utility);
             }
             .page-link { color: var(--color-utility); }
+            #utility-table > * > tr > :first-child { text-align: left; }
+            #utility-table > thead > tr > th:first-child div.dt-column-header { flex-direction: row; }
+            #utility-table > thead > tr > th:first-child .dt-column-order { left: auto; right: .25rem; }
             .highcharts-legend text, .highcharts-axis text, .highcharts-axis-labels text { stroke: #fff; }
     {% endif %}
             .home-tooltip {
@@ -113,8 +120,8 @@
     <body>
         <header class="container-fluid">
             <nav class="navbar navbar-dark navbar-expand">
-                <div class="navbar-nav align-content-between" role="menu">
-                    <h1 title="{{ title }}" class="pe-5">
+                <div class="navbar-nav flex-wrap align-items-center" role="menu">
+                    <h1 title="{{ title }}">
                         <a aria-label="{{ title }}" class="btn btn-lg nav-link nav-item icon-link icon-link-hover{% if title and title == 'Home' %} border border-primary" aria-current="page{% endif %}" data-bs-toggle="tooltip" data-bs-title="Home" data-bs-placement="bottom" data-bs-custom-class="home-tooltip" href="{% url 'home' %}" role="menuitem">
                             <svg class="bi text-primary" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#house"></use>
@@ -123,8 +130,8 @@
                         </a>
                     </h1>
     {% for utility_name, utility_settings in utilities.items %}
-                    <h2 title="{{ utility_settings.title }}" class="px-3">
-                        <a aria-label="{{ utility_settings.title }} usage" class="btn btn-lg nav-link nav-item icon-link icon-link-hover{% if title and title == utility_settings.title %}border border-utility" aria-current="page{% endif %}" href="{% url utility_name %}#chart" data-bs-toggle="tooltip" data-bs-title="{{ utility_settings.title }}" data-bs-placement="bottom" data-bs-custom-class="color-{{ utility_name }}" role="menuitem">
+                    <h2 title="{{ utility_settings.title }}"{% if forloop.first %} class="nav-group-start"{% endif %}>
+                        <a aria-label="{{ utility_settings.title }} usage" class="btn btn-lg nav-link nav-item icon-link icon-link-hover{% if title and title == utility_settings.title %} border-utility rounded" aria-current="page{% endif %}" href="{% url utility_name %}#chart" data-bs-toggle="tooltip" data-bs-title="{{ utility_settings.title }}" data-bs-placement="bottom" data-bs-custom-class="color-{{ utility_name }}" role="menuitem">
                             <svg class="bi color-{{ utility_name }}" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#{{ utility_settings.icon }}"></use>
                             </svg>
@@ -132,7 +139,7 @@
                         </a>
                     </h2>
     {% endfor %}
-                    <h2 title="Datasette (opens in new window)" class="px-5">
+                    <h2 title="Datasette (opens in new window)" class="nav-group-start">
                         <a class="btn btn-lg nav-link icon-link icon-link-hover" href="/datasette/" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Datasette<br>(<i>opens in new window</i>)" data-bs-custom-class="color-datasette" data-bs-placement="bottom" target="_blank">
                             <svg class="bi color-datasette" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#table"></use>
@@ -141,7 +148,7 @@
                         </a>
                     </h2>
     {% if request.user.is_staff %}
-                    <h2 title="Add" class="px-3">
+                    <h2 title="Add" class="nav-group-start">
                         <a class="btn btn-lg nav-link icon-link icon-link-hover{% if title and title == 'Add' %} border border-success" aria-current="page{% endif %}" href="{% url 'add' %}#add" data-bs-toggle="tooltip" data-bs-title="Add" data-bs-placement="bottom" data-bs-custom-class="add-tooltip">
                             <svg class="bi text-success" aria-hidden="true">
                                 <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#plus-lg"></use>
@@ -164,7 +171,7 @@
         </header>
         <main class="container-fluid py-5">
     {% if messages %}
-            <div class="m-3 w-50 list-group messages">
+            <div class="m-3 site-narrow list-group messages">
         {% for message in messages %}
                 <div class="alert border rounded list-group-item list-group-item-{% if message.tags %}{{ message.tags }}{% else %}success{% endif %}" title="{{ message|default:"" }}">
                     {{ message|default:"" }}
@@ -175,8 +182,8 @@
     {% block main %}
     {% endblock main %}
         </main>
-        <footer class="container-fluid footer mt-5 mb-3 row">
-            <div class="col text-start">
+        <footer class="container-fluid footer small mt-5 mb-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <div>
                 <a aria-label="View source on GitHub (opens in new window)" class="font-monospace icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="https://github.com/ericoc/utilities/" target="_blank" title="View source on GitHub (opens in new window)" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="View source on GitHub<br>(<i>opens in new window</i>)" data-bs-placement="top">
                     <svg class="bi text-primary-emphasis" aria-hidden="true">
                         <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#code-slash"></use>
@@ -187,7 +194,7 @@
                     </svg>
                 </a>
             </div>
-            <div class="col text-end" id="login-logout-link">
+            <div class="ms-auto" id="login-logout-link">
     {% if not request.user.is_authenticated %}
                 <a aria-label="Log in" class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{% url 'login' %}" title="Log in" data-bs-toggle="tooltip" data-bs-title="Log in" data-bs-placement="top">
                     <svg class="bi text-primary-emphasis" aria-hidden="true">
@@ -196,7 +203,7 @@
                     Log in
                 </a>
     {% else %}
-                <form action="{% url 'logout' %}" class="col" id="logout" method="post">
+                <form action="{% url 'logout' %}" id="logout" method="post">
                     <a aria-Label="Log out" href="#" class="icon-link icon-link-hover link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" onclick="document.getElementById('logout').submit()" title="Log out ({{ request.user.username }})" data-bs-html="true" data-bs-toggle="tooltip" data-bs-title="Log out (<i>{{ request.user.username }}</i>)" data-bs-placement="top">
                         <svg class="bi text-primary-emphasis" aria-hidden="true">
                             <use xlink:href="{% static 'bootstrap-icons-1.13.1/bootstrap-icons.svg' %}#door-closed"></use>

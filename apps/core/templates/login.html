@@ -3,7 +3,7 @@
     {% if form %}
             <div id="login">
         {% if form.errors %}
-                <div class="m-3 w-50 list-group form-errors">
+                <div class="m-3 site-narrow list-group form-errors">
             {% for error in form.errors.values %}
                     <div class="alert border rounded list-group-item list-group-item-danger" title="{{ error|striptags }}">
                         {{ error }}
@@ -11,17 +11,17 @@
             {% endfor %}
                 </div>
         {% endif %}
-                <form action="{% url 'login' %}" class="border m-3 p-3 w-50 rounded" method="post">
+                <form action="{% url 'login' %}" class="border m-3 p-3 site-narrow rounded" method="post">
                     <p class="fs-6 form-text" title="Please enter your username and password to add utility data.">
                         Please enter your username and password to add utility data.
                     </p>
                     <p title=Username>
-                        <label for="id-username">Username:</label>
-                        <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id-username">
+                        <label class="form-label" for="id-username">Username:</label>
+                        <input class="form-control" type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id-username">
                     </p>
                     <p title="Password">
-                        <label for="id-password">Password:</label>
-                        <input type="password" name="password" autocomplete="current-password" required="" id="id-password">
+                        <label class="form-label" for="id-password">Password:</label>
+                        <input class="form-control" type="password" name="password" autocomplete="current-password" required="" id="id-password">
                     </p>
                     <p>
                         <button aria-label="Log in" class="btn btn-outline-primary rounded m-1" title="Log in" type="submit">Log in</button>
