@@ -103,12 +103,14 @@
             }
         {% if request.user.is_authenticated %}
             .add-tooltip {
+                color: var(--bs-success);
                 --bs-tooltip-bg: none;
                 --bs-tooltip-font-size: 0.9rem;
                 --bs-tooltip-color: var(--bs-success);
             }
             {% if request.user.is_staff %}
            .admin-tooltip {
+                color: var(--bs-danger);
                 --bs-tooltip-bg: none;
                 --bs-tooltip-font-size: 0.9rem;
                 --bs-tooltip-color: var(--bs-danger);
