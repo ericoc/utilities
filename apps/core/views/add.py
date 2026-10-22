@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import ValidationError
+from django.utils.decorators import method_decorator
 from django.utils.html import format_html
 from django.utils.translation import ngettext
 from django.views.generic.edit import FormView
@@ -15,7 +16,7 @@ from .base import BaseView
 from ..forms.add import AddDataForm
 
 
-@staff_member_required
+@method_decorator(staff_member_required, name="dispatch")
 class AddView(LoginRequiredMixin, BaseView, FormView):
     """Add data via upload form view."""
     color = "var(--bs-success)"
