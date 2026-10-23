@@ -1,8 +1,8 @@
 aiofiles==25.1.0
 anyio==4.15.1
 asgi-csrf==0.11
-asgiref==3.12.1
-certifi==2026.10.19
+asgiref==3.13.0
+certifi==2026.10.23
 click==8.5.0
 click-default-group==1.2.4
 datasette==0.65.5
