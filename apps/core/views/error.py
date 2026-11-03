@@ -9,6 +9,10 @@ class ErrorView(BaseView):
     template_name = "error.html"
     title = "Uh-oh!"
 
+    def dispatch(self, request, *args, **kwargs):
+        # Render errors for any request method (such as a failed POST).
+        return self.get(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         # Include error message in context.
         context = super().get_context_data(**kwargs)

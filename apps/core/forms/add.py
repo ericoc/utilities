@@ -63,6 +63,11 @@ class AddDataForm(Form):
                 encoding += "-sig"
                 utility = "electric"
 
+            # Reject CSV files not recognized as electric or water usage.
+            if not utility:
+                file_path.unlink(missing_ok=True)
+                raise ValidationError(f"Unrecognized file name ({file.name})!")
+
             # Open CSV file that we just wrote, with proper encoding.
             with open(file_path, mode="r", encoding=encoding) as read_fh:
                 csv_lines = read_fh.readlines()
