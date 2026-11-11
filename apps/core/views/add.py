@@ -16,7 +16,7 @@ from .base import BaseView
 from ..forms.add import AddDataForm
 
 
-@method_decorator(staff_member_required, name="dispatch")
+@method_decorator(staff_member_required(login_url="login"), name="dispatch")
 class AddView(LoginRequiredMixin, BaseView, FormView):
     """Add data via upload form view."""
     color = "var(--bs-success)"
