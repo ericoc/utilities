@@ -1,6 +1,18 @@
+from django import forms
 from django.contrib import admin
 
 from .models import ElectricUsage
+
+
+class ElectricUsageAdminForm(forms.ModelForm):
+    # Preserve help text.
+
+    class Meta:
+        model = ElectricUsage
+        fields = ()
+        help_texts = {
+            "rounded_kwh": ElectricUsage._meta.get_field("kwh").help_text,
+        }
 
 
 # Create and register electric usage admin model.
@@ -9,6 +21,7 @@ class ElectricUsageAdmin(admin.ModelAdmin):
     """Electric usage administration."""
 
     date_hierarchy = "hour"
+    form = ElectricUsageAdminForm
     fieldsets = (
         ("Hour", {"fields": ("hour",)},),
         ("Usage", {"fields": ("rounded_kwh",)},)
@@ -21,7 +34,10 @@ class ElectricUsageAdmin(admin.ModelAdmin):
     show_full_result_count = True
     verbose_name = verbose_name_plural = "Electric Usage"
 
-    @admin.display(description="kWh")
+    @admin.display(
+        description=ElectricUsage._meta.get_field("kwh").verbose_name,
+        ordering="kwh",
+    )
     def rounded_kwh(self, obj):
         return round(obj.kwh, 2)
 

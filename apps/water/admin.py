@@ -1,6 +1,18 @@
+from django import forms
 from django.contrib import admin
 
 from .models import WaterUsage
+
+
+class WaterUsageAdminForm(forms.ModelForm):
+    # Preserve help text.
+
+    class Meta:
+        model = WaterUsage
+        fields = ()
+        help_texts = {
+            "rounded_gallons": WaterUsage._meta.get_field("gallons").help_text,
+        }
 
 
 # Create and register water usage admin model.
@@ -9,6 +21,7 @@ class WaterUsageAdmin(admin.ModelAdmin):
     """Water usage administration."""
 
     date_hierarchy = "day"
+    form = WaterUsageAdminForm
     fieldsets = (
         ("Day", {"fields": ("day",)},),
         ("Usage", {"fields": ("rounded_gallons",)},)
@@ -21,7 +34,10 @@ class WaterUsageAdmin(admin.ModelAdmin):
     show_full_result_count = True
     verbose_name = verbose_name_plural = "Water Usage"
 
-    @admin.display(description="Gallons")
+    @admin.display(
+        description=WaterUsage._meta.get_field("gallons").verbose_name,
+        ordering="gallons",
+    )
     def rounded_gallons(self, obj):
         return round(obj.gallons, 4)
 

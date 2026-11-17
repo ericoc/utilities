@@ -1,6 +1,21 @@
+from django import forms
 from django.contrib import admin
 
 from .models import NaturalGasUsage
+
+
+class NaturalGasUsageAdminForm(forms.ModelForm):
+    # Preserve help text.
+
+    class Meta:
+        model = NaturalGasUsage
+        fields = ()
+        help_texts = {
+            "format_date_to_month": (
+                NaturalGasUsage._meta.get_field("month").help_text
+            ),
+            "rounded_ccf": NaturalGasUsage._meta.get_field("ccf").help_text,
+        }
 
 
 # Create and register natural gas usage admin model.
@@ -15,6 +30,7 @@ class NaturalGasUsageAdmin(admin.ModelAdmin):
     format_date_to_month.short_description = "Month"
 
     date_hierarchy = "month"
+    form = NaturalGasUsageAdminForm
     fieldsets = (
         ("Month", {"fields": ("format_date_to_month",)},),
         ("Usage", {"fields": ("rounded_ccf",)},)
@@ -27,7 +43,10 @@ class NaturalGasUsageAdmin(admin.ModelAdmin):
     show_full_result_count = True
     verbose_name = verbose_name_plural = "Natural Gas Usage"
 
-    @admin.display(description="CCF")
+    @admin.display(
+        description=NaturalGasUsage._meta.get_field("ccf").verbose_name,
+        ordering="ccf",
+    )
     def rounded_ccf(self, obj):
         return round(obj.ccf)
 
