@@ -6,7 +6,7 @@ class ElectricUsage(models.Model):
     """Electric usage table."""
     hour = models.DateTimeField(
         primary_key=True,
-        help_text=_("Start of an hour of electricity usage."),
+        help_text=_("Hour of electricity usage."),
         verbose_name=_("Hour")
     )
     kwh = models.DecimalField(

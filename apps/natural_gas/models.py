@@ -6,7 +6,7 @@ class NaturalGasUsage(models.Model):
     """Natural gas usage table."""
     month = models.DateField(
         primary_key=True,
-        help_text=_("Billing month of natural gas usage."),
+        help_text=_("Month of natural gas usage."),
         verbose_name=_("Month")
     )
     ccf = models.DecimalField(
