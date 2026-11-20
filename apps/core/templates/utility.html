@@ -60,7 +60,33 @@
                         ])
                     }
 
+                    function measuredDuration (times) {
+                        const units = ['years', 'months', 'weeks', 'days']
+                        const zone = '{{ TIME_ZONE }}'
+                        const first = times.reduce((a, b) => Math.min(a, b))
+                        const last = times.reduce((a, b) => Math.max(a, b))
+                        const duration = luxon.Interval.fromDateTimes(
+                            DateTime.fromMillis(first, { zone }),
+                            DateTime.fromMillis(last, { zone })
+                        ).toDuration(units).toObject()
+                        const parts = []
+                        for (const unit of units) {
+                            const value = Math.floor(duration[unit] || 0)
+                            if (value > 0) {
+                                parts.push(`${value} ${value === 1 ? unit.slice(0, -1) : unit}`)
+                            }
+                        }
+                        return parts.length ? parts.join(', ') : '0 days'
+                    }
+
+                    const measurementCount = utilityUsageOverTime.length
+                    const measurementAverage = utilityUsageOverTime.reduce((sum, point) => sum + Number(point[1]), 0) / measurementCount
+
                     const utilityHighChart = new Highcharts.Chart({
+                        caption: {
+                            style: { color: chartColors.textColor },
+                            text: `${Highcharts.numberFormat(measurementCount, 0, '.', ',')} measurement${measurementCount === 1 ? '' : 's'} - averaging ${Highcharts.numberFormat(measurementAverage, 2, '.', ',')} {{ utility.long }} ({{ utility.short }})`
+                        },
                         chart: chartChart,
                         credits: false,
                         exporting: { buttons: { contextButton: { menuItems: ["printChart", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG"] } } },
@@ -72,6 +98,10 @@
                             type: 'spline'
                         }],
                         styledMode: true,
+                        subtitle: {
+                            style: { color: chartColors.textColor },
+                            text: measuredDuration(utilityUsageOverTime.map(point => point[0]))
+                        },
                         time: { timezone: '{{ TIME_ZONE }}' },
                         title: {
                             style: { color: chartColors.textColor },
